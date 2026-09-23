@@ -2,586 +2,492 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Visibility Audit — bezpłatny mini-audyt</title>
-<meta name="description" content="Bezpłatny mini-audyt widoczności Twojej firmy w AI (ChatGPT, Perplexity, Google AI Overviews) — Filip Szmel, AI Visibility.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darmowy audyt widoczności firmy w AI | Filip Szmel</title>
+<meta name="description" content="Sprawdzę, czy ChatGPT, Perplexity i Google poprawnie czytają stronę Twojej firmy. Mini-audyt 0 zł w 48h, poprawki od 800 zł. Zdalnie, cała Polska.">
+<link rel="canonical" href="https://ai-visibility-landing.vhb9bgvk8b.workers.dev/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Filip Szmel">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Filip Szmel — AI Visibility">
+<meta property="og:title" content="Darmowy audyt widoczności firmy w AI | Filip Szmel">
+<meta property="og:description" content="Sprawdzę, czy ChatGPT, Perplexity i Google poprawnie czytają stronę Twojej firmy. Mini-audyt 0 zł w 48h, poprawki od 800 zł. Zdalnie, cała Polska.">
+<meta property="og:url" content="https://ai-visibility-landing.vhb9bgvk8b.workers.dev/">
+<meta property="og:image" content="https://ai-visibility-landing.vhb9bgvk8b.workers.dev/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts.css">
 <style>
-  :root{
-    --bg: #0A0A0A;
-    --surface: #141311;
-    --surface-2: #1B1916;
-    --border: #2A2621;
-    --accent: #F5A623;
-    --accent-dim: #8A5A16;
-    --accent-soft: rgba(245,166,35,0.12);
-    --text: #FFFFFF;
-    --text-muted: #B8B8B8;
-    --text-faint: #7A7670;
-    color-scheme: dark;
-  }
+:root{
+  --bg:#0A0A0A; --surface:#141311; --surface-2:#1B1916; --border:#2E2A24;
+  --accent:#F5A623; --accent-dim:#8A5A16; --accent-soft:rgba(245,166,35,.12);
+  --text:#FFFFFF; --text-muted:#C9C6C0; --text-faint:#A8A39B; --error:#F08A7E;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;padding-inline:16px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.label{font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#17130A;padding:8px 12px;border-radius:3px;z-index:10}
+.skip:focus{left:8px}
+.todo{color:#17130A;background:var(--accent);padding:0 4px;border-radius:2px}
 
-  *{ box-sizing: border-box; }
+/* header */
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px;border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.logo-icon{width:34px;height:34px;flex-shrink:0}
+.brand .n{font-family:"Chakra Petch";font-weight:600;font-size:1rem;line-height:1.1;display:block}
+.brand .t{font-family:"Chakra Petch";font-weight:600;font-size:.7rem;letter-spacing:.16em;color:var(--accent);display:block}
+.site-head nav{display:flex;gap:18px;font-size:.9rem}
+.site-head nav a{color:var(--text-muted);text-decoration:none}
+.site-head nav a:hover{color:var(--accent)}
+@media (max-width:560px){ .site-head nav .opt{display:none} }
 
-  html, body{ margin:0; padding:0; }
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:44px 40px;border-bottom:1px solid var(--border)}
+.hero-hex{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none;width:100%;height:100%}
+.hero-inner{position:relative;z-index:1}
+.hero h1{margin-top:10px;font-size:clamp(1.85rem,5.4vw,2.6rem);letter-spacing:-.01em;max-width:18ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{margin:16px 0 0;max-width:56ch;color:var(--text-muted);font-size:1.05rem}
+.facts{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.92rem;color:var(--text-muted)}
+.facts li::before{content:"✓ ";color:var(--accent);font-weight:600}
 
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-    padding-inline: 20px;
-    -webkit-font-smoothing: antialiased;
-  }
+/* form card */
+.card{margin-top:28px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:22px;position:relative}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:4px 0 0 4px}
+.card h2{font-size:1.2rem}
+.card .sub{margin:4px 0 0;color:var(--text-muted);font-size:.92rem}
+form{margin-top:18px;display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.9rem;font-weight:600;color:var(--text)}
+.field input{background:var(--surface-2);border:1px solid #4A443B;color:var(--text);font:inherit;font-size:1rem;padding:12px 14px;border-radius:3px}
+.field input::placeholder{color:#8F8A82}
+.field input:focus{border-color:var(--accent);outline:none;background:#201D18}
+.field.error input{border-color:var(--error)}
+.err{font-size:.85rem;color:var(--error);min-height:1.2em}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+button.submit{background:var(--accent);color:#17130A;border:0;font-family:"Chakra Petch";font-weight:600;font-size:1.02rem;padding:14px 20px;border-radius:3px;cursor:pointer}
+button.submit:hover{background:#FFB94A}
+button.submit:disabled{opacity:.6;cursor:wait}
+.rodo{margin:2px 0 0;font-size:.82rem;color:var(--text-faint);line-height:1.5}
+.result{margin-top:16px}
+.result[hidden]{display:none}
+.status{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.status.bad{color:var(--error)}
+.result p{margin:8px 0 0;color:var(--text-muted)}
+.btn-line{display:inline-block;margin-top:12px;border:1px solid var(--accent-dim);color:var(--accent);padding:10px 16px;border-radius:3px;text-decoration:none;font-family:"Chakra Petch";font-weight:600}
+.copy-box{margin-top:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:12px;font-size:.85rem;color:var(--text-muted);white-space:pre-wrap;word-break:break-word}
+.copy-btn{margin-top:8px;background:none;border:1px solid var(--border);color:var(--text-muted);font:inherit;font-size:.85rem;padding:7px 12px;border-radius:3px;cursor:pointer}
 
-  .wrap{
-    max-width: 720px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+/* sections */
+section.block{padding-block:44px;border-bottom:1px solid var(--border)}
+section.block h2{font-size:clamp(1.4rem,3.6vw,1.8rem);margin-top:8px}
+section.block > p{color:var(--text-muted);max-width:60ch;margin:12px 0 0}
+.grid{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:24px}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:640px){ .grid.c2,.grid.c3{grid-template-columns:1fr} }
+.cell{background:var(--bg);padding:20px 18px}
+.cell h3{font-size:1.02rem}
+.cell p{margin:6px 0 0;font-size:.93rem;color:var(--text-muted)}
+.num{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;color:var(--accent)}
+.price{font-family:"Chakra Petch";font-weight:600;font-size:1.7rem;color:var(--text);margin-top:10px;line-height:1.1}
+.price small{font-size:.9rem;color:var(--text-faint);font-weight:600}
+.cell.hl{background:#15120D;box-shadow:inset 0 3px 0 var(--accent)}
+.cell ul{margin:10px 0 0;padding-left:18px;color:var(--text-muted);font-size:.92rem}
+.cell li{margin:3px 0}
+.note{margin-top:14px;font-size:.9rem;color:var(--text-faint)}
+.about{display:flex;gap:18px;align-items:flex-start;margin-top:20px}
+.about .logo-icon{width:52px;height:52px}
+.about p{margin:0 0 10px;color:var(--text-muted)}
+.honest{margin-top:18px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent-dim);padding:14px 16px;color:var(--text-muted);font-size:.95rem;border-radius:3px}
+details{border-top:1px solid var(--border)}
+details:last-of-type{border-bottom:1px solid var(--border)}
+summary{cursor:pointer;padding:16px 0;font-family:"Chakra Petch";font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);flex-shrink:0}
+details[open] summary::after{content:"−"}
+details p{margin:0 0 16px;color:var(--text-muted);max-width:62ch}
+.faq{margin-top:20px}
+.cta{padding-block:40px;text-align:center;border-bottom:1px solid var(--border)}
+.cta h2{font-size:1.5rem}
+.cta a.go{display:inline-block;margin-top:16px;background:var(--accent);color:#17130A;font-family:"Chakra Petch";font-weight:600;padding:14px 22px;border-radius:3px;text-decoration:none}
 
-  h1, h2, h3{
-    font-family: "Chakra Petch", ui-sans-serif, system-ui, sans-serif;
-    text-wrap: balance;
-    margin: 0;
-  }
+/* footer */
+footer{padding-block:28px 40px;font-size:.9rem;color:var(--text-faint)}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
+footer a{color:var(--text-muted)}
+footer p{margin:4px 0}
 
-  .eyebrow{
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  /* ---------- header ---------- */
-  header{
-    padding-block: 22px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .logo-icon{ width: 34px; height: 34px; flex-shrink: 0; }
-  .wordmark{ line-height: 1.15; }
-  .wordmark .name{ font-family:"Chakra Petch"; font-weight:600; font-size: 1rem; color: var(--text); }
-  .wordmark .tag{ font-family:"JetBrains Mono"; font-size: 0.66rem; letter-spacing: 0.16em; color: var(--accent); }
-
-  /* ---------- hero ---------- */
-  .hero{
-    position: relative;
-    overflow: hidden;
-    padding-block: 52px 40px;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-hex{
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .hero-inner{ position: relative; z-index: 1; }
-  .hero h1{
-    font-size: clamp(1.9rem, 5.2vw, 2.7rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    max-width: 14ch;
-  }
-  .hero h1 em{
-    font-style: normal;
-    color: var(--accent);
-  }
-  .hero p.lede{
-    margin-top: 16px;
-    max-width: 52ch;
-    color: var(--text-muted);
-    font-size: 1.02rem;
-    line-height: 1.6;
-  }
-
-  /* ---------- form card ---------- */
-  .audit-card{
-    margin-top: 30px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 22px;
-    position: relative;
-  }
-  .audit-card::before{
-    content: "";
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--accent);
-  }
-  .audit-card h2{
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .audit-card .sub{
-    font-family: "JetBrains Mono";
-    font-size: 0.74rem;
-    color: var(--text-faint);
-    margin-top: 4px;
-    letter-spacing: 0.02em;
-  }
-
-  form{ margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
-  .field{ display: flex; flex-direction: column; gap: 6px; }
-  .field label{
-    font-family: "JetBrains Mono";
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-  }
-  .field input{
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: "IBM Plex Sans";
-    font-size: 0.95rem;
-    padding: 12px 14px;
-    border-radius: 3px;
-    outline: none;
-    transition: border-color .15s ease, background .15s ease;
-  }
-  .field input::placeholder{ color: var(--text-faint); }
-  .field input:focus{
-    border-color: var(--accent);
-    background: #201D18;
-  }
-  .field.error input{ border-color: #C0392B; }
-  .field .err-msg{
-    font-family: "JetBrains Mono";
-    font-size: 0.68rem;
-    color: #E0685A;
-    min-height: 1em;
-  }
-
-  button.submit{
-    margin-top: 4px;
-    background: var(--accent);
-    color: #17130A;
-    border: none;
-    font-family: "Chakra Petch";
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
-    padding: 13px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background .15s ease, transform .05s ease;
-  }
-  button.submit:hover{ background: #FFB94A; }
-  button.submit:active{ transform: translateY(1px); }
-  button.submit:focus-visible{ outline: 2px solid var(--text); outline-offset: 2px; }
-
-  .fine{
-    margin-top: 10px;
-    font-size: 0.74rem;
-    color: var(--text-faint);
-    line-height: 1.5;
-  }
-
-  /* ---------- result state (after submit) ---------- */
-  .result{ display:none; margin-top: 18px; }
-  .result.show{ display:block; }
-  form.hide{ display:none; }
-  .result .ok-badge{
-    font-family:"JetBrains Mono";
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    display:flex; align-items:center; gap:8px;
-  }
-  .result .ok-badge::before{
-    content:"";
-    width:7px; height:7px;
-    background: var(--accent);
-    border-radius: 50%;
-    display:inline-block;
-  }
-  .mail-btn{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 14px;
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent-dim);
-    font-family: "Chakra Petch";
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 11px 18px;
-    border-radius: 3px;
-    text-decoration: none;
-  }
-  .mail-btn:hover{ background: var(--accent-soft); }
-  .copy-box{
-    margin-top: 14px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 12px 14px;
-    font-family: "JetBrains Mono";
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  .copy-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top: 10px; }
-  .copy-btn{
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-family: "JetBrains Mono";
-    font-size: 0.7rem;
-    padding: 7px 12px;
-    border-radius: 3px;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-  .copy-btn:hover{ border-color: var(--accent-dim); color: var(--accent); }
-  .copy-btn.copied{ color: var(--accent); border-color: var(--accent); }
-
-  /* ---------- benefits ---------- */
-  .benefits{
-    padding-block: 40px;
-    border-bottom: 1px solid var(--border);
-  }
-  .benefits h2{
-    font-size: 0.72rem;
-    font-family: "JetBrains Mono";
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 20px;
-  }
-  .benefit-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  @media (max-width: 620px){
-    .benefit-grid{ grid-template-columns: 1fr; }
-  }
-  .benefit{
-    background: var(--bg);
-    padding: 22px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .benefit .num{
-    font-family: "JetBrains Mono";
-    font-size: 0.7rem;
-    color: var(--accent);
-  }
-  .benefit h3{
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .benefit p{
-    margin: 0;
-    font-size: 0.86rem;
-    line-height: 1.55;
-    color: var(--text-muted);
-  }
-
-  /* ---------- footer ---------- */
-  footer{
-    padding-block: 26px 40px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  footer .brand{
-    font-family: "JetBrains Mono";
-    font-size: 0.74rem;
-    color: var(--text-faint);
-  }
-  footer .contact{
-    font-family: "JetBrains Mono";
-    font-size: 0.74rem;
-    color: var(--text-muted);
-  }
+/* consent */
+.consent{position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;padding:16px;z-index:20;font-size:.9rem;color:var(--text-muted)}
+.consent[hidden]{display:none}
+.consent .btns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.consent button{font:inherit;font-weight:600;padding:9px 14px;border-radius:3px;cursor:pointer;border:1px solid var(--accent)}
+.consent .yes{background:var(--accent);color:#17130A}
+.consent .no{background:none;color:var(--accent)}
 </style>
-
-<!-- ============================================================
-     META PIXEL — wklej swój Pixel ID w miejsce YOUR_PIXEL_ID
-     poniżej (dwa miejsca: !function... init(...) i noscript img src).
-     Pixel ID znajdziesz w Meta Business Suite > Zdarzenia > Piksele.
-     ============================================================ -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'YOUR_PIXEL_ID');
-fbq('track', 'PageView');
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebSite",
+   "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#strona",
+   "url": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/",
+   "name": "Filip Szmel — AI Visibility",
+   "inLanguage": "pl-PL"
+  },
+  {
+   "@type": "Person",
+   "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#filip",
+   "name": "Filip Szmel",
+   "email": "szmelfilip.business@gmail.com",
+   "knowsLanguage": "pl",
+   "worksFor": {
+    "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#firma"
+   }
+  },
+  {
+   "@type": "ProfessionalService",
+   "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#firma",
+   "name": "Filip Szmel — AI Visibility",
+   "url": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/",
+   "description": "Audyty i poprawki stron małych firm pod kątem tego, jak czytają je wyszukiwarki i asystenci AI, a także budowa nowych stron.",
+   "founder": {
+    "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#filip"
+   },
+   "email": "szmelfilip.business@gmail.com",
+   "areaServed": {
+    "@type": "Country",
+    "name": "Polska"
+   },
+   "priceRange": "0–2000+ zł",
+   "image": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/og-image.png",
+   "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Usługi",
+    "itemListElement": [
+     {
+      "@type": "Offer",
+      "name": "Mini-audyt widoczności w AI",
+      "price": "0",
+      "priceCurrency": "PLN",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Mini-audyt widoczności w AI",
+       "description": "Bezpłatna ocena strony: mocne strony i 3 najważniejsze ustalenia z rekomendacją, e-mailem w ciągu 48 godzin roboczych."
+      }
+     },
+     {
+      "@type": "Offer",
+      "name": "Wdrożenie poprawek",
+      "priceCurrency": "PLN",
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 800,
+       "maxPrice": 1200,
+       "priceCurrency": "PLN"
+      },
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Wdrożenie poprawek widoczności w AI",
+       "description": "Poprawki na istniejącej stronie: robots.txt, llms.txt, dane strukturalne, tytuły i opisy, uporządkowanie danych firmy, sekcja FAQ."
+      }
+     },
+     {
+      "@type": "Offer",
+      "name": "Nowa strona internetowa",
+      "priceCurrency": "PLN",
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 1500,
+       "priceCurrency": "PLN"
+      },
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Nowa strona internetowa",
+       "description": "Nowa, szybka strona przygotowana od początku pod wyszukiwarki i asystentów AI."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Czym jest widoczność firmy w AI?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "To to, czy asystenci AI, tacy jak ChatGPT, Perplexity czy odpowiedzi AI w Google, potrafią dotrzeć do Twojej strony, przeczytać ją i poprawnie podać klientowi Twoje usługi, obszar działania i kontakt. Jeśli strona jest dla nich nieczytelna, pomijają ją albo podają nieaktualne informacje."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy mini-audyt jest naprawdę darmowy?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tak. Mini-audyt kosztuje 0 zł i do niczego nie zobowiązuje. Dostajesz go e-mailem, a o ewentualnych poprawkach decydujesz sam."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Ile czeka się na mini-audyt?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Do 48 godzin roboczych od zgłoszenia. Wynik przychodzi na adres e-mail podany w formularzu."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy gwarantujesz, że ChatGPT poleci moją firmę?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Nikt nie może tego uczciwie zagwarantować, a kto to obiecuje, nie sprzedaje niczego. Mogę sprawić, że asystenci AI dotrą do Twojej strony, przeczytają ją i podadzą poprawne informacje o firmie. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Od czego zależy cena poprawek?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Od liczby podstron, platformy, na której działa strona (np. WordPress, Wix lub własny kod), i zakresu zmian. Dokładną cenę w przedziale 800–1200 zł podaję po mini-audycie, zanim zaczniemy pracę."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy pracujesz tylko w jednym mieście?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Pracuję zdalnie z firmami z całej Polski. Cały proces odbywa się zdalnie, przez e-mail."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Co jeśli moja strona jest stara albo nie mam jej wcale?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Wtedy zamiast łatać starą stronę bardziej opłaca się zbudować nową. Nową stronę, od początku przygotowaną pod wyszukiwarki i asystentów AI, wyceniam od 1500 zł, zależnie od liczby podstron i funkcji."
+     }
+    }
+   ]
+  }
+ ]
+}
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
-/></noscript>
 </head>
 <body>
-
 <div class="wrap">
+<a class="skip" href="#tresc">Przejdź do treści</a>
+<header class="site-head">
+  <a class="brand" href="/" aria-label="Filip Szmel — AI Visibility — strona główna"><svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="none"><path d="M32 20 L10 8 L14 22 L28 27 Z" fill="#F5A623"/><path d="M32 20 L54 8 L50 22 L36 27 Z" fill="#F5A623"/><path d="M24 20 L40 20 L44 30 L32 36 L20 30 Z" fill="#0A0A0A" stroke="#F5A623" stroke-width="2.2"/><circle cx="32" cy="27" r="4.6" fill="#0A0A0A" stroke="#F5A623" stroke-width="2"/><circle cx="32" cy="27" r="1.7" fill="#F5A623"/><path d="M27 36 L37 36 L35 42 L29 42 Z" fill="#F5A623"/><path d="M28.5 42 L35.5 42 L34 47 L30 47 Z" fill="#8A5A16"/><path d="M32 47 L32 54" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round"/></g></svg><span><span class="n">Filip Szmel</span><span class="t">AI VISIBILITY</span></span></a>
+  <nav aria-label="Główna"><a class="opt" href="#cennik">Cennik</a><a class="opt" href="#faq">FAQ</a><a href="#audyt">Darmowy audyt</a></nav>
+</header>
+<main id="tresc">
+<section class="hero" id="audyt">
+  <svg class="hero-hex" viewBox="0 0 760 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><pattern id="hex" width="42" height="72.7" patternUnits="userSpaceOnUse" patternTransform="translate(-10,-10)"><path d="M21 0 L42 12.1 L42 36.3 L21 48.5 L0 36.3 L0 12.1 Z" fill="none" stroke="#8A5A16" stroke-width="1" opacity=".5"/><path d="M21 48.5 L42 60.6 L42 84.8 L21 97 L0 84.8 L0 60.6 Z" fill="none" stroke="#8A5A16" stroke-width="1" opacity=".5"/></pattern><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0A0A" stop-opacity="0"/><stop offset=".85" stop-color="#0A0A0A" stop-opacity="1"/></linearGradient></defs><rect width="760" height="460" fill="url(#hex)"/><rect width="760" height="460" fill="url(#fade)"/></svg>
+  <div class="hero-inner">
+    <div class="label">Bezpłatny mini-audyt · odpowiedź w 48h</div>
+    <h1>Czy ChatGPT i Google <em>poprawnie opisują</em> Twoją firmę?</h1>
+    <p class="lede">Sprawdzę, czy wyszukiwarki i asystenci AI mogą przeczytać stronę Twojej firmy i podać klientom prawdziwe informacje o usługach, obszarze działania i kontakcie. Dostaniesz konkretną listę, co poprawić w pierwszej kolejności.</p>
+    <ul class="facts"><li>0 zł, bez zobowiązań</li><li>Wynik e-mailem w 48h roboczych</li><li>Zdalnie, cała Polska</li></ul>
 
-  <header>
-    <svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true">
-      <g fill="none" stroke="#F5A623" stroke-width="2">
-        <path d="M32 20 L10 8 L14 22 L28 27 Z" fill="#F5A623" stroke="none"/>
-        <path d="M32 20 L54 8 L50 22 L36 27 Z" fill="#F5A623" stroke="none"/>
-        <path d="M24 20 L40 20 L44 30 L32 36 L20 30 Z" fill="#0A0A0A" stroke="#F5A623" stroke-width="2.2"/>
-        <circle cx="32" cy="27" r="4.6" fill="#0A0A0A" stroke="#F5A623" stroke-width="2"/>
-        <circle cx="32" cy="27" r="1.7" fill="#F5A623" stroke="none"/>
-        <path d="M27 36 L37 36 L35 42 L29 42 Z" fill="#F5A623" stroke="none"/>
-        <path d="M28.5 42 L35.5 42 L34 47 L30 47 Z" fill="#8A5A16" stroke="none"/>
-        <path d="M32 47 L32 54" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round"/>
-      </g>
-    </svg>
-    <div class="wordmark">
-      <div class="name">Filip Szmel</div>
-      <div class="tag">AI&nbsp;VISIBILITY</div>
-    </div>
-  </header>
-
-  <section class="hero">
-    <svg class="hero-hex" viewBox="0 0 720 420" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <pattern id="hex" width="42" height="72.7" patternUnits="userSpaceOnUse" patternTransform="translate(-10,-10)">
-          <path d="M21 0 L42 12.1 L42 36.3 L21 48.5 L0 36.3 L0 12.1 Z"
-                fill="none" stroke="#8A5A16" stroke-width="1" opacity="0.55"/>
-          <path d="M21 48.5 L42 60.6 L42 84.8 L21 97 L0 84.8 L0 60.6 Z"
-                fill="none" stroke="#8A5A16" stroke-width="1" opacity="0.55"/>
-        </pattern>
-        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0A0A0A" stop-opacity="0"/>
-          <stop offset="1" stop-color="#0A0A0A" stop-opacity="1"/>
-        </linearGradient>
-      </defs>
-      <rect width="720" height="420" fill="url(#hex)"/>
-      <rect width="720" height="420" fill="url(#fade)"/>
-    </svg>
-
-    <div class="hero-inner">
-      <div class="eyebrow">Bezpłatny mini-audyt · 48h</div>
-      <h1 style="margin-top:10px">Czy asystenci AI <em>w ogóle widzą</em> Twoją firmę?</h1>
-      <p class="lede">ChatGPT, Perplexity i Google AI Overviews coraz częściej odpowiadają za klientów, zanim ci trafią na Twoją stronę. Sprawdzam, czy Twoja firma jest w tych odpowiedziach widoczna — i co konkretnie temu przeszkadza.</p>
-
-      <div class="audit-card">
-        <h2>Zgłoś się na bezpłatny mini-audyt</h2>
-        <div class="sub">// 3 ustalenia, jedna poprawka na dziś, bez zobowiązań</div>
-
-        <form id="audit-form" novalidate>
-          <div class="field" id="field-url">
-            <label for="site-url">Adres strony</label>
-            <input id="site-url" name="site-url" type="text" placeholder="np. twojafirma.pl" autocomplete="url" />
-            <div class="err-msg" id="err-url"></div>
-          </div>
-          <div class="field" id="field-email">
-            <label for="email">Adres e-mail</label>
-            <input id="email" name="email" type="email" placeholder="ty@twojafirma.pl" autocomplete="email" />
-            <div class="err-msg" id="err-email"></div>
-          </div>
-          <button class="submit" type="submit">Wyślij zgłoszenie</button>
-          <div class="fine">Audyt oceniam ręcznie na podstawie publicznie dostępnych danych. Odpowiedź w ciągu 48h roboczych.</div>
-        </form>
-
-        <div class="result" id="result">
-          <div id="result-sending">
-            <div class="ok-badge" style="color:var(--text-faint)"><span style="width:7px;height:7px;background:var(--text-faint);border-radius:50%;display:inline-block;"></span> Wysyłanie…</div>
-          </div>
-          <div id="result-success" hidden>
-            <div class="ok-badge">Zgłoszenie wysłane</div>
-            <p class="lede" style="margin-top:10px; font-size:0.9rem;">Dziękujemy! Odezwę się z mini-audytem w ciągu 48h roboczych na podany adres e-mail.</p>
-          </div>
-          <div id="result-fallback" hidden>
-            <div class="ok-badge" style="color:var(--critical, #E0685A)"><span style="width:7px;height:7px;background:#E0685A;border-radius:50%;display:inline-block;"></span> Nie udało się wysłać automatycznie</div>
-            <p class="lede" style="margin-top:10px; font-size:0.9rem;">Kliknij przycisk poniżej, aby otworzyć swój program pocztowy z gotową wiadomością. Jeśli się nie otworzy, skopiuj treść i wyślij ją ręcznie na adres w stopce.</p>
-            <a class="mail-btn" id="mail-link" href="#">Otwórz e-mail →</a>
-            <div class="copy-box" id="copy-box"></div>
-            <div class="copy-row">
-              <span class="fine" style="margin:0;">Skopiuj, jeśli klient poczty się nie otworzy</span>
-              <button class="copy-btn" id="copy-btn" type="button">Kopiuj treść</button>
-            </div>
-          </div>
+    <div class="card">
+      <h2>Zamów bezpłatny mini-audyt</h2>
+      <p class="sub">Podaj adres strony i e-mail, na który wyślę wynik.</p>
+      <form id="audit-form" novalidate>
+        <div class="field" id="f-url">
+          <label for="site-url">Adres strony firmy</label>
+          <input id="site-url" name="site" type="text" inputmode="url" placeholder="np. twojafirma.pl" autocomplete="url" required>
+          <div class="err" id="e-url" aria-live="polite"></div>
+        </div>
+        <div class="field" id="f-email">
+          <label for="email">Twój e-mail</label>
+          <input id="email" name="email" type="email" placeholder="np. kontakt@twojafirma.pl" autocomplete="email" required>
+          <div class="err" id="e-email" aria-live="polite"></div>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="botcheck">Nie wypełniaj tego pola</label><input type="checkbox" id="botcheck" name="botcheck" tabindex="-1"></div>
+        <button class="submit" type="submit">Wyślij zgłoszenie</button>
+        <p class="rodo">Administratorem danych jest Filip Szmel. Adres strony i e-mail wykorzystam tylko do przygotowania i wysłania mini-audytu oraz odpowiedzi na zgłoszenie. Szczegóły i Twoje prawa: <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
+      </form>
+      <div class="result" id="result" hidden aria-live="polite">
+        <div id="r-sending"><div class="status">Wysyłanie…</div></div>
+        <div id="r-ok" hidden><div class="status">Zgłoszenie przyjęte</div><p>Dziękuję! Mini-audyt wyślę na podany adres e-mail w ciągu 48 godzin roboczych.</p></div>
+        <div id="r-fail" hidden>
+          <div class="status bad">Nie udało się wysłać automatycznie</div>
+          <p>Kliknij poniżej, żeby otworzyć pocztę z gotową wiadomością. Jeśli się nie otworzy, skopiuj treść i wyślij ją na szmelfilip.business@gmail.com.</p>
+          <a class="btn-line" id="mail-link" href="mailto:szmelfilip.business@gmail.com">Otwórz e-mail</a>
+          <div class="copy-box" id="copy-box"></div>
+          <button class="copy-btn" id="copy-btn" type="button">Kopiuj treść</button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="benefits">
-    <h2>Co dostajesz</h2>
-    <div class="benefit-grid">
-      <div class="benefit">
-        <div class="num">01</div>
-        <h3>Bez kosztów, bez haczyka</h3>
-        <p>Mini-audyt jest darmowy i niezobowiązujący — to próbka pełnego audytu, nie okrojona wersja sprzedażowa.</p>
-      </div>
-      <div class="benefit">
-        <div class="num">02</div>
-        <h3>Konkretne ustalenia</h3>
-        <p>3 najważniejsze luki widoczności z dowodem (co dokładnie sprawdziłem) i jedna poprawka, którą wdrożysz jeszcze dziś.</p>
-      </div>
-      <div class="benefit">
-        <div class="num">03</div>
-        <h3>Gotowe w 48h</h3>
-        <p>Odpowiedź mailem z raportem PDF w ciągu dwóch dni roboczych od zgłoszenia — bez rozmowy telefonicznej.</p>
-      </div>
+<section class="block" id="co-sprawdzam">
+  <div class="label">Co sprawdzam</div>
+  <h2>Sześć rzeczy, które decydują, czy AI zrozumie Twoją stronę</h2>
+  <p>W mini-audycie opisuję najpierw, co na stronie działa dobrze, a potem 3 najważniejsze problemy: dowód, co to oznacza dla Twoich klientów i co z tym zrobić.</p>
+  <div class="grid c3">
+<div class="cell"><div class="num">01</div><h3>Dostęp robotów</h3><p>Czy plik robots.txt nie blokuje przez pomyłkę wyszukiwarek i asystentów AI.</p></div>
+<div class="cell"><div class="num">02</div><h3>Treść bez JavaScriptu</h3><p>Czy najważniejsze informacje są w kodzie strony, a nie pojawiają się dopiero po załadowaniu skryptów.</p></div>
+<div class="cell"><div class="num">03</div><h3>Dane firmy</h3><p>Czy nazwa, telefon, obszar działania i usługi są podane jasno i nigdzie się nie wykluczają.</p></div>
+<div class="cell"><div class="num">04</div><h3>Dane strukturalne</h3><p>Czy strona opisuje firmę w formacie schema.org, który maszyny czytają bez zgadywania.</p></div>
+<div class="cell"><div class="num">05</div><h3>Tytuły i opisy</h3><p>Czy tytuł i opis strony mówią, czym zajmuje się firma i dla kogo.</p></div>
+<div class="cell"><div class="num">06</div><h3>Test zapytań</h3><p>Co asystenci AI odpowiadają dziś na pytania, które zadają Twoi klienci.</p></div>
+  </div>
+</section>
+
+<section class="block" id="jak-to-dziala">
+  <div class="label">Jak to działa</div>
+  <h2>Trzy kroki, bez rozmów sprzedażowych</h2>
+  <div class="grid c3">
+    <div class="cell"><div class="num">01</div><h3>Zgłoszenie</h3><p>Wpisujesz adres strony i e-mail w formularzu powyżej.</p></div>
+    <div class="cell"><div class="num">02</div><h3>Mini-audyt</h3><p>W ciągu 48 godzin roboczych dostajesz e-mailem wynik: mocne strony i 3 najważniejsze ustalenia.</p></div>
+    <div class="cell"><div class="num">03</div><h3>Twoja decyzja</h3><p>Poprawki możesz wdrożyć sam albo zlecić mnie. Nic nie musisz.</p></div>
+  </div>
+</section>
+
+<section class="block" id="cennik">
+  <div class="label">Cennik</div>
+  <h2>Jasne ceny, zanim cokolwiek zlecisz</h2>
+  <div class="grid c3">
+    <div class="cell hl"><h3>Mini-audyt</h3><div class="price">0 zł</div><ul><li>Co już działa na stronie</li><li>3 najważniejsze ustalenia z rekomendacją</li><li>E-mailem w 48h roboczych</li></ul></div>
+    <div class="cell"><h3>Wdrożenie poprawek</h3><div class="price">800–1200 zł</div><ul><li>robots.txt i llms.txt</li><li>Dane strukturalne (schema.org)</li><li>Tytuły i opisy stron</li><li>Uporządkowane dane firmy i FAQ</li></ul></div>
+    <div class="cell"><h3>Nowa strona</h3><div class="price">od 1500 zł</div><ul><li>Gdy obecna strona jest przestarzała albo jej nie ma</li><li>Od początku gotowa pod wyszukiwarki i AI</li><li>Działa na telefonie i komputerze</li></ul></div>
+  </div>
+  <p class="note">Dokładną cenę wdrożenia podaję po mini-audycie, przed rozpoczęciem pracy. Zależy od liczby podstron, platformy i zakresu zmian.</p>
+</section>
+
+<section class="block" id="o-mnie">
+  <div class="label">Kto to robi</div>
+  <h2>Filip Szmel</h2>
+  <div class="about">
+    <svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="none"><path d="M32 20 L10 8 L14 22 L28 27 Z" fill="#F5A623"/><path d="M32 20 L54 8 L50 22 L36 27 Z" fill="#F5A623"/><path d="M24 20 L40 20 L44 30 L32 36 L20 30 Z" fill="#0A0A0A" stroke="#F5A623" stroke-width="2.2"/><circle cx="32" cy="27" r="4.6" fill="#0A0A0A" stroke="#F5A623" stroke-width="2"/><circle cx="32" cy="27" r="1.7" fill="#F5A623"/><path d="M27 36 L37 36 L35 42 L29 42 Z" fill="#F5A623"/><path d="M28.5 42 L35.5 42 L34 47 L30 47 Z" fill="#8A5A16"/><path d="M32 47 L32 54" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round"/></g></svg>
+    <div>
+      <p>Sprawdzam i poprawiam strony małych firm tak, żeby wyszukiwarki i asystenci AI mogli je przeczytać i podać klientom prawdziwe informacje. Pracuję zdalnie z firmami z całej Polski.</p>
+      <p>Działam jako osoba fizyczna (działalność nierejestrowana). Kontakt: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>.</p>
     </div>
-  </section>
+  </div>
+  <div class="honest"><strong style="color:var(--text)">Uczciwie:</strong> nikt nie może zagwarantować, że ChatGPT poleci Twoją firmę. Mogę sprawić, że AI dotrze do Twojej strony, ją przeczyta i poda poprawne dane. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.</div>
+</section>
 
-  <footer>
-    <div class="brand">© 2026 Filip Szmel — AI Visibility</div>
-    <div class="contact">szmelfilip.business@gmail.com</div>
-  </footer>
+<section class="block" id="faq">
+  <div class="label">Najczęstsze pytania</div>
+  <h2>FAQ</h2>
+  <div class="faq">
+<details><summary>Czym jest widoczność firmy w AI?</summary><p>To to, czy asystenci AI, tacy jak ChatGPT, Perplexity czy odpowiedzi AI w Google, potrafią dotrzeć do Twojej strony, przeczytać ją i poprawnie podać klientowi Twoje usługi, obszar działania i kontakt. Jeśli strona jest dla nich nieczytelna, pomijają ją albo podają nieaktualne informacje.</p></details>
+<details><summary>Czy mini-audyt jest naprawdę darmowy?</summary><p>Tak. Mini-audyt kosztuje 0 zł i do niczego nie zobowiązuje. Dostajesz go e-mailem, a o ewentualnych poprawkach decydujesz sam.</p></details>
+<details><summary>Ile czeka się na mini-audyt?</summary><p>Do 48 godzin roboczych od zgłoszenia. Wynik przychodzi na adres e-mail podany w formularzu.</p></details>
+<details><summary>Czy gwarantujesz, że ChatGPT poleci moją firmę?</summary><p>Nie. Nikt nie może tego uczciwie zagwarantować, a kto to obiecuje, nie sprzedaje niczego. Mogę sprawić, że asystenci AI dotrą do Twojej strony, przeczytają ją i podadzą poprawne informacje o firmie. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.</p></details>
+<details><summary>Od czego zależy cena poprawek?</summary><p>Od liczby podstron, platformy, na której działa strona (np. WordPress, Wix lub własny kod), i zakresu zmian. Dokładną cenę w przedziale 800–1200 zł podaję po mini-audycie, zanim zaczniemy pracę.</p></details>
+<details><summary>Czy pracujesz tylko w jednym mieście?</summary><p>Nie. Pracuję zdalnie z firmami z całej Polski. Cały proces odbywa się zdalnie, przez e-mail.</p></details>
+<details><summary>Co jeśli moja strona jest stara albo nie mam jej wcale?</summary><p>Wtedy zamiast łatać starą stronę bardziej opłaca się zbudować nową. Nową stronę, od początku przygotowaną pod wyszukiwarki i asystentów AI, wyceniam od 1500 zł, zależnie od liczby podstron i funkcji.</p></details>
+  </div>
+</section>
 
+<section class="cta">
+  <h2>Sprawdź swoją stronę za 0 zł</h2>
+  <a class="go" href="#audyt">Zamów bezpłatny mini-audyt</a>
+</section>
+</main>
+<footer>
+  <div class="row">
+    <div>
+      <p><strong style="color:var(--text)">Filip Szmel — AI Visibility</strong></p>
+      <p>Filip Szmel, działalność nierejestrowana</p>
+      <p>Obszar działania: Cała Polska (zdalnie)</p>
+    </div>
+    <div>
+      <p>E-mail: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a></p>
+      
+      <p><a href="/polityka-prywatnosci">Polityka prywatności</a></p>
+    </div>
+  </div>
+  <p style="margin-top:16px">© 2026 Filip Szmel</p>
+</footer>
+</div>
+
+<div class="consent" id="consent" hidden role="dialog" aria-labelledby="consent-t">
+  <strong id="consent-t" style="color:var(--text)">Pliki cookies marketingowe</strong>
+  <p style="margin:6px 0 0">Za Twoją zgodą strona uruchomi piksel Meta, żeby mierzyć skuteczność reklam. Bez zgody strona działa tak samo. Szczegóły: <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
+  <div class="btns"><button class="yes" id="c-yes" type="button">Zgadzam się</button><button class="no" id="c-no" type="button">Nie zgadzam się</button></div>
 </div>
 
 <script>
 (function(){
+  var EMAIL = "szmelfilip.business@gmail.com";
+  var KEY = "7003f878-52e8-4f95-ac90-3dbadec662c6";
+  var PIXEL = "";
+
+  /* ---- Meta Pixel: ładuje się WYŁĄCZNIE po zgodzie i tylko gdy PIXEL jest ustawiony ---- */
+  function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  function loadPixel(){
+    if(!PIXEL || window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL); fbq('track','PageView');
+  }
+  if(PIXEL){
+    var c = store('zgoda-marketing');
+    var box = document.getElementById('consent');
+    if(c === 'tak') loadPixel();
+    else if(c !== 'nie') box.hidden = false;
+    document.getElementById('c-yes').onclick = function(){ store('zgoda-marketing','tak'); box.hidden = true; loadPixel(); };
+    document.getElementById('c-no').onclick = function(){ store('zgoda-marketing','nie'); box.hidden = true; };
+  }
+
+  /* ---- Formularz ---- */
   var form = document.getElementById('audit-form');
-  var result = document.getElementById('result');
-  var CONTACT_EMAIL = 'szmelfilip.business@gmail.com';
-  var WEB3FORMS_KEY = '7003f878-52e8-4f95-ac90-3dbadec662c6';
+  function setErr(f, el, msg){ document.getElementById(f).classList.toggle('error', !!msg); document.getElementById(el).textContent = msg || ''; }
+  function norm(v){ v = v.trim(); if(v && !/^https?:\/\//i.test(v)) v = 'https://' + v; return v; }
+  function okUrl(v){ try{ return /\./.test(new URL(norm(v)).hostname); }catch(e){ return false; } }
+  function okMail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+  function show(s){ ['sending','ok','fail'].forEach(function(k){ document.getElementById('r-'+k).hidden = (k !== s); }); }
 
-  function setError(fieldId, errId, msg){
-    document.getElementById(fieldId).classList.toggle('error', !!msg);
-    document.getElementById(errId).textContent = msg || '';
-  }
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var u = document.getElementById('site-url').value, m = document.getElementById('email').value, good = true;
+    if(!u.trim()){ setErr('f-url','e-url','Podaj adres strony.'); good = false; }
+    else if(!okUrl(u)){ setErr('f-url','e-url','To nie wygląda na adres strony, np. twojafirma.pl'); good = false; }
+    else setErr('f-url','e-url','');
+    if(!m.trim()){ setErr('f-email','e-email','Podaj adres e-mail.'); good = false; }
+    else if(!okMail(m)){ setErr('f-email','e-email','To nie wygląda na adres e-mail.'); good = false; }
+    else setErr('f-email','e-email','');
+    if(!good) return;
 
-  function normalizeUrl(v){
-    v = v.trim();
-    if(!v) return '';
-    if(!/^https?:\/\//i.test(v)) v = 'https://' + v;
-    return v;
-  }
-
-  function isValidUrl(v){
-    try{
-      var u = new URL(normalizeUrl(v));
-      return /\./.test(u.hostname);
-    }catch(e){ return false; }
-  }
-
-  function isValidEmail(v){
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-  }
-
-  var submitBtn = form.querySelector('button.submit');
-  var resultSending = document.getElementById('result-sending');
-  var resultSuccess = document.getElementById('result-success');
-  var resultFallback = document.getElementById('result-fallback');
-
-  function showResult(state){
-    resultSending.hidden = state !== 'sending';
-    resultSuccess.hidden = state !== 'success';
-    resultFallback.hidden = state !== 'fallback';
-  }
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var urlVal = document.getElementById('site-url').value;
-    var emailVal = document.getElementById('email').value;
-    var ok = true;
-
-    if(!urlVal.trim()){ setError('field-url','err-url','Podaj adres strony.'); ok = false; }
-    else if(!isValidUrl(urlVal)){ setError('field-url','err-url','To nie wygląda na poprawny adres.'); ok = false; }
-    else setError('field-url','err-url','');
-
-    if(!emailVal.trim()){ setError('field-email','err-email','Podaj adres e-mail.'); ok = false; }
-    else if(!isValidEmail(emailVal)){ setError('field-email','err-email','To nie wygląda na poprawny e-mail.'); ok = false; }
-    else setError('field-email','err-email','');
-
-    if(!ok) return;
-
-    var site = normalizeUrl(urlVal);
-    var email = emailVal.trim();
+    var site = norm(u), mail = m.trim();
     var subject = 'Zgłoszenie na mini-audyt AI Visibility';
-    var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + email + '\n\nProszę o bezpłatny mini-audyt widoczności AI dla powyższej strony.';
+    var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + mail + '\n\nProszę o bezpłatny mini-audyt widoczności AI dla powyższej strony.';
+    document.getElementById('mail-link').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    var cb = document.getElementById('copy-box'); cb.textContent = 'Do: ' + EMAIL + '\nTemat: ' + subject + '\n\n' + body;
+    document.getElementById('copy-btn').onclick = function(){
+      var b = this; function done(){ b.textContent = 'Skopiowano'; }
+      if(navigator.clipboard) navigator.clipboard.writeText(cb.textContent).then(done, done); else done();
+    };
 
-    // Fallback (mailto + kopiowanie) — przygotowany na wypadek, gdyby automatyczna wysyłka zawiodła
-    var mailLinkEl = document.getElementById('mail-link');
-    var copyBoxEl = document.getElementById('copy-box');
-    var copyBtnEl = document.getElementById('copy-btn');
-    mailLinkEl.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    copyBoxEl.textContent = 'Do: ' + CONTACT_EMAIL + '\nTemat: ' + subject + '\n\n' + body;
-    copyBtnEl.addEventListener('click', function(){
-      var text = copyBoxEl.textContent;
-      function done(){
-        copyBtnEl.textContent = 'Skopiowano ✓';
-        copyBtnEl.classList.add('copied');
-        setTimeout(function(){ copyBtnEl.textContent = 'Kopiuj treść'; copyBtnEl.classList.remove('copied'); }, 1800);
-      }
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
-      } else {
-        fallbackCopy(text, done);
-      }
-    });
-
-    submitBtn.disabled = true;
-    form.classList.add('hide');
-    result.classList.add('show');
-    showResult('sending');
-
+    form.hidden = true; document.getElementById('result').hidden = false; show('sending');
     fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject: subject,
-        from_name: 'AI Visibility — strona lądowania',
-        site: site,
-        email: email,
-        message: body
-      })
-    })
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        if (data && data.success) {
-          showResult('success');
-          if (typeof fbq === 'function') { fbq('track', 'Lead'); }
-        } else {
-          showResult('fallback');
-        }
-      })
-      .catch(function(){
-        showResult('fallback');
-      });
+      method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({ access_key: KEY, subject: subject, from_name: 'AI Visibility — strona', site: site, email: mail, message: body,
+        botcheck: document.getElementById('botcheck').checked })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if(d && d.success){ show('ok'); if(typeof fbq === 'function') fbq('track','Lead'); } else show('fail');
+    }).catch(function(){ show('fail'); });
   });
-
-  function fallbackCopy(text, cb){
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.focus(); ta.select();
-    try{ document.execCommand('copy'); }catch(e){}
-    document.body.removeChild(ta);
-    cb();
-  }
 })();
 </script>
 </body>

@@ -1,0 +1,23 @@
+# Filip Szmel — AI Visibility
+
+> Filip Szmel przygotowuje bezpłatne mini-audyty i wdraża poprawki na stronach małych firm, tak żeby wyszukiwarki i asystenci AI (np. ChatGPT, Perplexity, Google) mogli je przeczytać i podawać klientom poprawne informacje. Buduje też nowe strony. Pracuje zdalnie z firmami z całej Polski.
+
+## Usługi i ceny
+- Mini-audyt widoczności w AI: 0 zł. Co już działa na stronie i 3 najważniejsze ustalenia z rekomendacją, e-mailem w ciągu 48 godzin roboczych.
+- Wdrożenie poprawek na istniejącej stronie: 800–1200 zł (robots.txt, llms.txt, dane strukturalne schema.org, tytuły i opisy, uporządkowanie danych firmy, FAQ).
+- Nowa strona internetowa: od 1500 zł, zależnie od liczby podstron i funkcji.
+
+## Obszar działania
+Cała Polska, zdalnie.
+
+## Czego nie obiecuję
+Nie gwarantuję, że asystent AI poleci firmę ani pozycji w wynikach. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.
+
+## Kontakt
+E-mail: szmelfilip.business@gmail.com
+
+Forma działalności: działalność nierejestrowana
+
+## Ważne strony
+- Zamówienie mini-audytu i cennik: https://ai-visibility-landing.vhb9bgvk8b.workers.dev/
+- Polityka prywatności: https://ai-visibility-landing.vhb9bgvk8b.workers.dev/polityka-prywatnosci
