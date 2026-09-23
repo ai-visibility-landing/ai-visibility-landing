@@ -408,13 +408,22 @@ src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
         </form>
 
         <div class="result" id="result">
-          <div class="ok-badge">Zgłoszenie gotowe do wysłania</div>
-          <p class="lede" style="margin-top:10px; font-size:0.9rem;">Kliknij przycisk poniżej, aby otworzyć swój program pocztowy z gotową wiadomością. Jeśli się nie otworzy, skopiuj treść i wyślij ją ręcznie na adres w stopce.</p>
-          <a class="mail-btn" id="mail-link" href="#">Otwórz e-mail →</a>
-          <div class="copy-box" id="copy-box"></div>
-          <div class="copy-row">
-            <span class="fine" style="margin:0;">Skopiuj, jeśli klient poczty się nie otworzy</span>
-            <button class="copy-btn" id="copy-btn" type="button">Kopiuj treść</button>
+          <div id="result-sending">
+            <div class="ok-badge" style="color:var(--text-faint)"><span style="width:7px;height:7px;background:var(--text-faint);border-radius:50%;display:inline-block;"></span> Wysyłanie…</div>
+          </div>
+          <div id="result-success" hidden>
+            <div class="ok-badge">Zgłoszenie wysłane</div>
+            <p class="lede" style="margin-top:10px; font-size:0.9rem;">Dziękujemy! Odezwę się z mini-audytem w ciągu 48h roboczych na podany adres e-mail.</p>
+          </div>
+          <div id="result-fallback" hidden>
+            <div class="ok-badge" style="color:var(--critical, #E0685A)"><span style="width:7px;height:7px;background:#E0685A;border-radius:50%;display:inline-block;"></span> Nie udało się wysłać automatycznie</div>
+            <p class="lede" style="margin-top:10px; font-size:0.9rem;">Kliknij przycisk poniżej, aby otworzyć swój program pocztowy z gotową wiadomością. Jeśli się nie otworzy, skopiuj treść i wyślij ją ręcznie na adres w stopce.</p>
+            <a class="mail-btn" id="mail-link" href="#">Otwórz e-mail →</a>
+            <div class="copy-box" id="copy-box"></div>
+            <div class="copy-row">
+              <span class="fine" style="margin:0;">Skopiuj, jeśli klient poczty się nie otworzy</span>
+              <button class="copy-btn" id="copy-btn" type="button">Kopiuj treść</button>
+            </div>
           </div>
         </div>
       </div>
@@ -453,10 +462,8 @@ src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
 (function(){
   var form = document.getElementById('audit-form');
   var result = document.getElementById('result');
-  var mailLink = document.getElementById('mail-link');
-  var copyBox = document.getElementById('copy-box');
-  var copyBtn = document.getElementById('copy-btn');
   var CONTACT_EMAIL = 'szmelfilip.business@gmail.com';
+  var WEB3FORMS_KEY = '7003f878-52e8-4f95-ac90-3dbadec662c6';
 
   function setError(fieldId, errId, msg){
     document.getElementById(fieldId).classList.toggle('error', !!msg);
@@ -481,6 +488,17 @@ src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
   }
 
+  var submitBtn = form.querySelector('button.submit');
+  var resultSending = document.getElementById('result-sending');
+  var resultSuccess = document.getElementById('result-success');
+  var resultFallback = document.getElementById('result-fallback');
+
+  function showResult(state){
+    resultSending.hidden = state !== 'sending';
+    resultSuccess.hidden = state !== 'success';
+    resultFallback.hidden = state !== 'fallback';
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var urlVal = document.getElementById('site-url').value;
@@ -498,33 +516,59 @@ src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
     if(!ok) return;
 
     var site = normalizeUrl(urlVal);
+    var email = emailVal.trim();
     var subject = 'Zgłoszenie na mini-audyt AI Visibility';
-    var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + emailVal.trim() + '\n\nProszę o bezpłatny mini-audyt widoczności AI dla powyższej strony.';
+    var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + email + '\n\nProszę o bezpłatny mini-audyt widoczności AI dla powyższej strony.';
 
-    mailLink.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    copyBox.textContent = 'Do: ' + CONTACT_EMAIL + '\nTemat: ' + subject + '\n\n' + body;
+    // Fallback (mailto + kopiowanie) — przygotowany na wypadek, gdyby automatyczna wysyłka zawiodła
+    var mailLinkEl = document.getElementById('mail-link');
+    var copyBoxEl = document.getElementById('copy-box');
+    var copyBtnEl = document.getElementById('copy-btn');
+    mailLinkEl.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    copyBoxEl.textContent = 'Do: ' + CONTACT_EMAIL + '\nTemat: ' + subject + '\n\n' + body;
+    copyBtnEl.addEventListener('click', function(){
+      var text = copyBoxEl.textContent;
+      function done(){
+        copyBtnEl.textContent = 'Skopiowano ✓';
+        copyBtnEl.classList.add('copied');
+        setTimeout(function(){ copyBtnEl.textContent = 'Kopiuj treść'; copyBtnEl.classList.remove('copied'); }, 1800);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
+      } else {
+        fallbackCopy(text, done);
+      }
+    });
 
+    submitBtn.disabled = true;
     form.classList.add('hide');
     result.classList.add('show');
+    showResult('sending');
 
-    // Meta Pixel: zdarzenie konwersji (lead) — kluczowe do optymalizacji kampanii
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead');
-    }
-  });
-
-  copyBtn.addEventListener('click', function(){
-    var text = copyBox.textContent;
-    function done(){
-      copyBtn.textContent = 'Skopiowano ✓';
-      copyBtn.classList.add('copied');
-      setTimeout(function(){ copyBtn.textContent = 'Kopiuj treść'; copyBtn.classList.remove('copied'); }, 1800);
-    }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
-    } else {
-      fallbackCopy(text, done);
-    }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: subject,
+        from_name: 'AI Visibility — strona lądowania',
+        site: site,
+        email: email,
+        message: body
+      })
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.success) {
+          showResult('success');
+          if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+        } else {
+          showResult('fallback');
+        }
+      })
+      .catch(function(){
+        showResult('fallback');
+      });
   });
 
   function fallbackCopy(text, cb){
