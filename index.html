@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Darmowy audyt widoczności firmy w AI | Filip Szmel</title>
-<meta name="description" content="Sprawdzę, czy ChatGPT, Perplexity i Google poprawnie czytają stronę Twojej firmy. Mini-audyt 0 zł w 48h, poprawki od 800 zł. Zdalnie, cała Polska.">
+<meta name="description" content="Sprawdzę, czy ChatGPT, Perplexity i Google poprawnie czytają stronę Twojej firmy. Mini-audyt 0 zł w 48 h roboczych, poprawki od 800 zł. Cała Polska.">
 <link rel="canonical" href="https://ai-visibility-landing.vhb9bgvk8b.workers.dev/">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Filip Szmel">
@@ -14,7 +14,7 @@
 <meta property="og:locale" content="pl_PL">
 <meta property="og:site_name" content="Filip Szmel — AI Visibility">
 <meta property="og:title" content="Darmowy audyt widoczności firmy w AI | Filip Szmel">
-<meta property="og:description" content="Sprawdzę, czy ChatGPT, Perplexity i Google poprawnie czytają stronę Twojej firmy. Mini-audyt 0 zł w 48h, poprawki od 800 zł. Zdalnie, cała Polska.">
+<meta property="og:description" content="Sprawdzę, czy ChatGPT, Perplexity i Google poprawnie czytają stronę Twojej firmy. Mini-audyt 0 zł w 48 h roboczych, poprawki od 800 zł. Cała Polska.">
 <meta property="og:url" content="https://ai-visibility-landing.vhb9bgvk8b.workers.dev/">
 <meta property="og:image" content="https://ai-visibility-landing.vhb9bgvk8b.workers.dev/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -35,6 +35,13 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans"
 .wrap{max-width:760px;margin:0 auto}
 h1,h2,h3{font-family:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
 a{color:var(--accent)}
+a[href^="tel:"]{white-space:nowrap}
+a,button,summary,input{touch-action:manipulation;-webkit-tap-highlight-color:rgba(245,166,35,.18)}
+a,button,summary{transition:color .15s ease,background-color .15s ease,border-color .15s ease,transform .1s ease}
+@media (prefers-reduced-motion: reduce){ a,button,summary{transition:none} }
+[id]{scroll-margin-top:16px}
+p,li{text-wrap:pretty}
+a:hover{color:#FFB94A}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .label{font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#17130A;padding:8px 12px;border-radius:3px;z-index:10}
@@ -44,11 +51,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 /* header */
 .site-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px;border-bottom:1px solid var(--border)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.brand:hover{color:var(--text)}
 .logo-icon{width:34px;height:34px;flex-shrink:0}
 .brand .n{font-family:"Chakra Petch";font-weight:600;font-size:1rem;line-height:1.1;display:block}
 .brand .t{font-family:"Chakra Petch";font-weight:600;font-size:.7rem;letter-spacing:.16em;color:var(--accent);display:block}
 .site-head nav{display:flex;gap:18px;font-size:.9rem}
-.site-head nav a{color:var(--text-muted);text-decoration:none}
+.site-head nav{align-items:center}
+.site-head nav a{color:var(--text-muted);text-decoration:none;padding-block:6px}
+.site-head nav a.nav-cta{color:var(--accent);border:1px solid var(--accent-dim);padding:6px 12px;border-radius:3px}
+.site-head nav a.nav-cta:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 .site-head nav a:hover{color:var(--accent)}
 @media (max-width:560px){ .site-head nav .opt{display:none} }
 
@@ -72,12 +83,14 @@ form{margin-top:18px;display:flex;flex-direction:column;gap:14px}
 .field label{font-size:.9rem;font-weight:600;color:var(--text)}
 .field input{background:var(--surface-2);border:1px solid #4A443B;color:var(--text);font:inherit;font-size:1rem;padding:12px 14px;border-radius:3px}
 .field input::placeholder{color:#8F8A82}
-.field input:focus{border-color:var(--accent);outline:none;background:#201D18}
+.field input:focus{border-color:var(--accent);background:#201D18}
+.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px;box-shadow:0 0 0 4px var(--accent-soft)}
 .field.error input{border-color:var(--error)}
 .err{font-size:.85rem;color:var(--error);min-height:1.2em}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 button.submit{background:var(--accent);color:#17130A;border:0;font-family:"Chakra Petch";font-weight:600;font-size:1.02rem;padding:14px 20px;border-radius:3px;cursor:pointer}
 button.submit:hover{background:#FFB94A}
+button.submit:active,.cta a.go:active,.btn-line:active,.consent button:active,.price-cta:active{transform:translateY(1px)}
 button.submit:disabled{opacity:.6;cursor:wait}
 .rodo{margin:2px 0 0;font-size:.82rem;color:var(--text-faint);line-height:1.5}
 .result{margin-top:16px}
@@ -85,8 +98,10 @@ button.submit:disabled{opacity:.6;cursor:wait}
 .status{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .status.bad{color:var(--error)}
 .result p{margin:8px 0 0;color:var(--text-muted)}
+.btn-line:hover{border-color:var(--accent);background:var(--accent-soft)}
 .btn-line{display:inline-block;margin-top:12px;border:1px solid var(--accent-dim);color:var(--accent);padding:10px 16px;border-radius:3px;text-decoration:none;font-family:"Chakra Petch";font-weight:600}
 .copy-box{margin-top:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:12px;font-size:.85rem;color:var(--text-muted);white-space:pre-wrap;word-break:break-word}
+.copy-btn:hover{border-color:var(--accent-dim);color:var(--text)}
 .copy-btn{margin-top:8px;background:none;border:1px solid var(--border);color:var(--text-muted);font:inherit;font-size:.85rem;padding:7px 12px;border-radius:3px;cursor:pointer}
 
 /* sections */
@@ -100,12 +115,16 @@ section.block > p{color:var(--text-muted);max-width:60ch;margin:12px 0 0}
 .cell{background:var(--bg);padding:20px 18px}
 .cell h3{font-size:1.02rem}
 .cell p{margin:6px 0 0;font-size:.93rem;color:var(--text-muted)}
-.num{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;color:var(--accent)}
-.price{font-family:"Chakra Petch";font-weight:600;font-size:1.7rem;color:var(--text);margin-top:10px;line-height:1.1}
+.num{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.price{font-family:"Chakra Petch";font-weight:600;font-size:1.7rem;color:var(--text);margin-top:10px;line-height:1.1;font-variant-numeric:tabular-nums}
+.price-cta{display:inline-block;margin-top:14px;font-family:"Chakra Petch";font-weight:600;font-size:.95rem;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);padding-block:4px}
+.price-cta:hover{border-color:var(--accent)}
 .price small{font-size:.9rem;color:var(--text-faint);font-weight:600}
 .cell.hl{background:#15120D;box-shadow:inset 0 3px 0 var(--accent)}
 .cell ul{margin:10px 0 0;padding-left:18px;color:var(--text-muted);font-size:.92rem}
 .cell li{margin:3px 0}
+.role{margin:6px 0 0;font-family:"Chakra Petch";font-weight:600;color:var(--accent);font-size:.95rem}
+.cell.case .num{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 .note{margin-top:14px;font-size:.9rem;color:var(--text-faint)}
 .about{display:flex;gap:18px;align-items:flex-start;margin-top:20px}
 .about .logo-icon{width:52px;height:52px}
@@ -115,6 +134,7 @@ details{border-top:1px solid var(--border)}
 details:last-of-type{border-bottom:1px solid var(--border)}
 summary{cursor:pointer;padding:16px 0;font-family:"Chakra Petch";font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
 summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--accent)}
 summary::after{content:"+";color:var(--accent);flex-shrink:0}
 details[open] summary::after{content:"−"}
 details p{margin:0 0 16px;color:var(--text-muted);max-width:62ch}
@@ -122,11 +142,13 @@ details p{margin:0 0 16px;color:var(--text-muted);max-width:62ch}
 .cta{padding-block:40px;text-align:center;border-bottom:1px solid var(--border)}
 .cta h2{font-size:1.5rem}
 .cta a.go{display:inline-block;margin-top:16px;background:var(--accent);color:#17130A;font-family:"Chakra Petch";font-weight:600;padding:14px 22px;border-radius:3px;text-decoration:none}
+.cta a.go:hover{background:#FFB94A;color:#17130A}
 
 /* footer */
 footer{padding-block:28px 40px;font-size:.9rem;color:var(--text-faint)}
 footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
-footer a{color:var(--text-muted)}
+footer a{color:var(--text-muted);display:inline-block;padding-block:3px}
+footer a:hover{color:var(--accent)}
 footer p{margin:4px 0}
 
 /* consent */
@@ -136,6 +158,8 @@ footer p{margin:4px 0}
 .consent button{font:inherit;font-weight:600;padding:9px 14px;border-radius:3px;cursor:pointer;border:1px solid var(--accent)}
 .consent .yes{background:var(--accent);color:#17130A}
 .consent .no{background:none;color:var(--accent)}
+.consent .yes:hover{background:#FFB94A}
+.consent .no:hover{background:var(--accent-soft)}
 </style>
 <script type="application/ld+json">
 {
@@ -152,7 +176,12 @@ footer p{margin:4px 0}
    "@type": "Person",
    "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#filip",
    "name": "Filip Szmel",
+   "jobTitle": "Specjalista ds. widoczności w AI (GEO)",
    "email": "szmelfilip.business@gmail.com",
+   "telephone": "+48 502 890 686",
+   "sameAs": [
+    "https://www.linkedin.com/in/filip-szmel-b2993a439/"
+   ],
    "knowsLanguage": "pl",
    "worksFor": {
     "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#firma"
@@ -168,11 +197,11 @@ footer p{margin:4px 0}
     "@id": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/#filip"
    },
    "email": "szmelfilip.business@gmail.com",
+   "telephone": "+48 502 890 686",
    "areaServed": {
     "@type": "Country",
     "name": "Polska"
    },
-   "priceRange": "0–2000+ zł",
    "image": "https://ai-visibility-landing.vhb9bgvk8b.workers.dev/og-image.png",
    "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -272,7 +301,7 @@ footer p{margin:4px 0}
      "name": "Czy pracujesz tylko w jednym mieście?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Nie. Pracuję zdalnie z firmami z całej Polski. Cały proces odbywa się zdalnie, przez e-mail."
+      "text": "Nie. Pracuję zdalnie z firmami z całej Polski. Cały proces odbywa się zdalnie, przez e-mail i telefon."
      }
     },
     {
@@ -293,30 +322,33 @@ footer p{margin:4px 0}
 <div class="wrap">
 <a class="skip" href="#tresc">Przejdź do treści</a>
 <header class="site-head">
-  <a class="brand" href="/" aria-label="Filip Szmel — AI Visibility — strona główna"><svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="none"><path d="M32 20 L10 8 L14 22 L28 27 Z" fill="#F5A623"/><path d="M32 20 L54 8 L50 22 L36 27 Z" fill="#F5A623"/><path d="M24 20 L40 20 L44 30 L32 36 L20 30 Z" fill="#0A0A0A" stroke="#F5A623" stroke-width="2.2"/><circle cx="32" cy="27" r="4.6" fill="#0A0A0A" stroke="#F5A623" stroke-width="2"/><circle cx="32" cy="27" r="1.7" fill="#F5A623"/><path d="M27 36 L37 36 L35 42 L29 42 Z" fill="#F5A623"/><path d="M28.5 42 L35.5 42 L34 47 L30 47 Z" fill="#8A5A16"/><path d="M32 47 L32 54" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round"/></g></svg><span><span class="n">Filip Szmel</span><span class="t">AI VISIBILITY</span></span></a>
-  <nav aria-label="Główna"><a class="opt" href="#cennik">Cennik</a><a class="opt" href="#faq">FAQ</a><a href="#audyt">Darmowy audyt</a></nav>
+  <a class="brand" href="/" aria-label="Filip Szmel — AI Visibility — strona główna"><svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="none"><path d="M32 20 L10 8 L14 22 L28 27 Z" fill="#F5A623"/><path d="M32 20 L54 8 L50 22 L36 27 Z" fill="#F5A623"/><path d="M24 20 L40 20 L44 30 L32 36 L20 30 Z" fill="#0A0A0A" stroke="#F5A623" stroke-width="2.2"/><circle cx="32" cy="27" r="4.6" fill="#0A0A0A" stroke="#F5A623" stroke-width="2"/><circle cx="32" cy="27" r="1.7" fill="#F5A623"/><path d="M27 36 L37 36 L35 42 L29 42 Z" fill="#F5A623"/><path d="M28.5 42 L35.5 42 L34 47 L30 47 Z" fill="#8A5A16"/><path d="M32 47 L32 54" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round"/></g></svg><span><span class="n" translate="no">Filip Szmel</span><span class="t" translate="no">AI VISIBILITY</span></span></a>
+  <nav aria-label="Główna"><a class="opt" href="#przyklady">Przykłady</a><a class="opt" href="#cennik">Cennik</a><a class="opt" href="#faq">FAQ</a><a class="nav-cta" href="#audyt">Darmowy audyt</a></nav>
 </header>
 <main id="tresc">
 <section class="hero" id="audyt">
   <svg class="hero-hex" viewBox="0 0 760 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><pattern id="hex" width="42" height="72.7" patternUnits="userSpaceOnUse" patternTransform="translate(-10,-10)"><path d="M21 0 L42 12.1 L42 36.3 L21 48.5 L0 36.3 L0 12.1 Z" fill="none" stroke="#8A5A16" stroke-width="1" opacity=".5"/><path d="M21 48.5 L42 60.6 L42 84.8 L21 97 L0 84.8 L0 60.6 Z" fill="none" stroke="#8A5A16" stroke-width="1" opacity=".5"/></pattern><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0A0A" stop-opacity="0"/><stop offset=".85" stop-color="#0A0A0A" stop-opacity="1"/></linearGradient></defs><rect width="760" height="460" fill="url(#hex)"/><rect width="760" height="460" fill="url(#fade)"/></svg>
   <div class="hero-inner">
-    <div class="label">Bezpłatny mini-audyt · odpowiedź w 48h</div>
+    <div class="label">Bezpłatny mini-audyt · wynik w 48 godzin roboczych</div>
     <h1>Czy ChatGPT i Google <em>poprawnie opisują</em> Twoją firmę?</h1>
     <p class="lede">Sprawdzę, czy wyszukiwarki i asystenci AI mogą przeczytać stronę Twojej firmy i podać klientom prawdziwe informacje o usługach, obszarze działania i kontakcie. Dostaniesz konkretną listę, co poprawić w pierwszej kolejności.</p>
-    <ul class="facts"><li>0 zł, bez zobowiązań</li><li>Wynik e-mailem w 48h roboczych</li><li>Zdalnie, cała Polska</li></ul>
+    <ul class="facts"><li>0 zł, bez zobowiązań</li><li>Wynik e-mailem w 48 godzin roboczych</li><li>Zdalnie, cała Polska</li></ul>
 
     <div class="card">
       <h2>Zamów bezpłatny mini-audyt</h2>
-      <p class="sub">Podaj adres strony i e-mail, na który wyślę wynik.</p>
-      <form id="audit-form" novalidate>
+      <p class="sub">Podaj adres strony i e-mail, na który wyślę wynik. Wolisz porozmawiać? Zadzwoń: <a href="tel:+48502890686">502 890 686</a></p>
+      <form id="audit-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="7003f878-52e8-4f95-ac90-3dbadec662c6">
+        <input type="hidden" name="subject" value="Zgłoszenie na mini-audyt AI Visibility">
+        <input type="hidden" name="from_name" value="AI Visibility — strona">
         <div class="field" id="f-url">
           <label for="site-url">Adres strony firmy</label>
-          <input id="site-url" name="site" type="text" inputmode="url" placeholder="np. twojafirma.pl" autocomplete="url" required>
+          <input id="site-url" name="site" type="text" inputmode="url" placeholder="np. twojafirma.pl" autocomplete="url" spellcheck="false" autocapitalize="off" required>
           <div class="err" id="e-url" aria-live="polite"></div>
         </div>
         <div class="field" id="f-email">
           <label for="email">Twój e-mail</label>
-          <input id="email" name="email" type="email" placeholder="np. kontakt@twojafirma.pl" autocomplete="email" required>
+          <input id="email" name="email" type="email" placeholder="np. kontakt@twojafirma.pl" autocomplete="email" spellcheck="false" autocapitalize="off" required>
           <div class="err" id="e-email" aria-live="polite"></div>
         </div>
         <div class="hp" aria-hidden="true"><label for="botcheck">Nie wypełniaj tego pola</label><input type="checkbox" id="botcheck" name="botcheck" tabindex="-1"></div>
@@ -325,7 +357,7 @@ footer p{margin:4px 0}
       </form>
       <div class="result" id="result" hidden aria-live="polite">
         <div id="r-sending"><div class="status">Wysyłanie…</div></div>
-        <div id="r-ok" hidden><div class="status">Zgłoszenie przyjęte</div><p>Dziękuję! Mini-audyt wyślę na podany adres e-mail w ciągu 48 godzin roboczych.</p></div>
+        <div id="r-ok" hidden><div class="status">Zgłoszenie przyjęte</div><p>Dziękuję! Mini-audyt wyślę na podany adres e-mail w ciągu 48 godzin roboczych.</p></div>
         <div id="r-fail" hidden>
           <div class="status bad">Nie udało się wysłać automatycznie</div>
           <p>Kliknij poniżej, żeby otworzyć pocztę z gotową wiadomością. Jeśli się nie otworzy, skopiuj treść i wyślij ją na szmelfilip.business@gmail.com.</p>
@@ -341,7 +373,7 @@ footer p{margin:4px 0}
 <section class="block" id="co-sprawdzam">
   <div class="label">Co sprawdzam</div>
   <h2>Sześć rzeczy, które decydują, czy AI zrozumie Twoją stronę</h2>
-  <p>W mini-audycie opisuję najpierw, co na stronie działa dobrze, a potem 3 najważniejsze problemy: dowód, co to oznacza dla Twoich klientów i co z tym zrobić.</p>
+  <p>W mini-audycie opisuję najpierw, co na stronie działa dobrze, a potem 3 najważniejsze problemy: dowód, co to oznacza dla Twoich klientów i co z tym zrobić.</p>
   <div class="grid c3">
 <div class="cell"><div class="num">01</div><h3>Dostęp robotów</h3><p>Czy plik robots.txt nie blokuje przez pomyłkę wyszukiwarek i asystentów AI.</p></div>
 <div class="cell"><div class="num">02</div><h3>Treść bez JavaScriptu</h3><p>Czy najważniejsze informacje są w kodzie strony, a nie pojawiają się dopiero po załadowaniu skryptów.</p></div>
@@ -357,18 +389,31 @@ footer p{margin:4px 0}
   <h2>Trzy kroki, bez rozmów sprzedażowych</h2>
   <div class="grid c3">
     <div class="cell"><div class="num">01</div><h3>Zgłoszenie</h3><p>Wpisujesz adres strony i e-mail w formularzu powyżej.</p></div>
-    <div class="cell"><div class="num">02</div><h3>Mini-audyt</h3><p>W ciągu 48 godzin roboczych dostajesz e-mailem wynik: mocne strony i 3 najważniejsze ustalenia.</p></div>
-    <div class="cell"><div class="num">03</div><h3>Twoja decyzja</h3><p>Poprawki możesz wdrożyć sam albo zlecić mnie. Nic nie musisz.</p></div>
+    <div class="cell"><div class="num">02</div><h3>Mini-audyt</h3><p>W ciągu 48 godzin roboczych dostajesz e-mailem wynik: mocne strony i 3 najważniejsze ustalenia.</p></div>
+    <div class="cell"><div class="num">03</div><h3>Wdrożenie</h3><p>Jeśli chcesz, żebym wprowadził poprawki, dostajesz dokładną wycenę przed rozpoczęciem pracy. Nic nie musisz.</p></div>
   </div>
+</section>
+
+<section class="block" id="przyklady">
+  <div class="label">Z ostatnich przeglądów stron</div>
+  <h2>Co najczęściej przeszkadza AI w zrozumieniu firmy</h2>
+  <p>Prawdziwe ustalenia ze stron, które sprawdzałem we wrześniu 2026. Bez nazw firm.</p>
+  <div class="grid c2">
+    <div class="cell case"><div class="num">Doradca finansowy</div><h3>Trzy różne informacje o stażu</h3><p>Na jednej stronie firma działała „od 20 lat”, „od 15 lat” i „od 10 lat”. AI nie wie, której wersji wierzyć, i może podać klientowi dowolną z nich.</p></div>
+    <div class="cell case"><div class="num">Biuro rachunkowe</div><h3>Nazwa szablonu zamiast nazwy firmy</h3><p>Tytuł strony, który Google pokazuje w wynikach, był nazwą gotowego szablonu. Wyszukiwarka i AI widziały szablon, a nie biuro.</p></div>
+    <div class="cell case"><div class="num">Biuro nieruchomości</div><h3>„Pokazuj” i „nie pokazuj” jednocześnie</h3><p>W kodzie strony były dwa sprzeczne polecenia dla wyszukiwarek, w tym jedno oznaczające „nie pokazuj tej strony w wynikach”.</p></div>
+    <div class="cell case"><div class="num">Doradca kredytowy</div><h3>Mapa w innym województwie</h3><p>Mapa na stronie kontaktowej wskazywała adres kilkaset kilometrów od biura. Dla map Google i AI to sprzeczna informacja o tym, gdzie firma działa.</p></div>
+  </div>
+  <p class="note">Każda z tych rzeczy jest drobna, ale AI składa obraz firmy właśnie z takich elementów. Poprawiam je razem, bo są ze sobą powiązane.</p>
 </section>
 
 <section class="block" id="cennik">
   <div class="label">Cennik</div>
   <h2>Jasne ceny, zanim cokolwiek zlecisz</h2>
   <div class="grid c3">
-    <div class="cell hl"><h3>Mini-audyt</h3><div class="price">0 zł</div><ul><li>Co już działa na stronie</li><li>3 najważniejsze ustalenia z rekomendacją</li><li>E-mailem w 48h roboczych</li></ul></div>
-    <div class="cell"><h3>Wdrożenie poprawek</h3><div class="price">800–1200 zł</div><ul><li>robots.txt i llms.txt</li><li>Dane strukturalne (schema.org)</li><li>Tytuły i opisy stron</li><li>Uporządkowane dane firmy i FAQ</li></ul></div>
-    <div class="cell"><h3>Nowa strona</h3><div class="price">od 1500 zł</div><ul><li>Gdy obecna strona jest przestarzała albo jej nie ma</li><li>Od początku gotowa pod wyszukiwarki i AI</li><li>Działa na telefonie i komputerze</li></ul></div>
+    <div class="cell hl"><h3>Mini-audyt</h3><div class="price">0 zł</div><ul><li>Co już działa na stronie</li><li>3 najważniejsze ustalenia z rekomendacją</li><li>E-mailem w 48 godzin roboczych</li></ul><a class="price-cta" href="#audyt">Zamów mini-audyt →</a></div>
+    <div class="cell"><h3>Wdrożenie poprawek</h3><div class="price">800–1200 zł</div><ul><li>robots.txt i llms.txt</li><li>Dane strukturalne (schema.org)</li><li>Tytuły i opisy stron</li><li>Uporządkowane dane firmy i FAQ</li></ul></div>
+    <div class="cell"><h3>Nowa strona</h3><div class="price">od 1500 zł</div><ul><li>Gdy obecna strona jest przestarzała albo jej nie ma</li><li>Od początku gotowa pod wyszukiwarki i AI</li><li>Działa na telefonie i komputerze</li></ul></div>
   </div>
   <p class="note">Dokładną cenę wdrożenia podaję po mini-audycie, przed rozpoczęciem pracy. Zależy od liczby podstron, platformy i zakresu zmian.</p>
 </section>
@@ -376,14 +421,15 @@ footer p{margin:4px 0}
 <section class="block" id="o-mnie">
   <div class="label">Kto to robi</div>
   <h2>Filip Szmel</h2>
+  <p class="role">Specjalista ds. widoczności w AI (GEO)</p>
   <div class="about">
     <svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="none"><path d="M32 20 L10 8 L14 22 L28 27 Z" fill="#F5A623"/><path d="M32 20 L54 8 L50 22 L36 27 Z" fill="#F5A623"/><path d="M24 20 L40 20 L44 30 L32 36 L20 30 Z" fill="#0A0A0A" stroke="#F5A623" stroke-width="2.2"/><circle cx="32" cy="27" r="4.6" fill="#0A0A0A" stroke="#F5A623" stroke-width="2"/><circle cx="32" cy="27" r="1.7" fill="#F5A623"/><path d="M27 36 L37 36 L35 42 L29 42 Z" fill="#F5A623"/><path d="M28.5 42 L35.5 42 L34 47 L30 47 Z" fill="#8A5A16"/><path d="M32 47 L32 54" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round"/></g></svg>
     <div>
       <p>Sprawdzam i poprawiam strony małych firm tak, żeby wyszukiwarki i asystenci AI mogli je przeczytać i podać klientom prawdziwe informacje. Pracuję zdalnie z firmami z całej Polski.</p>
-      <p>Działam jako osoba fizyczna (działalność nierejestrowana). Kontakt: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>.</p>
+      <p>Działam jako osoba fizyczna (działalność nierejestrowana). Kontakt: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>, telefon: <a href="tel:+48502890686">502 890 686</a>, <a href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">profil na LinkedIn</a>.</p>
     </div>
   </div>
-  <div class="honest"><strong style="color:var(--text)">Uczciwie:</strong> nikt nie może zagwarantować, że ChatGPT poleci Twoją firmę. Mogę sprawić, że AI dotrze do Twojej strony, ją przeczyta i poda poprawne dane. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.</div>
+  <div class="honest"><strong style="color:var(--text)">Uczciwie:</strong> nikt nie może zagwarantować, że ChatGPT poleci Twoją firmę. Mogę sprawić, że AI dotrze do Twojej strony, ją przeczyta i poda poprawne dane. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.</div>
 </section>
 
 <section class="block" id="faq">
@@ -391,30 +437,31 @@ footer p{margin:4px 0}
   <h2>FAQ</h2>
   <div class="faq">
 <details><summary>Czym jest widoczność firmy w AI?</summary><p>To to, czy asystenci AI, tacy jak ChatGPT, Perplexity czy odpowiedzi AI w Google, potrafią dotrzeć do Twojej strony, przeczytać ją i poprawnie podać klientowi Twoje usługi, obszar działania i kontakt. Jeśli strona jest dla nich nieczytelna, pomijają ją albo podają nieaktualne informacje.</p></details>
-<details><summary>Czy mini-audyt jest naprawdę darmowy?</summary><p>Tak. Mini-audyt kosztuje 0 zł i do niczego nie zobowiązuje. Dostajesz go e-mailem, a o ewentualnych poprawkach decydujesz sam.</p></details>
-<details><summary>Ile czeka się na mini-audyt?</summary><p>Do 48 godzin roboczych od zgłoszenia. Wynik przychodzi na adres e-mail podany w formularzu.</p></details>
-<details><summary>Czy gwarantujesz, że ChatGPT poleci moją firmę?</summary><p>Nie. Nikt nie może tego uczciwie zagwarantować, a kto to obiecuje, nie sprzedaje niczego. Mogę sprawić, że asystenci AI dotrą do Twojej strony, przeczytają ją i podadzą poprawne informacje o firmie. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.</p></details>
-<details><summary>Od czego zależy cena poprawek?</summary><p>Od liczby podstron, platformy, na której działa strona (np. WordPress, Wix lub własny kod), i zakresu zmian. Dokładną cenę w przedziale 800–1200 zł podaję po mini-audycie, zanim zaczniemy pracę.</p></details>
-<details><summary>Czy pracujesz tylko w jednym mieście?</summary><p>Nie. Pracuję zdalnie z firmami z całej Polski. Cały proces odbywa się zdalnie, przez e-mail.</p></details>
-<details><summary>Co jeśli moja strona jest stara albo nie mam jej wcale?</summary><p>Wtedy zamiast łatać starą stronę bardziej opłaca się zbudować nową. Nową stronę, od początku przygotowaną pod wyszukiwarki i asystentów AI, wyceniam od 1500 zł, zależnie od liczby podstron i funkcji.</p></details>
+<details><summary>Czy mini-audyt jest naprawdę darmowy?</summary><p>Tak. Mini-audyt kosztuje 0 zł i do niczego nie zobowiązuje. Dostajesz go e-mailem, a o ewentualnych poprawkach decydujesz sam.</p></details>
+<details><summary>Ile czeka się na mini-audyt?</summary><p>Do 48 godzin roboczych od zgłoszenia. Wynik przychodzi na adres e-mail podany w formularzu.</p></details>
+<details><summary>Czy gwarantujesz, że ChatGPT poleci moją firmę?</summary><p>Nie. Nikt nie może tego uczciwie zagwarantować, a kto to obiecuje, nie sprzedaje niczego. Mogę sprawić, że asystenci AI dotrą do Twojej strony, przeczytają ją i podadzą poprawne informacje o firmie. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.</p></details>
+<details><summary>Od czego zależy cena poprawek?</summary><p>Od liczby podstron, platformy, na której działa strona (np. WordPress, Wix lub własny kod), i zakresu zmian. Dokładną cenę w przedziale 800–1200 zł podaję po mini-audycie, zanim zaczniemy pracę.</p></details>
+<details><summary>Czy pracujesz tylko w jednym mieście?</summary><p>Nie. Pracuję zdalnie z firmami z całej Polski. Cały proces odbywa się zdalnie, przez e-mail i telefon.</p></details>
+<details><summary>Co jeśli moja strona jest stara albo nie mam jej wcale?</summary><p>Wtedy zamiast łatać starą stronę bardziej opłaca się zbudować nową. Nową stronę, od początku przygotowaną pod wyszukiwarki i asystentów AI, wyceniam od 1500 zł, zależnie od liczby podstron i funkcji.</p></details>
   </div>
 </section>
 
 <section class="cta">
-  <h2>Sprawdź swoją stronę za 0 zł</h2>
+  <h2>Sprawdź swoją stronę za 0 zł</h2>
   <a class="go" href="#audyt">Zamów bezpłatny mini-audyt</a>
 </section>
 </main>
 <footer>
   <div class="row">
     <div>
-      <p><strong style="color:var(--text)">Filip Szmel — AI Visibility</strong></p>
+      <p><strong style="color:var(--text)" translate="no">Filip Szmel — AI Visibility</strong></p>
       <p>Filip Szmel, działalność nierejestrowana</p>
       <p>Obszar działania: Cała Polska (zdalnie)</p>
     </div>
     <div>
       <p>E-mail: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a></p>
-      
+      <p>Telefon: <a href="tel:+48502890686">502 890 686</a></p>
+      <p><a href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></p>
       <p><a href="/polityka-prywatnosci">Polityka prywatności</a></p>
     </div>
   </div>
@@ -447,7 +494,8 @@ footer p{margin:4px 0}
     if(c === 'tak') loadPixel();
     else if(c !== 'nie') box.hidden = false;
     document.getElementById('c-yes').onclick = function(){ store('zgoda-marketing','tak'); box.hidden = true; loadPixel(); };
-    document.getElementById('c-no').onclick = function(){ store('zgoda-marketing','nie'); box.hidden = true; };
+    document.getElementById('c-no').onclick = function(){ var had = store('zgoda-marketing') === 'tak'; store('zgoda-marketing','nie'); box.hidden = true; if(had) location.reload(); };
+    var cs = document.getElementById('cookie-settings'); if(cs) cs.onclick = function(ev){ ev.preventDefault(); box.hidden = false; };
   }
 
   /* ---- Formularz ---- */
@@ -467,7 +515,7 @@ footer p{margin:4px 0}
     if(!m.trim()){ setErr('f-email','e-email','Podaj adres e-mail.'); good = false; }
     else if(!okMail(m)){ setErr('f-email','e-email','To nie wygląda na adres e-mail.'); good = false; }
     else setErr('f-email','e-email','');
-    if(!good) return;
+    if(!good){ var fe = form.querySelector('.field.error input'); if(fe) fe.focus(); return; }
 
     var site = norm(u), mail = m.trim();
     var subject = 'Zgłoszenie na mini-audyt AI Visibility';
