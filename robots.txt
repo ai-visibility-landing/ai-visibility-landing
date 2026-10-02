@@ -16,4 +16,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://ai-visibility-landing.vhb9bgvk8b.workers.dev/sitemap.xml
+Sitemap: https://wskazani.pl/sitemap.xml

@@ -1,6 +1,6 @@
-# Filip Szmel — AI Visibility
+# Wskazani — Filip Szmel
 
-> Filip Szmel, specjalista ds. widoczności w AI (GEO), przygotowuje bezpłatne mini-audyty i wdraża poprawki na stronach małych firm, tak żeby wyszukiwarki i asystenci AI (np. ChatGPT, Perplexity, Google) mogli je przeczytać i podawać klientom poprawne informacje. Buduje też nowe strony. Pracuje zdalnie z firmami z całej Polski.
+> Wskazani to marka, pod którą Filip Szmel, specjalista ds. widoczności w AI (GEO), przygotowuje bezpłatne mini-audyty i wdraża poprawki na stronach małych firm, tak żeby wyszukiwarki i asystenci AI (np. ChatGPT, Perplexity, Google) mogli je przeczytać i podawać klientom poprawne informacje. Buduje też nowe strony. Pracuje zdalnie z firmami z całej Polski.
 
 ## Usługi i ceny
 - Mini-audyt widoczności w AI: 0 zł. Co już działa na stronie i 3 najważniejsze ustalenia z rekomendacją, e-mailem w ciągu 48 godzin roboczych.
@@ -20,5 +20,9 @@ LinkedIn: https://www.linkedin.com/in/filip-szmel-b2993a439/
 Forma działalności: działalność nierejestrowana
 
 ## Ważne strony
-- Zamówienie mini-audytu i cennik: https://ai-visibility-landing.vhb9bgvk8b.workers.dev/
-- Polityka prywatności: https://ai-visibility-landing.vhb9bgvk8b.workers.dev/polityka-prywatnosci
+- Zamówienie mini-audytu, kalkulator strat i cennik: https://wskazani.pl/
+- Dla kancelarii prawnych: https://wskazani.pl/kancelarie
+- Dla biur rachunkowych: https://wskazani.pl/biura-rachunkowe
+- Dla biur nieruchomości: https://wskazani.pl/nieruchomosci
+- Dla firm z innych branż: https://wskazani.pl/inne-branze
+- Polityka prywatności: https://wskazani.pl/polityka-prywatnosci
