@@ -4,8 +4,8 @@
 
 ## Usługi i ceny
 - Mini-audyt widoczności w AI: 0 zł. Co już działa na stronie i 3 najważniejsze ustalenia z rekomendacją, e-mailem w ciągu 48 godzin roboczych.
-- Wdrożenie poprawek na istniejącej stronie: 800–1200 zł (robots.txt, llms.txt, dane strukturalne schema.org, tytuły i opisy, uporządkowanie danych firmy, FAQ).
-- Nowa strona internetowa: od 1500 zł, zależnie od liczby podstron i funkcji.
+- Wdrożenie poprawek na istniejącej stronie: wycena po mini-audycie, zależnie od zakresu (robots.txt, llms.txt, dane strukturalne schema.org, tytuły i opisy, uporządkowanie danych firmy, FAQ).
+- Nowa strona internetowa: wycena indywidualna, zależnie od liczby podstron i funkcji.
 
 ## Obszar działania
 Cała Polska, zdalnie.
@@ -20,7 +20,7 @@ LinkedIn: https://www.linkedin.com/in/filip-szmel-b2993a439/
 Forma działalności: działalność nierejestrowana
 
 ## Ważne strony
-- Zamówienie mini-audytu, kalkulator strat i cennik: https://wskazani.pl/
+- Zamówienie mini-audytu, kalkulator strat i zasady współpracy: https://wskazani.pl/
 - Dla kancelarii prawnych: https://wskazani.pl/kancelarie
 - Dla biur rachunkowych: https://wskazani.pl/biura-rachunkowe
 - Dla biur nieruchomości: https://wskazani.pl/nieruchomosci
