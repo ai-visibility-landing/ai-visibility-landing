@@ -1,14 +1,14 @@
 # Wskazani — Filip Szmel
 
-> Wskazani to marka, pod którą Filip Szmel, specjalista ds. widoczności w AI (GEO), przygotowuje bezpłatne mini-audyty i wdraża poprawki na stronach małych firm, tak żeby wyszukiwarki i asystenci AI (np. ChatGPT, Perplexity, Google) mogli je przeczytać i podawać klientom poprawne informacje. Buduje też nowe strony. Pracuje zdalnie z firmami z całej Polski.
+> Wskazani to marka, pod którą Filip Szmel, specjalista ds. widoczności w AI (GEO), przygotowuje bezpłatne mini-audyty i wdraża poprawki na stronach małych firm, tak żeby wyszukiwarki i asystenci AI (np. ChatGPT, Perplexity, Google) mogli je przeczytać i podawać klientom poprawne informacje. Buduje też nowe strony. Pracuje zdalnie z firmami z całej Polski, a w Warszawie i okolicach także osobiście.
 
-## Usługi i ceny
-- Mini-audyt widoczności w AI: 0 zł. Co już działa na stronie i 3 najważniejsze ustalenia z rekomendacją, e-mailem w ciągu 48 godzin roboczych.
+## Usługi
+- Mini-audyt widoczności w AI: bezpłatny. Co już działa na stronie i 3 najważniejsze ustalenia z rekomendacją, e-mailem w ciągu 48 godzin roboczych.
 - Wdrożenie poprawek na istniejącej stronie: wycena po mini-audycie, zależnie od zakresu (robots.txt, llms.txt, dane strukturalne schema.org, tytuły i opisy, uporządkowanie danych firmy, FAQ).
-- Nowa strona internetowa: wycena indywidualna, zależnie od liczby podstron i funkcji.
+- Nowa strona internetowa dla małej firmy: wycena indywidualna po rozmowie, zależnie od liczby podstron i funkcji.
 
 ## Obszar działania
-Cała Polska, zdalnie.
+Warszawa i okolice (także osobiście), cała Polska zdalnie.
 
 ## Czego nie obiecuję
 Nie gwarantuję, że asystent AI poleci firmę ani pozycji w wynikach. Pierwsze zmiany w odpowiedziach widać zwykle najwcześniej po około 30 dniach.
@@ -20,9 +20,12 @@ LinkedIn: https://www.linkedin.com/in/filip-szmel-b2993a439/
 Forma działalności: działalność nierejestrowana
 
 ## Ważne strony
-- Zamówienie mini-audytu, kalkulator strat i zasady współpracy: https://wskazani.pl/
-- Dla kancelarii prawnych: https://wskazani.pl/kancelarie
-- Dla biur rachunkowych: https://wskazani.pl/biura-rachunkowe
-- Dla biur nieruchomości: https://wskazani.pl/nieruchomosci
-- Dla firm z innych branż: https://wskazani.pl/inne-branze
+- Bezpłatny mini-audyt widoczności firmy w AI, kalkulator i formularz: https://wskazani.pl/
+- Nowa strona internetowa dla małej firmy: https://wskazani.pl/nowa-strona
+- Test do samodzielnego użycia: 5 pytań do wpisania w ChatGPT o własnej firmie: https://wskazani.pl/test-ai
+- Checklista: 12 rzeczy, które AI czyta na stronie firmy: https://wskazani.pl/checklista
+- Widoczność kancelarii w ChatGPT: https://wskazani.pl/kancelarie
+- Widoczność biura rachunkowego w ChatGPT: https://wskazani.pl/biura-rachunkowe
+- Widoczność biura nieruchomości w ChatGPT: https://wskazani.pl/nieruchomosci
+- GEO dla małych firm z innych branż: https://wskazani.pl/inne-branze
 - Polityka prywatności: https://wskazani.pl/polityka-prywatnosci

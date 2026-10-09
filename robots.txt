@@ -1,19 +1,41 @@
+# Wskazani — wszystkie roboty wyszukiwarek i asystentów AI mają dostęp do całej strony.
 User-agent: *
 Allow: /
 
-User-agent: ClaudeBot
+User-agent: Googlebot
 Allow: /
 
-User-agent: GPTBot
+User-agent: Bingbot
 Allow: /
 
 User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
 Allow: /
 
 Sitemap: https://wskazani.pl/sitemap.xml
