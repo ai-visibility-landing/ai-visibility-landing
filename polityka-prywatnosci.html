@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
+gtag('set','ads_data_redaction',true);
+try{if(localStorage.getItem('zgoda-marketing')==='tak')gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});}catch(e){}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503882283"></script>
+<script>gtag('js',new Date());gtag('config','AW-18503882283');gtag('config','G-ENH7LJ2YW2');</script>
 <title>Polityka prywatności | Wskazani — Filip Szmel</title>
 <meta name="description" content="Jak przetwarzam dane z formularza mini-audytu: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.">
 <link rel="canonical" href="https://wskazani.pl/polityka-prywatnosci">
@@ -291,7 +299,11 @@ section.block > p, .lede{max-width:62ch}
 <p>Podanie danych jest dobrowolne, ale bez adresu strony i e-maila nie mogę przygotować ani wysłać mini-audytu, a bez e-maila nie udostępnię checklisty. Nie podejmuję wobec Ciebie decyzji w sposób zautomatyzowany i nie profiluję Cię.</p>
 <h2>8. Pliki cookies</h2>
 <p>Strona nie używa plików cookies do działania. Parametry UTM i nazwa pierwszej odwiedzonej podstrony są zapamiętywane tylko w pamięci sesji Twojej przeglądarki (sessionStorage), wyłącznie po to, żeby dołączyć je do zgłoszenia, i znikają po zamknięciu karty. Jeśli włączony jest piksel reklamowy Meta, uruchamia się on dopiero po Twojej zgodzie w okienku na stronie; Twój wybór zapisuje się tylko w Twojej przeglądarce.</p>
-<p class="note">Ostatnia aktualizacja: 2026-10-09</p>
+<h2>9. Google Ads i Google Analytics</h2>
+<p>Strona może korzystać z narzędzi Google: Google Ads i Google Analytics (tag Google). Służą do pomiaru skuteczności reklam i ruchu na stronie, w tym do policzenia zgłoszeń wysłanych z formularza.</p>
+<p>Narzędzia działają w trybie Consent Mode: do czasu Twojej zgody nie zapisują plików cookies, a pełne działanie (pliki cookies i identyfikatory służące do pomiaru) włączają się dopiero po zgodzie w okienku na stronie. Bez zgody Google może otrzymywać jedynie ograniczone sygnały bez zapisywania identyfikatorów w Twojej przeglądarce. Podstawą przetwarzania jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Zgodę możesz w każdej chwili cofnąć linkiem „Ustawienia cookies” w stopce strony.</p>
+<p>Odbiorcą danych jest Google Ireland Ltd. Więcej o tym, jak Google wykorzystuje dane z witryn korzystających z jego usług: <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">zasady Google</a>.</p>
+<p class="note">Ostatnia aktualizacja: 2026-10-11</p>
 
 </section>
 </main>
@@ -309,11 +321,56 @@ section.block > p, .lede{max-width:62ch}
       <p>Telefon: <a href="tel:+48502890686">502 890 686</a></p>
       <p><a href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></p>
       <p><a href="/polityka-prywatnosci">Polityka prywatności</a></p>
+      <p><a href="#" id="cookie-settings">Ustawienia cookies</a></p>
     </div>
   </div>
   <p style="margin-top:16px">© 2026 Filip Szmel</p>
 </footer>
 </div>
 <a class="sticky-cta" href="/#audyt">Bezpłatny mini-audyt →</a>
+<div class="consent" id="consent" hidden role="dialog" aria-labelledby="consent-t">
+  <strong id="consent-t" style="color:var(--text)">Pliki cookies marketingowe</strong>
+  <p style="margin:6px 0 0">Za Twoją zgodą strona uruchomi piksel Meta oraz narzędzia Google (Google Ads i Google Analytics), żeby mierzyć skuteczność reklam. Bez zgody strona działa tak samo. Szczegóły: <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
+  <div class="btns"><button class="yes" id="c-yes" type="button">Zgadzam się</button><button class="no" id="c-no" type="button">Nie zgadzam się</button></div>
+</div>
+<script>
+(function(){
+
+  var EMAIL = "szmelfilip.business@gmail.com";
+  var KEY = "7003f878-52e8-4f95-ac90-3dbadec662c6";
+  var PIXEL = "";  /* ID piksela Meta: wpisz tutaj później (tylko cyfry). Bez ID nic się nie ładuje. */
+  var GOOGLE_ADS_ID = "AW-18503882283", GOOGLE_ADS_LABEL = "DfXmCMW3pZkdEKusq_dE", GA4_ID = "G-ENH7LJ2YW2";  /* ustawiane w build_pages.py */
+
+  /* ---- Parametry UTM i strona wejścia (tylko sessionStorage, potrzebne do opisania zgłoszenia) ---- */
+  var UTM = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  function sget(k){ try{ return sessionStorage.getItem(k); }catch(e){ return null; } }
+  function sset(k,v){ try{ sessionStorage.setItem(k,v); }catch(e){} }
+  function sdel(k){ try{ sessionStorage.removeItem(k); }catch(e){} }
+  (function(){
+    var q = new URLSearchParams(location.search);
+    UTM.forEach(function(k){ var v = q.get(k); if(v) sset('wsk_'+k, v.slice(0,120)); });
+    if(!sget('wsk_wejscie')) sset('wsk_wejscie', location.pathname);
+  })();
+
+  /* ---- Meta Pixel: ładuje się WYŁĄCZNIE po zgodzie i tylko gdy PIXEL jest ustawiony ---- */
+  function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  function loadPixel(){
+    if(!PIXEL || window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL); fbq('track','PageView');
+    if(window.__fireLead){ fbq('track','Lead',{content_name: window.__fireLead}); window.__fireLead = null; }
+  }
+  function gconsent(v){ if(typeof gtag === 'function') gtag('consent','update',{ad_storage:v,ad_user_data:v,ad_personalization:v,analytics_storage:v}); }
+  if(PIXEL || GOOGLE_ADS_ID || GA4_ID){
+    var c = store('zgoda-marketing');
+    var box = document.getElementById('consent');
+    if(c === 'tak') loadPixel();
+    else if(c !== 'nie') box.hidden = false;
+    document.getElementById('c-yes').onclick = function(){ store('zgoda-marketing','tak'); box.hidden = true; gconsent('granted'); loadPixel(); };
+    document.getElementById('c-no').onclick = function(){ var had = store('zgoda-marketing') === 'tak'; store('zgoda-marketing','nie'); gconsent('denied'); box.hidden = true; if(had) location.reload(); };
+    var cs = document.getElementById('cookie-settings'); if(cs) cs.onclick = function(ev){ ev.preventDefault(); box.hidden = false; };
+  }
+})();
+</script>
 </body>
 </html>
