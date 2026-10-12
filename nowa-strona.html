@@ -164,6 +164,13 @@ section.block{padding-block:var(--sec);border-top:1px solid var(--line)}
 .field select:focus-visible,.field input[type=text]:focus-visible,.field input[type=email]:focus-visible{outline:2px solid var(--accent);outline-offset:1px;box-shadow:0 0 0 5px var(--accent-soft)}
 .field.error input{border-color:var(--error)}
 .err{font-size:.85rem;color:var(--error);min-height:1.2em}
+.field.error select{border-color:var(--error)}
+.field .check{display:flex;align-items:flex-start;gap:12px;font-weight:400;line-height:1.45;cursor:pointer}
+.field .check input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:var(--accent);color-scheme:dark;cursor:pointer}
+.field .check input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.field.error .check input{outline:2px solid var(--error);outline-offset:2px}
+.h-captcha{max-width:100%;min-height:78px}
+@media (max-width:420px){.h-captcha{transform:scale(.94);transform-origin:0 0;margin-bottom:-5px}}
 .rng-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .rng-h output{font-family:var(--f-head);font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:1.05rem}
 .field input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;padding:0;border:0;margin:0;cursor:pointer;--p:50%}
@@ -666,10 +673,24 @@ footer .copy{margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
           <input id="email" name="email" type="email" placeholder="np. kontakt@twojafirma.pl" autocomplete="email" spellcheck="false" autocapitalize="off" required>
           <div class="err" id="e-email" aria-live="polite"></div>
         </div>
+        <div class="field" id="f-branza">
+          <label for="branza">Branża</label>
+          <select id="branza" name="branza" required aria-describedby="e-branza"><option value="" selected disabled>Wybierz branżę</option><option value="Biuro rachunkowe">Biuro rachunkowe</option><option value="Kancelaria">Kancelaria</option><option value="Doradca finansowy lub kredytowy">Doradca finansowy lub kredytowy</option><option value="Biuro nieruchomości">Biuro nieruchomości</option><option value="Usługi lokalne">Usługi lokalne</option><option value="Inna">Inna</option></select>
+          <div class="err" id="e-branza" aria-live="polite"></div>
+        </div>
+        <div class="field" id="f-firma">
+          <label class="check" for="firma"><input type="checkbox" id="firma" name="prowadze_firme" value="Tak" required aria-describedby="e-firma"><span>Prowadzę firmę lub odpowiadam za jej stronę</span></label>
+          <div class="err" id="e-firma" aria-live="polite"></div>
+        </div>
+        <div class="field" id="f-captcha">
+          <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+          <div class="err" id="e-captcha" aria-live="polite"></div>
+        </div>
         <div class="hp" aria-hidden="true"><label for="botcheck">Nie wypełniaj tego pola</label><input type="checkbox" id="botcheck" name="botcheck" tabindex="-1"></div>
         <button class="btn submit" type="submit">Wyślij zgłoszenie <span class="arr" aria-hidden="true">→</span></button>
         <p class="rodo">Administratorem danych jest Filip Szmel. Adres strony i e-mail wykorzystam tylko do przygotowania i wysłania mini-audytu oraz odpowiedzi na zgłoszenie. Szczegóły i Twoje prawa: <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
       </form>
+      <script src="https://web3forms.com/client/script.js" async defer></script>
       <div class="result" id="result" hidden aria-live="polite">
         <div id="r-sending"><div class="status">Wysyłanie…</div></div>
         <div id="r-ok" hidden><div class="status">Zgłoszenie przyjęte</div><p>Dziękuję! Przechodzę do strony z potwierdzeniem…</p></div>
@@ -732,13 +753,13 @@ footer .copy{margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
   var GOOGLE_ADS_ID = "AW-18503882283", GOOGLE_ADS_LABEL = "DfXmCMW3pZkdEKusq_dE", GA4_ID = "G-ENH7LJ2YW2";  /* ustawiane w build_pages.py */
 
   /* ---- Parametry UTM i strona wejścia (tylko sessionStorage, potrzebne do opisania zgłoszenia) ---- */
-  var UTM = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var UTM = ['gclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
   function sget(k){ try{ return sessionStorage.getItem(k); }catch(e){ return null; } }
   function sset(k,v){ try{ sessionStorage.setItem(k,v); }catch(e){} }
   function sdel(k){ try{ sessionStorage.removeItem(k); }catch(e){} }
   (function(){
     var q = new URLSearchParams(location.search);
-    UTM.forEach(function(k){ var v = q.get(k); if(v) sset('wsk_'+k, v.slice(0,120)); });
+    UTM.forEach(function(k){ var v = q.get(k); if(v) sset('wsk_'+k, v.slice(0,200)); });
     if(!sget('wsk_wejscie')) sset('wsk_wejscie', location.pathname);
   })();
 
@@ -812,31 +833,69 @@ footer .copy{margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
   /* ---- Formularz ---- */
   var form = document.getElementById('audit-form');
   if(!form) return;
-  function setErr(f, el, msg){ document.getElementById(f).classList.toggle('error', !!msg); document.getElementById(el).textContent = msg || ''; }
+  function setErr(f, el, msg){
+    var fld = document.getElementById(f), ctl = fld.querySelector('input, select');
+    fld.classList.toggle('error', !!msg); document.getElementById(el).textContent = msg || '';
+    if(ctl && ctl.type !== 'hidden'){ if(msg){ ctl.setAttribute('aria-invalid','true'); ctl.setAttribute('aria-describedby', el); } else ctl.removeAttribute('aria-invalid'); }
+  }
   function norm(v){ v = v.trim(); if(v && !/^https?:\/\//i.test(v)) v = 'https://' + v; return v; }
   function okUrl(v){ try{ return /\./.test(new URL(norm(v)).hostname); }catch(e){ return false; } }
   function okMail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+  /* mini-audyt: adres musi być domeną firmy, bez spacji, bez linków logowania, banków, poczty i serwisów znanych z niewłaściwych zgłoszeń */
+  /* marki i frazy: dopasowanie jako podciąg; słowa ogólne: tylko jako osobny człon adresu (login.x.com, x.pl/login, ale nie doradcabankowy.pl) */
+  var BAD_SUB = ['mcafee','norton','avast','kaspersky','allegro','gmail','facebook.com','instagram.com','google.','wp.pl/poczta','onet.pl/poczta'];
+  var BAD_TOK = ['login','signin','logowanie','auth','oauth','eset','bank','olx'];
+  var BAD_MAIL = ['mailinator','tempmail','10minutemail','guerrillamail','yopmail'];
+  var URL_ERR = 'Wpisz adres strony swojej firmy, np. twojafirma.pl. Sprawdzam strony firm, nie bezpieczeństwo linków.';
+  function okCompanyUrl(v){
+    v = v.trim();
+    if(!v || /\s/.test(v)) return false;
+    var low = v.toLowerCase();
+    try{ low += ' ' + decodeURIComponent(low); }catch(e){}
+    var toks = low.split(/[^a-z0-9]+/);
+    if(BAD_SUB.some(function(w){ return low.indexOf(w) !== -1; }) || BAD_TOK.some(function(w){ return toks.indexOf(w) !== -1; })) return false;
+    var u; try{ u = new URL(norm(v)); }catch(e){ return false; }
+    if(u.protocol !== 'https:' && u.protocol !== 'http:') return false;
+    if(u.username || u.password || u.port) return false;
+    return /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z][a-z0-9-]{1,23}$/.test(u.hostname.toLowerCase());
+  }
+  function throwawayMail(v){ var d = v.trim().toLowerCase().split('@').pop(); return BAD_MAIL.some(function(w){ return d.indexOf(w) !== -1; }); }
   function show(s){ ['sending','ok','fail'].forEach(function(k){ document.getElementById('r-'+k).hidden = (k !== s); }); }
 
   form.addEventListener('submit', function(ev){
     ev.preventDefault();
     var u = document.getElementById('site-url').value, m = document.getElementById('email').value, good = true;
     var typ = form.getAttribute('data-typ') || 'audyt', urlReq = !!document.getElementById('site-url').required;
+    var strict = (typ === 'audyt');
+    var brEl = document.getElementById('branza'), fcEl = document.getElementById('firma'), capEl = form.querySelector('textarea[name="h-captcha-response"]');
+    var branza = brEl ? brEl.value : '', capTok = capEl ? capEl.value : '';
     if(!u.trim() && !urlReq){ setErr('f-url','e-url',''); }
-    else if(!u.trim()){ setErr('f-url','e-url','Podaj adres strony.'); good = false; }
-    else if(!okUrl(u)){ setErr('f-url','e-url','To nie wygląda na adres strony, np. twojafirma.pl'); good = false; }
+    else if(!u.trim()){ setErr('f-url','e-url', strict ? URL_ERR : 'Podaj adres strony.'); good = false; }
+    else if(strict ? !okCompanyUrl(u) : !okUrl(u)){ setErr('f-url','e-url', strict ? URL_ERR : 'To nie wygląda na adres strony, np. twojafirma.pl'); good = false; }
     else setErr('f-url','e-url','');
     if(!m.trim()){ setErr('f-email','e-email','Podaj adres e-mail.'); good = false; }
     else if(!okMail(m)){ setErr('f-email','e-email','To nie wygląda na adres e-mail.'); good = false; }
+    else if(strict && throwawayMail(m)){ setErr('f-email','e-email','Podaj stały adres e-mail, nie jednorazowy.'); good = false; }
     else setErr('f-email','e-email','');
-    if(!good){ var fe = form.querySelector('.field.error input'); if(fe) fe.focus(); return; }
+    if(strict && brEl){
+      if(!branza){ setErr('f-branza','e-branza','Wybierz branżę.'); good = false; } else setErr('f-branza','e-branza','');
+      if(!fcEl.checked){ setErr('f-firma','e-firma','Zaznacz, że prowadzisz firmę lub odpowiadasz za jej stronę.'); good = false; } else setErr('f-firma','e-firma','');
+      if(!capTok){ setErr('f-captcha','e-captcha','Potwierdź, że nie jesteś robotem.'); good = false; } else setErr('f-captcha','e-captcha','');
+    }
+    if(!good){
+      var fe = form.querySelector('.field.error input, .field.error select');
+      if(fe) fe.focus(); else { var fc2 = form.querySelector('.field.error'); if(fc2) fc2.scrollIntoView({block:'center'}); }
+      return;
+    }
+    if(document.getElementById('botcheck').checked) return;
 
     var site = u.trim() ? norm(u) : '(nie podano)', mail = m.trim();
     var subject = form.querySelector('[name=subject]').value;
     var track = { strona_zgloszenia: location.pathname, strona_wejscia: sget('wsk_wejscie') || location.pathname };
     UTM.forEach(function(k){ var v = sget('wsk_'+k); if(v) track[k] = v; });
     var trackTxt = Object.keys(track).map(function(k){ return k + ': ' + track[k]; }).join('\n');
-    var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + mail + '\n' + trackTxt + '\n\n' + (typ === 'checklista' ? 'Proszę o pełną wersję PDF checklisty „12 rzeczy, które AI czyta na stronie firmy”.' : 'Proszę o bezpłatny mini-audyt widoczności AI dla powyższej strony.');
+    var extra = (strict && brEl) ? 'Branża: ' + branza + '\nProwadzi firmę lub odpowiada za jej stronę: Tak\n' : '';
+    var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + mail + '\n' + extra + trackTxt + '\n\n' + (typ === 'checklista' ? 'Proszę o pełną wersję PDF checklisty „12 rzeczy, które AI czyta na stronie firmy”.' : 'Proszę o bezpłatny mini-audyt widoczności AI dla powyższej strony.');
     document.getElementById('mail-link').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     var cb = document.getElementById('copy-box'); cb.textContent = 'Do: ' + EMAIL + '\nTemat: ' + subject + '\n\n' + body;
     document.getElementById('copy-btn').onclick = function(){
@@ -848,9 +907,10 @@ footer .copy{margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
     fetch('https://api.web3forms.com/submit', {
       method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'},
       body: JSON.stringify(Object.assign({ access_key: KEY, subject: subject, from_name: 'Wskazani — strona', site: site, email: mail, message: body,
-        botcheck: document.getElementById('botcheck').checked }, track))
+        botcheck: document.getElementById('botcheck').checked },
+        (strict && brEl) ? { branza: branza, prowadze_firme: 'Tak', 'h-captcha-response': capTok } : {}, track))
     }).then(function(r){ return r.json(); }).then(function(d){
-      if(d && d.success){ show('ok'); sset('wsk_lead', typ); location.href = '/dziekuje?typ=' + typ; } else show('fail');
+      if(d && d.success === true){ show('ok'); sset('wsk_lead', typ); location.href = '/dziekuje?typ=' + typ; } else show('fail');
     }).catch(function(){ show('fail'); });
   });
 })();
