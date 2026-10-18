@@ -1,3 +1,6 @@
 /checklista-widocznosc-w-ai.pdf
   X-Robots-Tag: noindex
   Content-Disposition: inline; filename="checklista-widocznosc-w-ai-wskazani.pdf"
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
+document.documentElement.classList.add('js');
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
 gtag('set','ads_data_redaction',true);
@@ -11,274 +12,50 @@ try{if(localStorage.getItem('zgoda-marketing')==='tak')gtag('consent','update',{
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503882283"></script>
 <script>gtag('js',new Date());gtag('config','AW-18503882283');gtag('config','G-ENH7LJ2YW2');</script>
-<title>Polityka prywatności | Wskazani — Filip Szmel</title>
-<meta name="description" content="Jak przetwarzam dane z formularza mini-audytu: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.">
-<link rel="canonical" href="https://wskazani.pl/polityka-prywatnosci">
+<title>Polityka prywatności | Wskazani</title>
+<meta name="description" content="Jak przetwarzam dane z formularzy: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.">
 <meta name="robots" content="noindex, follow">
 <meta name="author" content="Filip Szmel">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#13233A">
+<link rel="canonical" href="https://wskazani.pl/polityka-prywatnosci">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pl_PL">
-<meta property="og:site_name" content="Wskazani — Filip Szmel">
-<meta property="og:title" content="Polityka prywatności | Wskazani — Filip Szmel">
-<meta property="og:description" content="Jak przetwarzam dane z formularza mini-audytu: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.">
+<meta property="og:site_name" content="Wskazani">
+<meta property="og:title" content="Polityka prywatności | Wskazani">
+<meta property="og:description" content="Jak przetwarzam dane z formularzy: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.">
 <meta property="og:url" content="https://wskazani.pl/polityka-prywatnosci">
 <meta property="og:image" content="https://wskazani.pl/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wskazani: sprawdzę za darmo, czy ChatGPT i Google polecają Twoją firmę">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/fonts.css">
-<style>
-:root{
-  --bg:#0A0A0A; --surface:#141311; --surface-2:#1B1916; --border:#2E2A24;
-  --accent:#F5A623; --accent-dim:#8A5A16; --accent-soft:rgba(245,166,35,.12);
-  --text:#FFFFFF; --text-muted:#C9C6C0; --text-faint:#A8A39B; --error:#F08A7E;
-  color-scheme: dark;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
-body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;padding-inline:16px}
-.wrap{max-width:1120px;margin:0 auto}
-h1,h2,h3{font-family:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
-a{color:var(--accent)}
-a[href^="tel:"]{white-space:nowrap}
-a,button,summary,input{touch-action:manipulation;-webkit-tap-highlight-color:rgba(245,166,35,.18)}
-a,button,summary{transition:color .15s ease,background-color .15s ease,border-color .15s ease,transform .1s ease}
-@media (prefers-reduced-motion: reduce){ a,button,summary{transition:none} }
-[id]{scroll-margin-top:16px}
-p,li{text-wrap:pretty}
-a:hover{color:#FFB94A}
-a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.label{font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#17130A;padding:8px 12px;border-radius:3px;z-index:10}
-.skip:focus{left:8px}
-.todo{color:#17130A;background:var(--accent);padding:0 4px;border-radius:2px}
-
-/* header */
-.site-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px;border-bottom:1px solid var(--border)}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
-.brand:hover{color:var(--text)}
-.logo-icon{width:34px;height:34px;flex-shrink:0}
-.brand .n{font-family:"Chakra Petch";font-weight:600;font-size:1rem;line-height:1.1;display:block}
-.brand .t{font-family:"Chakra Petch";font-weight:600;font-size:.7rem;letter-spacing:.16em;color:var(--accent);display:block}
-.site-head nav{display:flex;gap:18px;font-size:.9rem}
-.site-head nav{align-items:center}
-.site-head nav a{color:var(--text-muted);text-decoration:none;padding-block:6px}
-.site-head nav a.nav-cta{color:var(--accent);border:1px solid var(--accent-dim);padding:6px 12px;border-radius:3px}
-.site-head nav a.nav-cta:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
-.site-head nav a:hover{color:var(--accent)}
-@media (max-width:560px){ .site-head nav .opt{display:none} .brand .t2{display:none} }
-.site-head nav a.nav-cta{white-space:nowrap}
-
-/* hero */
-.hero{position:relative;overflow:hidden;padding-block:44px 40px;border-bottom:1px solid var(--border)}
-.hero-hex{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none;width:100%;height:100%}
-.hero-inner{position:relative;z-index:1}
-.hero h1{margin-top:10px;font-size:clamp(1.85rem,5.4vw,2.6rem);letter-spacing:-.01em;max-width:18ch}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.lede{margin:16px 0 0;max-width:56ch;color:var(--text-muted);font-size:1.05rem}
-.facts{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.92rem;color:var(--text-muted)}
-.facts li::before{content:"✓ ";color:var(--accent);font-weight:600}
-
-/* form card */
-.card{margin-top:28px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:22px;position:relative}
-.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:4px 0 0 4px}
-.card h2{font-size:1.2rem}
-.card .sub{margin:4px 0 0;color:var(--text-muted);font-size:.92rem}
-form{margin-top:18px;display:flex;flex-direction:column;gap:14px}
-.field{display:flex;flex-direction:column;gap:6px}
-.field label{font-size:.9rem;font-weight:600;color:var(--text)}
-.field input{background:var(--surface-2);border:1px solid #4A443B;color:var(--text);font:inherit;font-size:1rem;padding:12px 14px;border-radius:3px}
-.field input::placeholder{color:#8F8A82}
-.field input:focus{border-color:var(--accent);background:#201D18}
-.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px;box-shadow:0 0 0 4px var(--accent-soft)}
-.field.error input{border-color:var(--error)}
-.err{font-size:.85rem;color:var(--error);min-height:1.2em}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-button.submit{background:var(--accent);color:#17130A;border:0;font-family:"Chakra Petch";font-weight:600;font-size:1.02rem;padding:14px 20px;border-radius:3px;cursor:pointer}
-button.submit:hover{background:#FFB94A}
-button.submit:active,.cta a.go:active,.btn-line:active,.consent button:active,.price-cta:active{transform:translateY(1px)}
-button.submit:disabled{opacity:.6;cursor:wait}
-.rodo{margin:2px 0 0;font-size:.82rem;color:var(--text-faint);line-height:1.5}
-.result{margin-top:16px}
-.result[hidden]{display:none}
-.status{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.status.bad{color:var(--error)}
-.result p{margin:8px 0 0;color:var(--text-muted)}
-.btn-line:hover{border-color:var(--accent);background:var(--accent-soft)}
-.btn-line{display:inline-block;margin-top:12px;border:1px solid var(--accent-dim);color:var(--accent);padding:10px 16px;border-radius:3px;text-decoration:none;font-family:"Chakra Petch";font-weight:600}
-.copy-box{margin-top:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:12px;font-size:.85rem;color:var(--text-muted);white-space:pre-wrap;word-break:break-word}
-.copy-btn:hover{border-color:var(--accent-dim);color:var(--text)}
-.copy-btn{margin-top:8px;background:none;border:1px solid var(--border);color:var(--text-muted);font:inherit;font-size:.85rem;padding:7px 12px;border-radius:3px;cursor:pointer}
-
-/* sections */
-section.block{padding-block:44px;border-bottom:1px solid var(--border)}
-section.block h2{font-size:clamp(1.4rem,3.6vw,1.8rem);margin-top:8px}
-section.block > p{color:var(--text-muted);max-width:60ch;margin:12px 0 0}
-.grid{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:24px}
-.grid.c2{grid-template-columns:repeat(2,1fr)}
-.grid.c3{grid-template-columns:repeat(3,1fr)}
-@media (max-width:640px){ .grid.c2,.grid.c3{grid-template-columns:1fr} }
-.cell{background:var(--bg);padding:20px 18px}
-.cell h3{font-size:1.02rem}
-.cell p{margin:6px 0 0;font-size:.93rem;color:var(--text-muted)}
-.num{font-family:"Chakra Petch";font-weight:600;font-size:.85rem;color:var(--accent);font-variant-numeric:tabular-nums}
-.price{font-family:"Chakra Petch";font-weight:600;font-size:1.7rem;color:var(--text);margin-top:10px;line-height:1.1;font-variant-numeric:tabular-nums}
-.price-cta{display:inline-block;margin-top:14px;font-family:"Chakra Petch";font-weight:600;font-size:.95rem;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);padding-block:4px}
-.price-cta:hover{border-color:var(--accent)}
-.price-s{font-size:1.15rem;color:var(--accent);line-height:1.25}
-.price small{font-size:.9rem;color:var(--text-faint);font-weight:600}
-.cell.hl{background:#15120D;box-shadow:inset 0 3px 0 var(--accent)}
-.cell ul{margin:10px 0 0;padding-left:18px;color:var(--text-muted);font-size:.92rem}
-.cell li{margin:3px 0}
-.role{margin:6px 0 0;font-family:"Chakra Petch";font-weight:600;color:var(--accent);font-size:.95rem}
-.cell.case .num{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
-.note{margin-top:14px;font-size:.9rem;color:var(--text-faint)}
-.about{display:flex;gap:18px;align-items:flex-start;margin-top:20px}
-.about .logo-icon{width:52px;height:52px}
-.about p{margin:0 0 10px;color:var(--text-muted)}
-.honest{margin-top:18px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent-dim);padding:14px 16px;color:var(--text-muted);font-size:.95rem;border-radius:3px}
-details{border-top:1px solid var(--border)}
-details:last-of-type{border-bottom:1px solid var(--border)}
-summary{cursor:pointer;padding:16px 0;font-family:"Chakra Petch";font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
-summary::-webkit-details-marker{display:none}
-summary:hover{color:var(--accent)}
-summary::after{content:"+";color:var(--accent);flex-shrink:0}
-details[open] summary::after{content:"−"}
-details p{margin:0 0 16px;color:var(--text-muted);max-width:62ch}
-.faq{margin-top:20px}
-.cta{padding-block:40px;text-align:center;border-bottom:1px solid var(--border)}
-.cta h2{font-size:1.5rem}
-.cta a.go{display:inline-block;margin-top:16px;background:var(--accent);color:#17130A;font-family:"Chakra Petch";font-weight:600;padding:14px 22px;border-radius:3px;text-decoration:none}
-.cta a.go:hover{background:#FFB94A;color:#17130A}
-
-/* footer */
-footer{padding-block:28px 40px;font-size:.9rem;color:var(--text-faint)}
-footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
-footer a{color:var(--text-muted);display:inline-block;padding-block:3px}
-footer a:hover{color:var(--accent)}
-footer p{margin:4px 0}
-
-/* layout v4: hero (nagłówek u góry) + kalkulator z suwakami */
-.hero-grid{display:grid;gap:28px;align-items:start}
-@media (min-width:900px){ .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:56px} .hero{padding-block:44px 48px} .hero-copy{padding-top:12px} .hero h1{font-size:clamp(2.8rem,4.4vw,3.7rem);max-width:13ch;line-height:1.05} .hero-calc{display:none} }
-.hero .lede{font-size:1.1rem}
-.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:24px}
-.hero-calc{font-family:"Chakra Petch";font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent-dim);padding-block:4px}
-.hero-hex{opacity:.32}
-.calc{background:linear-gradient(180deg,#171512,#12110F);border:1px solid var(--border);border-radius:6px;padding:20px 22px;position:relative;box-shadow:0 24px 60px -30px rgba(245,166,35,.25)}
-.calc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:6px 0 0 6px}
-.calc-t{font-size:1.25rem}
-.calc-sub{margin:4px 0 0;color:var(--text-muted);font-size:.92rem}
-.calc-f{margin-top:14px;gap:14px}
-.field select{appearance:none;-webkit-appearance:none;background:var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F5A623' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 14px center;border:1px solid #4A443B;color:var(--text);font:inherit;font-size:1rem;padding:11px 38px 11px 14px;border-radius:3px;width:100%}
-.field select option{background:#1B1916;color:#FFFFFF}
-.field select:focus{border-color:var(--accent)}
-.field select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.rng-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.rng-h output{font-family:"Chakra Petch";font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:1.05rem}
-.field input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;padding:0;border:0;margin:2px 0 0;cursor:pointer;--p:50%}
-.field input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--accent) var(--p),#3A352E var(--p))}
-.field input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:#3A352E}
-.field input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--accent)}
-.field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#FFF;border:3px solid var(--accent);margin-top:-8px;box-shadow:0 2px 6px rgba(0,0,0,.5)}
-.field input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#FFF;border:3px solid var(--accent)}
-.field input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
-.hint{font-weight:400;color:var(--text-faint);font-size:.8rem;line-height:1.5;margin:0}
-.calc-r{margin-top:16px;padding:16px 16px 14px;border-radius:5px;background:radial-gradient(120% 140% at 0% 0%,rgba(245,166,35,.16),rgba(245,166,35,.03) 60%);border:1px solid rgba(245,166,35,.35)}
-.r-k{font-family:"Chakra Petch";font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.r-num{font-family:"Chakra Petch";font-weight:600;line-height:1;margin-top:6px;color:var(--text);font-variant-numeric:tabular-nums;font-size:clamp(2.4rem,7vw,3.1rem);white-space:nowrap}
-.r-pre{font-size:.42em;color:var(--text-muted);vertical-align:.5em}
-.r-cur{font-size:.55em;color:var(--accent)}
-.r-exp{margin:10px 0 0;font-size:.9rem;color:var(--text-muted)}
-.r-exp strong{color:var(--text);font-variant-numeric:tabular-nums}
-a.go{display:inline-block;background:var(--accent);color:#17130A;font-family:"Chakra Petch";font-weight:600;padding:14px 20px;border-radius:3px;text-decoration:none;text-align:center}
-a.go:hover{background:#FFB94A;color:#17130A}
-a.go:active{transform:translateY(1px)}
-.calc-go{display:block;margin-top:14px}
-.r-note{margin:8px 0 0;font-size:.78rem;color:var(--text-faint)}
-@media (min-width:900px){ .calc-f{gap:10px} .calc .field{gap:2px} .calc .hint#c-ai-h{font-size:.76rem} }
-/* czat (sekcja problemu) */
-.chat{margin:0;background:#121110;border:1px solid var(--border);border-radius:10px;padding:0 0 16px;overflow:hidden;box-shadow:0 30px 70px -40px rgba(0,0,0,.9)}
-.chat-h{display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border);background:#181614}
-.chat-h .dot{width:9px;height:9px;border-radius:50%;background:#3A352E}
-.chat-t{margin-left:8px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.78rem;color:var(--text-faint)}
-.msg{display:flex;padding:12px 16px 0}
-.msg span{max-width:88%;padding:11px 14px;border-radius:12px;font-size:.92rem;line-height:1.5}
-.msg.me{justify-content:flex-end}
-.msg.me span{background:#2A2621;color:var(--text);border-bottom-right-radius:3px}
-.msg.ai span{background:transparent;border:1px solid var(--border);color:var(--text-muted);border-bottom-left-radius:3px}
-.msg.ai ol{margin:8px 0;padding-left:20px;color:var(--text)}
-.msg.ai li{margin:3px 0}
-.msg.slot span{border:1px dashed var(--accent);color:var(--text-muted);background:var(--accent-soft)}
-.msg.slot strong{color:var(--accent)}
-.chat figcaption{padding:12px 16px 0;font-size:.75rem;color:var(--text-faint)}
-.js-anim .chat .msg{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
-.js-anim .chat.in .msg{opacity:1;transform:none}
-.js-anim .chat.in .msg.ai{transition-delay:.5s}
-.js-anim .chat.in .msg.slot{transition-delay:1.2s}
-@media (prefers-reduced-motion: reduce){ .js-anim .chat .msg{opacity:1;transform:none;transition:none} }
-/* przyklejony przycisk na telefonie */
-.sticky-cta{display:none}
-@media (max-width:760px){
-  .sticky-cta{display:block;position:fixed;left:12px;right:12px;bottom:12px;z-index:15;background:var(--accent);color:#17130A;text-align:center;font-family:"Chakra Petch";font-weight:600;font-size:1.02rem;padding:14px;border-radius:6px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:transform .25s ease,opacity .25s ease}
-  .sticky-cta:hover{color:#17130A}
-  .sticky-cta.off{transform:translateY(140%);opacity:0;pointer-events:none}
-  body{padding-bottom:76px}
-}
-@media (prefers-reduced-motion: reduce){ .sticky-cta{transition:none} }
-section.block > p, .lede{max-width:62ch}
-.split{display:grid;gap:28px;align-items:start}
-@media (min-width:900px){ .split{grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:48px} }
-.split .card{margin-top:0}
-.split h2{max-width:22ch}
-.steps{margin:20px 0 0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px;max-width:56ch}
-.steps li{counter-increment:s;position:relative;padding-left:44px;color:var(--text-muted)}
-.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:1px;font-family:"Chakra Petch";font-weight:600;color:var(--accent);border:1px solid var(--accent-dim);border-radius:3px;width:32px;text-align:center;font-size:.85rem;line-height:1.7}
-.steps strong{color:var(--text)}
-.card-t{font-size:1.2rem}
-.doc{margin-top:24px;max-width:760px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:24px;position:relative}
-.doc-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:6px}
-.doc-k{font-family:"Chakra Petch";font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}
-.doc-m{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.78rem;color:var(--text-faint)}
-.doc h3{font-size:1rem;margin-top:18px;color:var(--text)}
-.doc ul{margin:8px 0 0;padding-left:18px;color:var(--text-muted);font-size:.93rem}
-.doc-f{margin:8px 0 0;color:var(--text)}
-.doc-dl{margin:10px 0 0;display:grid;grid-template-columns:max-content 1fr;gap:8px 16px;font-size:.93rem}
-.doc-dl dt{font-family:"Chakra Petch";font-weight:600;color:var(--accent);font-size:.85rem;letter-spacing:.04em;padding-top:1px}
-.doc-dl dd{margin:0;color:var(--text-muted)}
-@media (max-width:560px){ .doc-dl{grid-template-columns:1fr;gap:2px} .doc-dl dd{margin-bottom:8px} .doc{padding:18px} }
-.doc-more{margin-top:18px;padding-top:14px;border-top:1px dashed var(--border);color:var(--text-faint);font-size:.92rem;-webkit-mask-image:linear-gradient(#000 40%,transparent);mask-image:linear-gradient(#000 40%,transparent)}
-.doc-more p{margin:0 0 6px}
-.doc-end{margin:14px 0 0;font-size:.95rem;color:var(--text-muted)}
-
-/* consent */
-.consent{position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;padding:16px;z-index:20;font-size:.9rem;color:var(--text-muted)}
-.consent[hidden]{display:none}
-.consent .btns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.consent button{font:inherit;font-weight:600;padding:9px 14px;border-radius:3px;cursor:pointer;border:1px solid var(--accent)}
-.consent .yes{background:var(--accent);color:#17130A}
-.consent .no{background:none;color:var(--accent)}
-.consent .yes:hover{background:#FFB94A}
-.consent .no:hover{background:var(--accent-soft)}
-.policy h2{font-size:1.15rem;margin-top:28px}.policy p,.policy li{color:var(--text-muted);max-width:65ch}.policy ul{padding-left:20px}</style>
-
+<meta name="twitter:title" content="Polityka prywatności | Wskazani">
+<meta name="twitter:description" content="Jak przetwarzam dane z formularzy: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.">
+<meta name="twitter:image" content="https://wskazani.pl/og-image.png">
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<noscript><style>.nav-toggle{display:none}.nav-panel{display:flex!important}.cmp-wrap{display:block!important}.cmp-mobile{display:none!important}</style></noscript>
 </head>
 <body>
-<div class="wrap">
 <a class="skip" href="#tresc">Przejdź do treści</a>
-<header class="site-head">
-  <a class="brand" href="/" aria-label="Wskazani — Filip Szmel — strona główna"><svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 5 L55.4 18.5 L55.4 45.5 L32 59 L8.6 45.5 L8.6 18.5 Z" fill="none" stroke="#F5A623" stroke-width="4" stroke-linejoin="round"/><path d="M15 32 Q32 17 49 32 Q32 47 15 32 Z" fill="none" stroke="#F5A623" stroke-width="3.5" stroke-linejoin="round"/><circle cx="32" cy="32" r="6.5" fill="#F5A623"/><circle cx="34.5" cy="29.5" r="2" fill="#0A0A0A"/></svg><span><span class="n" translate="no">Wskazani</span><span class="t">FILIP SZMEL<span class="t2"> · WIDOCZNOŚĆ W AI</span></span></span></a>
-  <nav aria-label="Główna"><a class="opt" href="/#kalkulator">Kalkulator</a><a class="opt" href="/#przyklady">Przykład raportu</a><a class="opt" href="/#wspolpraca">Współpraca</a><a class="opt" href="/#faq">FAQ</a><a class="nav-cta" href="/#audyt">Darmowy audyt</a></nav>
+<header class="site-header">
+<nav class="nav" aria-label="Menu główne">
+<a class="brand" href="/" aria-label="Wskazani — strona główna"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 64 64" style="flex:0 0 auto"><circle cx="32" cy="32" r="31" fill="#13233A"></circle><path d="M14 26L21.5 41.5L29.5 30L37.5 41.5" fill="none" stroke="#FAF8F4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M37.5 41.5L50.5 18.5" fill="none" stroke="#F0743A" stroke-width="6" stroke-linecap="round"></path></svg><span>wskazani</span></a>
+<span class="nav-spacer"></span>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav-panel"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#13233A" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
+<div class="nav-panel" id="nav-panel">
+<div class="nav-links"><a href="/cennik">Cennik</a><a href="/widocznosc-w-ai">Widoczność w AI</a><a href="/wspolpraca">Dla firm</a><a href="/faq">FAQ</a></div>
+<a class="btn btn-primary btn-sm" href="/#audyt">Darmowy audyt</a>
+</div>
+</nav>
 </header>
 <main id="tresc">
-<section class="block policy">
-  <div class="label">RODO</div>
-  <h1 style="font-size:clamp(1.6rem,4.6vw,2.2rem);margin-top:8px">Polityka prywatności</h1>
-  
+<article class="doc">
+<p class="eyebrow" style="margin:0">RODO</p>
+<h1>Polityka prywatności</h1>
 <h2>1. Administrator danych</h2>
 <p>Administratorem Twoich danych osobowych jest Filip Szmel, prowadzący działalność nierejestrowana (usługi Wskazani — Filip Szmel). Kontakt w sprawach danych: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>, telefon: <a href="tel:+48502890686">502 890 686</a>.</p>
 <h2>2. Jakie dane zbieram</h2>
@@ -303,74 +80,28 @@ section.block > p, .lede{max-width:62ch}
 <p>Strona może korzystać z narzędzi Google: Google Ads i Google Analytics (tag Google). Służą do pomiaru skuteczności reklam i ruchu na stronie, w tym do policzenia zgłoszeń wysłanych z formularza.</p>
 <p>Narzędzia działają w trybie Consent Mode: do czasu Twojej zgody nie zapisują plików cookies, a pełne działanie (pliki cookies i identyfikatory służące do pomiaru) włączają się dopiero po zgodzie w okienku na stronie. Bez zgody Google może otrzymywać jedynie ograniczone sygnały bez zapisywania identyfikatorów w Twojej przeglądarce. Podstawą przetwarzania jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Zgodę możesz w każdej chwili cofnąć linkiem „Ustawienia cookies” w stopce strony.</p>
 <p>Odbiorcą danych jest Google Ireland Ltd. Więcej o tym, jak Google wykorzystuje dane z witryn korzystających z jego usług: <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">zasady Google</a>.</p>
-<p class="note">Ostatnia aktualizacja: 2026-10-11</p>
-
-</section>
+<h2>10. Newsletter „Wskazówki”</h2>
+<p>Jeśli zapiszesz się na newsletter „Wskazówki” (zaznaczając zgodę w formularzu audytu albo podając e-mail w osobnym polu zapisu na stronie głównej), użyję Twojego adresu e-mail wyłącznie do wysyłki „Wskazówek” mniej więcej co 2 tygodnie. Podstawą jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Możesz się wypisać w każdej chwili, pisząc na <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>. Adres przechowuję do czasu wypisania się. Zapis na newsletter nie jest warunkiem zamówienia audytu.</p>
+<p class="note">Ostatnia aktualizacja: 2026-10-18</p>
+</article>
 </main>
 <footer>
-  <div class="row">
-    <div>
-      <p><strong style="color:var(--text)" translate="no">Wskazani — Filip Szmel</strong></p>
-      <p>Filip Szmel, działalność nierejestrowana</p>
-      <p>Warszawa i okolice (także osobiście), cała Polska zdalnie</p>
-      <p>Dla branż: <a href="/kancelarie">kancelarie</a> · <a href="/biura-rachunkowe">biura rachunkowe</a> · <a href="/nieruchomosci">nieruchomości</a> · <a href="/inne-branze">inne branże</a> · <a href="/nowa-strona">nowa strona dla firmy</a></p>
-      <p><a href="/test-ai">Test: co ChatGPT mówi o firmie</a> · <a href="/checklista">Checklista dla AI</a></p>
-    </div>
-    <div>
-      <p>E-mail: <a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a></p>
-      <p>Telefon: <a href="tel:+48502890686">502 890 686</a></p>
-      <p><a href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></p>
-      <p><a href="/polityka-prywatnosci">Polityka prywatności</a></p>
-      <p><a href="#" id="cookie-settings">Ustawienia cookies</a></p>
-    </div>
-  </div>
-  <p style="margin-top:16px">© 2026 Filip Szmel</p>
-</footer>
+<div class="site-footer foot-links">
+<span class="logo"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 64 64" style="flex:0 0 auto"><circle cx="32" cy="32" r="31" fill="#13233A"></circle><path d="M14 26L21.5 41.5L29.5 30L37.5 41.5" fill="none" stroke="#FAF8F4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M37.5 41.5L50.5 18.5" fill="none" stroke="#F0743A" stroke-width="6" stroke-linecap="round"></path></svg><span>wskazani</span></span>
+<a href="/">Strona główna</a><a href="/cennik">Cennik</a><a href="/widocznosc-w-ai">Widoczność w AI</a><a href="/wspolpraca">Dla firm</a><a href="/faq">FAQ</a><a href="/#omnie">O mnie</a>
+<a href="tel:+48502890686">502 890 686</a>
+<a href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>
+<a href="/polityka-prywatnosci">Polityka prywatności</a>
+<a href="#" id="cookie-settings">Ustawienia cookies</a>
+<span class="t">Płatność: przelew · BLIK · karta</span>
+<span class="t">Kwoty końcowe, bez VAT</span>
 </div>
-<a class="sticky-cta" href="/#audyt">Bezpłatny mini-audyt →</a>
+</footer>
 <div class="consent" id="consent" hidden role="dialog" aria-labelledby="consent-t">
-  <strong id="consent-t" style="color:var(--text)">Pliki cookies marketingowe</strong>
-  <p style="margin:6px 0 0">Za Twoją zgodą strona uruchomi piksel Meta oraz narzędzia Google (Google Ads i Google Analytics), żeby mierzyć skuteczność reklam. Bez zgody strona działa tak samo. Szczegóły: <a href="/polityka-prywatnosci">polityka prywatności</a>.</p>
+  <strong id="consent-t">Pliki cookies marketingowe</strong>
+  <p>Za Twoją zgodą strona uruchomi piksel Meta oraz narzędzia Google (Google Ads i Google Analytics), żeby mierzyć skuteczność reklam. Bez zgody strona działa tak samo. Szczegóły: <a class="link" href="/polityka-prywatnosci">polityka prywatności</a>.</p>
   <div class="btns"><button class="yes" id="c-yes" type="button">Zgadzam się</button><button class="no" id="c-no" type="button">Nie zgadzam się</button></div>
 </div>
-<script>
-(function(){
-
-  var EMAIL = "szmelfilip.business@gmail.com";
-  var KEY = "7003f878-52e8-4f95-ac90-3dbadec662c6";
-  var PIXEL = "";  /* ID piksela Meta: wpisz tutaj później (tylko cyfry). Bez ID nic się nie ładuje. */
-  var GOOGLE_ADS_ID = "AW-18503882283", GOOGLE_ADS_LABEL = "DfXmCMW3pZkdEKusq_dE", GA4_ID = "G-ENH7LJ2YW2";  /* ustawiane w build_pages.py */
-
-  /* ---- Parametry UTM i strona wejścia (tylko sessionStorage, potrzebne do opisania zgłoszenia) ---- */
-  var UTM = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
-  function sget(k){ try{ return sessionStorage.getItem(k); }catch(e){ return null; } }
-  function sset(k,v){ try{ sessionStorage.setItem(k,v); }catch(e){} }
-  function sdel(k){ try{ sessionStorage.removeItem(k); }catch(e){} }
-  (function(){
-    var q = new URLSearchParams(location.search);
-    UTM.forEach(function(k){ var v = q.get(k); if(v) sset('wsk_'+k, v.slice(0,120)); });
-    if(!sget('wsk_wejscie')) sset('wsk_wejscie', location.pathname);
-  })();
-
-  /* ---- Meta Pixel: ładuje się WYŁĄCZNIE po zgodzie i tylko gdy PIXEL jest ustawiony ---- */
-  function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
-  function loadPixel(){
-    if(!PIXEL || window.fbq) return;
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', PIXEL); fbq('track','PageView');
-    if(window.__fireLead){ fbq('track','Lead',{content_name: window.__fireLead}); window.__fireLead = null; }
-  }
-  function gconsent(v){ if(typeof gtag === 'function') gtag('consent','update',{ad_storage:v,ad_user_data:v,ad_personalization:v,analytics_storage:v}); }
-  if(PIXEL || GOOGLE_ADS_ID || GA4_ID){
-    var c = store('zgoda-marketing');
-    var box = document.getElementById('consent');
-    if(c === 'tak') loadPixel();
-    else if(c !== 'nie') box.hidden = false;
-    document.getElementById('c-yes').onclick = function(){ store('zgoda-marketing','tak'); box.hidden = true; gconsent('granted'); loadPixel(); };
-    document.getElementById('c-no').onclick = function(){ var had = store('zgoda-marketing') === 'tak'; store('zgoda-marketing','nie'); gconsent('denied'); box.hidden = true; if(had) location.reload(); };
-    var cs = document.getElementById('cookie-settings'); if(cs) cs.onclick = function(ev){ ev.preventDefault(); box.hidden = false; };
-  }
-})();
-</script>
+<script src="/site.js" defer></script>
 </body>
 </html>

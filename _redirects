@@ -1,0 +1,16 @@
+# Stare podstrony: 301 na stronę główną (z .html i bez)
+/kancelarie / 301
+/kancelarie.html / 301
+/biura-rachunkowe / 301
+/biura-rachunkowe.html / 301
+/nieruchomosci / 301
+/nieruchomosci.html / 301
+/inne-branze / 301
+/inne-branze.html / 301
+/test-ai / 301
+/test-ai.html / 301
+/checklista / 301
+/checklista.html / 301
+# Stara strona z ofertą: 301 na cennik
+/nowa-strona /cennik 301
+/nowa-strona.html /cennik 301
