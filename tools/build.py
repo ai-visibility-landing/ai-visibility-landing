@@ -77,7 +77,7 @@ NOSCRIPT_HEAD = '<noscript><style>.nav-toggle{display:none}.nav-panel{display:fl
 CONSENT_BOX = (
     '<div class="consent" id="consent" hidden role="dialog" aria-labelledby="consent-t">\n'
     '  <strong id="consent-t">Pliki cookies marketingowe</strong>\n'
-    '  <p>Za Twoją zgodą strona uruchomi piksel Meta oraz narzędzia Google (Google Ads i Google Analytics), żeby mierzyć skuteczność reklam. '
+    '  <p>Za Twoją zgodą strona uruchomi narzędzia Google (Google Ads i Google Analytics), żeby mierzyć skuteczność reklam. '
     'Bez zgody strona działa tak samo. Szczegóły: <a class="link" href="/polityka-prywatnosci">polityka prywatności</a>.</p>\n'
     '  <div class="btns"><button class="yes" id="c-yes" type="button">Zgadzam się</button><button class="no" id="c-no" type="button">Nie zgadzam się</button></div>\n'
     '</div>\n'
@@ -745,12 +745,12 @@ def build_wsp():
 <p class="note" style="margin-top:14px">Przykład układu. Bez danych żadnego klienta.</p>
 </div>
 <figure class="rep" aria-label="Przykładowy raport miesięczny">
-<div class="top"><span class="t">Raport miesięczny · [miesiąc]</span><span class="pill">Opieka</span></div>
+<div class="top"><span class="t">Raport miesięczny · przykład</span><span class="pill">Opieka</span></div>
 <dl>
 <div class="row"><dt>Dostęp botów AI</dt><dd class="g">bez zmian, otwarty</dd></div>
-<div class="row"><dt>Dane firmy w sieci</dt><dd>[np. spójne w 4 z 5 miejsc]</dd></div>
-<div><dt>Co poprawiłem</dt><dd>[np. godziny otwarcia na stronie i w wizytówce Google]</dd></div>
-<div><dt>Na następny miesiąc</dt><dd>[jedna rekomendacja]</dd></div>
+<div class="row"><dt>Dane firmy w sieci</dt><dd>spójne na stronie, w wizytówce Google i w katalogach</dd></div>
+<div><dt>Co poprawiłem</dt><dd>godziny otwarcia na stronie i w wizytówce Google</dd></div>
+<div><dt>Na następny miesiąc</dt><dd>dodać odpowiedź na pytanie o dojazd i parking</dd></div>
 </dl>
 </figure>
 </div></section>
@@ -914,7 +914,7 @@ def main():
         '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów darmowy audyt widoczności firmy w AI.',
         build_404(), robots='noindex', mobile_cta=False))
 
-    urls = ['/', '/cennik', '/widocznosc-w-ai', '/wspolpraca', '/faq', '/polityka-prywatnosci']
+    urls = ['/', '/cennik', '/widocznosc-w-ai', '/wspolpraca', '/faq']
     sm = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD))
