@@ -13,8 +13,8 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://wskazani.pl'
-LASTMOD = '2026-10-18'
-OG_ALT = 'Wskazani: sprawdzę za darmo, czy ChatGPT i Google polecają Twoją firmę'
+LASTMOD = '2026-10-30'
+OG_ALT = 'Wskazani: AI poleca Twoją firmę, nie konkurencję'
 
 
 def esc(s):
@@ -121,7 +121,7 @@ def site_header(active, audyt_href, sticky):
         '<span class="nav-spacer"></span>\n'
         '<button class="nav-toggle" id="nav-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav-panel">%s</button>\n'
         '<div class="nav-panel" id="nav-panel">\n<div class="nav-links">%s</div>\n'
-        '<a class="btn btn-primary btn-sm" href="%s">Darmowy audyt</a>\n</div>\n</nav>\n</header>\n'
+        '<a class="btn btn-primary btn-sm" href="%s">Sprawdź, kogo AI poleca</a>\n</div>\n</nav>\n</header>\n'
         % (' sticky' if sticky else '', ' aria-current="page"' if active == '/' else '', logo(34), BURGER, links, audyt_href))
 
 
@@ -151,7 +151,7 @@ def page(path, title, desc, main_html, active=None, audyt_href='/#audyt', sticky
     b.append('<main id="tresc">\n%s</main>\n' % main_html)
     b.append(site_footer(active))
     if mobile_cta:
-        b.append('<div class="mobile-cta"><a class="btn btn-primary" href="%s">Darmowy audyt</a></div>\n' % audyt_href)
+        b.append('<div class="mobile-cta"><a class="btn btn-primary" href="%s">Diagnostyka AI: 190 zł</a></div>\n' % audyt_href)
     b.append(CONSENT_BOX)
     b.append(extra_foot)
     b.append('<script src="/site.js" defer></script>\n</body>\n</html>\n')
@@ -180,7 +180,7 @@ def cta_band(h2, p, primary, secondary, note):
                '<a class="btn btn-ghost-white btn-lg" href="%s">%s</a>' % (secondary[1], esc(secondary[0])), esc(note)))
 
 
-TILES = [('mini', 'Darmowy mini-audyt', '0 zł'), ('start', 'Start: test usługi', '199 zł'), ('wdrozenie', 'Wdrożenie widoczności', 'od 990 zł'),
+TILES = [('mini', 'Pełna diagnostyka widoczności w AI', '190 zł'), ('wdrozenie', 'Wdrożenie widoczności', 'od 990 zł'),
          ('strona', 'Nowa strona', 'od 1990 zł'), ('opieka', 'Opieka lub marketing', 'od 199 zł / mies.')]
 BRANZE = ['Biuro rachunkowe', 'Kancelaria', 'Doradca finansowy lub kredytowy', 'Biuro nieruchomości', 'Usługi lokalne', 'Inna']
 NEWS_TEXT = 'Chcę dostawać „Wskazówki”: bezpłatne poradniki o AI w firmie, mniej więcej co 2 tygodnie. Mogę się wypisać w każdej chwili.'
@@ -189,12 +189,12 @@ NEWS_TEXT = 'Chcę dostawać „Wskazówki”: bezpłatne poradniki o AI w firmi
 def audit_form(legend, calm, rodo):
     tiles = ''.join(
         '<label class="tile%s"><input type="radio" name="kafelek" value="%s"%s><span class="n">%s</span><span class="p%s">%s</span></label>'
-        % (' on' if i == 0 else '', v, ' checked' if i == 0 else '', esc(n), ' free' if v == 'mini' else '', esc(p))
+        % (' on' if i == 0 else '', v, ' checked' if i == 0 else '', esc(n), '', esc(p))
         for i, (v, n, p) in enumerate(TILES))
     opts = ''.join('<option value="%s">%s</option>' % (attr(b), esc(b)) for b in BRANZE)
     return f'''<form class="form" id="audit-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
 <input type="hidden" name="access_key" value="7003f878-52e8-4f95-ac90-3dbadec662c6">
-<input type="hidden" name="subject" value="Zgłoszenie na mini-audyt AI Visibility">
+<input type="hidden" name="subject" value="Zamówienie: pełna diagnostyka widoczności w AI (190 zł)">
 <input type="hidden" name="from_name" value="Wskazani — strona">
 <div class="field" id="f-url"><label for="site-url">Adres strony firmy</label>
 <input id="site-url" name="site" type="text" inputmode="url" placeholder="np. mojafirma.pl" autocomplete="url" spellcheck="false" autocapitalize="off" required>
@@ -211,13 +211,13 @@ def audit_form(legend, calm, rodo):
 <div class="err" id="e-branza" aria-live="polite"></div></div>
 <fieldset class="field"><legend>{esc(legend)}</legend>
 <div class="tiles">{tiles}</div>
-<p class="chosen" aria-live="polite">Wybrany pakiet: <strong id="chosen-name">Darmowy mini-audyt</strong></p></fieldset>
+<p class="chosen" aria-live="polite">Wybrany pakiet: <strong id="chosen-name">Pełna diagnostyka widoczności w AI</strong></p></fieldset>
 <div class="field" id="f-firma"><label class="chk dark" for="firma"><input type="checkbox" id="firma" name="prowadze_firme" value="Tak" required aria-describedby="e-firma"><span>Prowadzę firmę lub odpowiadam za jej stronę</span></label>
 <div class="err" id="e-firma" aria-live="polite"></div></div>
 <label class="chk" for="newsletter"><input type="checkbox" id="newsletter" name="newsletter" value="tak"><span>{esc(NEWS_TEXT)}</span></label>
 <div class="field" id="f-captcha"><div class="h-captcha captcha" data-captcha="true" data-theme="light"></div><div class="err" id="e-captcha" aria-live="polite"></div></div>
 <div class="hp" aria-hidden="true"><label for="botcheck">Nie wypełniaj tego pola</label><input type="checkbox" id="botcheck" name="botcheck" tabindex="-1"></div>
-<button class="btn-submit" id="submit-btn" type="submit">Zamów darmowy audyt</button>
+<button class="btn-submit" id="submit-btn" type="submit">Zamawiam diagnostykę: 190 zł</button>
 <p class="calm">{esc(calm)}</p>
 <p class="rodo">{rodo}</p>
 </form>
@@ -234,7 +234,7 @@ def audit_form(legend, calm, rodo):
 </div></div>'''
 
 
-RODO_MAIN = ('Wysyłając formularz, zgadzasz się na kontakt w sprawie audytu. Administrator danych: Filip Szmel. '
+RODO_MAIN = ('Wysyłając formularz, zgadzasz się na kontakt w sprawie zamówienia. Administrator danych: Filip Szmel. '
              'Szczegóły w <a class="link" href="/polityka-prywatnosci">polityce prywatności</a>.')
 RODO_CENNIK = ('Wysyłając formularz, zgadzasz się na kontakt w sprawie zgłoszenia. Administrator danych: Filip Szmel. '
                'Szczegóły w <a class="link" href="/polityka-prywatnosci">polityce prywatności</a>.')
@@ -245,8 +245,7 @@ PROVIDER = {'@type': 'Organization', '@id': ORG_ID, 'name': 'Wskazani', 'url': S
 
 # ---------------------------------------------------------------- dane: oferta
 OFFERS = [  # (nazwa, cena, "od", co miesiąc, opis)
-    ('Mini-audyt', 0, False, False, 'Czy AI czyta Twoją stronę i 3 najważniejsze problemy. Raport w 48 h roboczych.'),
-    ('Start: test usługi', 199, False, False, 'Plan poprawek krok po kroku i 1–2 szybkie poprawki, które wprowadzam za Ciebie. Kwota odliczana od Wdrożenia.'),
+    ('Pełna diagnostyka widoczności w AI', 190, False, False, '20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
     ('Wdrożenie widoczności', 990, True, False, 'Wszystkie poprawki z audytu, dane o firmie dla Google i AI, pytania i odpowiedzi na stronie, test przed i po 30 dniach.'),
     ('Nowa strona widoczna w AI', 1990, True, False, 'Strona 4–6 podstron, gotowa pod Google i AI od pierwszego dnia, test przed i po 30 dniach.'),
     ('Opieka i monitoring AI', 199, True, True, 'Co miesiąc sprawdzam, czy AI poleca Twoją firmę, wysyłam krótki raport i robię drobne poprawki.'),
@@ -274,167 +273,155 @@ def service_ld(path, name, desc, offers):
             'provider': PROVIDER, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': name, 'itemListElement': [offer_ld(*o) for o in offers]}}
 
 
-# ================================================================= STRONA GŁÓWNA
-MAIN_CARDS = [
-    ('mini', 'Mini-audyt', '', '0 zł', '', 'Czy AI czyta Twoją stronę i 3 najważniejsze problemy. Raport w 48 h roboczych.', 'Zamów za darmo', False),
-    ('start', 'Start: test usługi', '', '199 zł', 'jednorazowo', 'Plan poprawek i 1–2 poprawki wdrożone od ręki. Kwota odliczana od Wdrożenia.', 'Wybierz Start', False),
-    ('wdrozenie', 'Wdrożenie widoczności', 'od', '990 zł', '', 'Wszystkie poprawki z audytu i test przed i po 30 dniach.', 'Wybierz Wdrożenie', True),
-    ('strona', 'Nowa strona', 'od', '1990 zł', '', 'Strona 4–6 podstron, gotowa pod Google i AI od pierwszego dnia.', 'Zapytaj o stronę', False),
-]
+# ================================================================= STRONA GŁÓWNA (v2 GEO, 30.10.2026)
+DIAG_NAME = 'Pełna diagnostyka widoczności w AI'
 MAIN_FAQ = [
-    ('Czy mini-audyt jest naprawdę darmowy?', 'Tak. Nie płacisz nic i nie musisz potem niczego kupować. Raport jest Twój i do niczego nie zobowiązuje.'),
-    ('Czym różni się darmowy mini-audyt od Startu za 199 zł?', 'Mini-audyt mówi, co jest nie tak. Start to naprawia: dostajesz plan poprawek i 1–2 poprawki wdrożone od ręki. Jeśli potem zlecisz Wdrożenie, 199 zł odliczam od jego ceny.'),
-    ('Jak się rozliczasz?', 'Start płatny z góry. Wdrożenie: połowa przed startem, połowa do 7 dni po wykonaniu. Nowa strona: połowa przed startem, połowa przed publikacją. Abonament z góry za miesiąc, wypowiedzenie miesięczne.'),
-    ('Czy gwarantujesz, że ChatGPT poleci moją firmę?', 'Nie. Asystenci AI sami decydują, kogo wymienić. Poprawiam to, co AI czyta, i pokazuję wynik przed i po 30 dniach.'),
-    ('Co muszę zrobić ja?', 'Dać dostęp do strony i znaleźć 10 minut na kilka pytań. Resztę robię ja.'),
+    ('Czym to się różni od SEO?', 'SEO walczy o miejsce na liście wyników Google. My walczymy o to, żeby AI wymieniło Cię z nazwy, kiedy listy w ogóle nie ma. Część pracy jest wspólna: porządna strona pomaga w obu.'),
+    ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Kto mówi inaczej, kłamie. My ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, czyli więcej odpowiedzi z Twoją firmą, pracujemy dalej bez dopłaty, aż pokaże.'),
+    ('Ile to trwa?', 'Diagnostyka: 3 dni robocze od wpłaty. Wdrożenie: 2–4 tygodnie. Każde narzędzie AI aktualizuje wiedzę we własnym tempie, dlatego wynik mierzymy co miesiąc, a nie raz.'),
+    ('Ile kosztuje?', 'Diagnostyka 190 zł, odliczane od ceny wdrożenia. Wdrożenie od 990 zł. Opieka i pomiar od 199 zł miesięcznie. Dokładną kwotę wdrożenia dostajesz po diagnostyce, zanim cokolwiek zlecisz. Kwoty końcowe, bez VAT.'),
+    ('Dlaczego diagnostyka jest płatna?', 'Bo to ręczna praca: 20 pytań w czterech narzędziach AI, sprawdzonych i opisanych. Za 190 zł dostajesz wynik, który zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
+    ('A jeśli AI już mnie poleca?', 'To dowiesz się o tym czarno na białym i będziesz wiedzieć, czego pilnować. Nie sprzedajemy wdrożenia, którego nie potrzebujesz.'),
+    ('Muszę coś robić?', 'Dać dostęp do strony i wizytówki Google oraz odpowiedzieć na kilka pytań o firmę. Tekstami, kodem, wizytówką i katalogami zajmujemy się my.'),
+    ('Kto to robi?', 'Filip Szmel, Warszawa. Pracujesz z jedną osobą od diagnostyki do raportu, bez działu obsługi i przekazywania sprawy dalej.'),
 ]
+
+AI_NAMES = ['ChatGPT', 'Gemini', 'Perplexity', 'Claude']
+
+
+def ai_chat(label, question, rows, foot, tone):
+    r = ''.join('<li class="%s"><span class="ai-nm">%s</span>%s</li>' % (c, esc(n), ('<span class="ai-why">%s</span>' % esc(w)) if w else '') for c, n, w in rows)
+    return ('<div class="ai-chat %s"><div class="ai-top"><span class="dot"></span><span>%s</span></div>'
+            '<p class="ai-q">%s</p><ol class="ai-a">%s</ol><p class="ai-f">%s</p></div>' % (tone, esc(label), esc(question), r, esc(foot)))
 
 
 def build_main():
-    cards = []
-    for pid, name, pre, price, post, desc, cta, rec in MAIN_CARDS:
-        badge = '<span class="badge">Polecany na start</span>' if rec else ''
-        btn = 'btn-primary' if rec else 'btn-outline'
-        cards.append(
-            f'<article class="price-card{" pick" if rec else ""}">{badge}<h3>{esc(name)}</h3>'
-            f'<p class="price"><span class="pre">{pre}</span><span class="num{" price-ok" if pid == "mini" else ""}">{price}</span><span class="post">{post}</span></p>'
-            f'<p class="desc">{esc(desc)}</p>'
-            f'<a class="btn {btn} btn-block" href="/?pakiet={pid}#audyt" data-pakiet="{pid}">{esc(cta)}</a></article>')
-    cards = '\n'.join(cards)
+    q = '„Polecisz dobre biuro rachunkowe w Warszawie dla małej firmy?”'
+    hero_chat = ai_chat('Asystent AI · ilustracja', q,
+                        [('c', 'Firma A', 'specjalizacja w JDG, dużo opinii'), ('c', 'Firma B', 'blisko centrum, księgowość online'),
+                         ('c', 'Firma C', 'stałe ceny, szybki kontakt'), ('miss', 'Twoja firma', 'brak w odpowiedzi')],
+                        'Klient dzwoni do jednej z trzech. Do Ciebie nie.', 'bad')
+    before = ai_chat('Bez nas', q,
+                     [('c', 'Firma A', 'AI opisuje ją jej słowami'), ('c', 'Firma B', 'z opiniami i lokalizacją'),
+                      ('c', 'Firma C', 'z linkiem do strony')],
+                     'Twojej firmy nie ma. Nie wiesz nawet, że ten klient istniał.', 'bad')
+    after = ai_chat('Z nami: cel', q,
+                    [('you', 'Twoja firma', 'z powodem, dla którego AI ją wybiera'), ('c', 'Firma A', ''), ('c', 'Firma B', '')],
+                    'AI opisuje Cię Twoimi słowami. Wiesz, przy których pytaniach jesteś, a przy których jeszcze nie.', 'good')
+    faq = faq_details(MAIN_FAQ)
+    ais = ' · '.join(AI_NAMES)
     return f'''<section id="top" class="wrap hero">
 <div class="hero-l">
-<h1 class="eyebrow">Darmowy audyt widoczności firmy w AI</h1>
-<p class="display xl">Sprawdzę za darmo, czy ChatGPT i Google polecają Twoją firmę.</p>
-<p class="lead">Analiza jest bezpłatna. Płacisz tylko, jeśli zlecisz poprawki, od 199 zł.</p>
-<div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt">Zamów darmowy audyt</a><a class="btn btn-outline btn-lg" href="#ceny" data-ga="zobacz_ceny" data-ga-miejsce="glowna_hero">Zobacz ceny</a></div>
-<p class="note" style="margin-top:22px">Bez umowy na lata · Przelew, BLIK lub karta · Odpowiedź w 48 h roboczych</p>
+<p class="eyebrow">Widoczność w AI · {ais}</p>
+<h1 class="display xl">Klient pyta ChatGPT o firmę z Twojej branży. AI wymienia konkurencję. Ciebie nie.</h1>
+<p class="lead">I właśnie straciłeś klienta, o którym nawet nie wiedziałeś, że go miałeś.</p>
+<div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Sprawdź, kogo AI poleca zamiast Ciebie</a></div>
+<p class="note" style="margin-top:18px">{esc(DIAG_NAME)} · 190 zł · wynik w 3 dni robocze</p>
+<p style="margin-top:14px;font-size:17px">Wolisz od razu porozmawiać? <a class="link" href="tel:+48502890686">502 890 686</a></p>
 </div>
-<figure class="hero-r report" aria-label="Przykładowy raport z mini-audytu">
-<div class="report-top"><span class="t">Mini-audyt · przykład</span><span class="pill">0 zł</span></div>
-<p class="q">Czy AI rozumie stronę Twojej firmy?</p>
-<div class="rrow ok">{tick('#15803D', 22, '2.4')}<div><strong>Boty AI mają dostęp do strony</strong><div>Nic ich nie blokuje.</div></div></div>
-<div class="rrow">{bang()}<div><strong>Brak danych o firmie dla Google</strong><div>AI musi zgadywać, czym się zajmujesz.</div></div></div>
-<div class="rrow">{bang()}<div><strong>Tytuł strony ucinany w Google</strong><div>120 znaków, Google pokazuje ok. 60.</div></div></div>
-<figcaption>Wynik w 48 h roboczych · bez zobowiązań</figcaption>
-</figure>
+<figure class="hero-r" aria-label="Ilustracja odpowiedzi asystenta AI">{hero_chat}</figure>
 </section>
 
-<section class="band" aria-label="Dane"><div class="wrap sec stats grid g-240" style="padding-block:44px;gap:32px">
-<div><p class="n">16 mln</p><p class="t">polskich internautów korzysta już z narzędzi AI. Twoi klienci też.</p></div>
-<div><p class="n">6 na 10</p><p class="t">Polaków pyta AI, zanim wybierze produkt lub usługę.</p></div>
-<div><p class="n">2× więcej</p><p class="t">kliknięć dostają firmy cytowane w odpowiedzi AI Google niż te, które AI pomija (badanie z USA).</p></div>
+<section class="band" aria-label="Obietnica"><div class="wrap sec promise">
+<p class="k">Nie „zwiększamy widoczności w AI”.</p>
+<h2 class="h2 lg">Robimy tak, że AI zaczyna Cię polecać.</h2>
+<div class="grid g-280" style="margin-top:32px">
+<div class="pp"><strong>Konkretnie</strong><p>Przy pytaniach, które zadają Twoi klienci, a nie przy hasłach z narzędzia SEO.</p></div>
+<div class="pp"><strong>Mierzalnie</strong><p>Co miesiąc te same pytania, te same narzędzia i jeden wynik: w ilu odpowiedziach już jesteś.</p></div>
+</div></div></section>
+
+<section id="porownanie" class="wrap sec" aria-label="To samo pytanie, inna odpowiedź">
+<h2 class="h2 lg">To samo pytanie. Inna odpowiedź.</h2>
+<p class="sub">Tak wygląda odpowiedź AI, kiedy klient szuka firmy w Twojej branży.</p>
+<div class="vs">{before}{after}</div>
+<p class="note" style="margin-top:18px">Ilustracja układu odpowiedzi, nie wynik klienta. W diagnostyce dostajesz prawdziwe odpowiedzi dla swojej branży i miasta, ze zrzutami i datą testu.</p>
+</section>
+
+<section id="google" class="band" aria-label="Dlaczego Google to za mało"><div class="wrap sec">
+<h2 class="h2 lg" style="max-width:780px">Google pokazywał listę. AI pokazuje trzy nazwy.</h2>
+<div class="wrap-0 stats s4 grid g-240" style="margin-top:36px;gap:32px">
+<div><p class="n">68%</p><p class="t">wyszukiwań w Google kończy się bez kliknięcia w żadną stronę.<sup>1</sup></p></div>
+<div><p class="n">−58%</p><p class="t">o tyle spada klikalność wyniku nr 1, gdy nad nim pojawia się odpowiedź AI.<sup>2</sup></p></div>
+<div><p class="n">900 mln</p><p class="t">ludzi co tydzień korzysta z ChatGPT.<sup>3</sup></p></div>
+<div><p class="n">81%</p><p class="t">Polaków w wieku 18–24 używało AI w ostatnich 3 miesiącach. Wśród wszystkich dorosłych: 36%.<sup>4</sup></p></div>
+</div>
+<p class="lead" style="margin-top:36px;max-width:760px">Pierwsze miejsce w Google nie znaczy już, że klient do Ciebie trafi. Kiedy AI odpowiada za Google, liczy się jedno: czy jesteś w tej odpowiedzi.</p>
 </div></section>
 
-<section id="jak" class="wrap sec" aria-label="Jak to działa" style="padding-bottom:72px">
-<h2 class="h2 lg">Jak działa audyt widoczności w AI?</h2>
-<p class="sub">Trzy kroki. Bez zobowiązań.</p>
-<ol class="steps3">
-<li><span class="num">1</span><strong>Podajesz adres strony</strong><span class="d">Formularz na dole tej strony, około minuty. Nie potrzebuję dostępu do niczego.</span></li>
-<li><span class="num">2</span><strong>W 48 h roboczych dostajesz raport</strong><span class="d">Co działa, co blokuje AI i co poprawić najpierw. Prostym językiem.</span></li>
-<li><span class="num">3</span><strong>Decyzja należy do Ciebie</strong><span class="d">Zlecasz mi poprawki, od 199 zł, albo zostajesz z darmowym raportem. Cenę znasz z góry.</span></li>
+<section id="jak" class="wrap sec" aria-label="Co dokładnie robimy">
+<h2 class="h2 lg">Co dokładnie robimy</h2>
+<ol class="steps3 s4">
+<li><span class="num">1</span><strong>Diagnostyka</strong><span class="d">20 pytań, które zadają Twoi klienci, w {ais}. Wiesz, kogo AI poleca, kogo pomija i dlaczego.</span></li>
+<li><span class="num">2</span><strong>Strona, którą AI rozumie</strong><span class="d">Treść i kod ustawione tak, żeby AI wiedziało, co robisz, gdzie i dla kogo: odpowiedzi na pytania klientów, dane strukturalne, llms.txt.</span></li>
+<li><span class="num">3</span><strong>Źródła, którym AI wierzy</strong><span class="d">Wizytówka Google, katalogi branżowe, opinie, wzmianki. Jedne dane wszędzie, bez trzech adresów i dwóch numerów telefonu.</span></li>
+<li><span class="num">4</span><strong>Pomiar co miesiąc</strong><span class="d">Te same pytania, ta sama metoda. Raport na jednej stronie: gdzie byłeś, gdzie jesteś, co robimy dalej.</span></li>
 </ol>
 </section>
 
-<section class="band" aria-label="Przykładowe ustalenia"><div class="wrap sec">
-<h2 class="h2 lg" style="max-width:760px">Co najczęściej blokuje firmy w AI?</h2>
-<p class="muted" style="margin-top:14px;font-size:18px;max-width:680px">Prawdziwe ustalenia ze stron firm, które sprawdziłem we wrześniu i październiku 2026. Bez nazw.</p>
-<div class="grid g-280" style="margin-top:36px">
-<div class="finding"><p class="k">Klinika</p><p class="v">Plik dla robotów blokował stronę „Pierwsza wizyta”, której pacjent szuka najczęściej.</p></div>
-<div class="finding"><p class="k">Firma budowlana</p><p class="v">Najnowsze treści na stronie były z 2017 roku, a strona nie miała formularza kontaktowego, mapy ani opisu firmy, który Google czyta bez zgadywania.</p></div>
-<div class="finding"><p class="k">Hotel</p><p class="v">Najmocniejszy argument, darmowy transfer 24 h, nie trafił do opisu, który pokazuje Google.</p></div>
+<section id="dla-kogo" class="band" aria-label="Dla kogo"><div class="wrap sec">
+<h2 class="h2 lg">Dla kogo to jest. Dla kogo nie.</h2>
+<div class="fit">
+<div class="yes"><h3>To jest dla Ciebie, jeśli:</h3><ul>
+<li>{tick()}<span>klienci wybierają Cię z polecenia: kancelaria, biuro rachunkowe, klinika, gabinet, wykonawca, firma usługowa B2B,</span></li>
+<li>{tick()}<span>masz działającą firmę, stronę i choć kilka opinii,</span></li>
+<li>{tick()}<span>decyzję podejmujesz sam, bez przetargu i trzech zebrań,</span></li>
+<li>{tick()}<span>chcesz wyniku, a nie kolejnego raportu do szuflady.</span></li></ul></div>
+<div class="no"><h3>To nie jest dla Ciebie, jeśli:</h3><ul>
+<li><span class="x" aria-hidden="true">×</span><span>oczekujesz efektu w tydzień. AI aktualizuje wiedzę we własnym tempie,</span></li>
+<li><span class="x" aria-hidden="true">×</span><span>chcesz dostać PDF i wdrażać sam,</span></li>
+<li><span class="x" aria-hidden="true">×</span><span>masz agencję na abonamencie i szukasz tańszego wykonawcy na sztuki,</span></li>
+<li><span class="x" aria-hidden="true">×</span><span>nie zamierzasz prosić klientów o opinie.</span></li></ul></div>
 </div></div></section>
 
-<section id="ceny" class="wrap sec" aria-label="Ceny" style="padding-bottom:48px">
-<h2 class="h2 lg">Ile kosztuje widoczność w AI?</h2>
-<p class="sub">Jawne ceny. Zaczynasz od zera złotych.</p>
-<p class="muted" style="margin-top:14px;font-size:18px;line-height:1.55;max-width:720px">Audyt 0 zł, pierwszy krok 199 zł, wdrożenie od 990 zł, nowa strona od 1990 zł. Kwoty końcowe, bez VAT. Dokładną kwotę znasz po darmowym audycie, zanim cokolwiek zlecisz.</p>
-<p class="note" style="margin-top:8px">Ceny aktualne: październik 2026</p>
-<div class="grid g-240" style="gap:18px;margin-top:40px;align-items:stretch">
-{cards}
-</div>
-<div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;margin-top:28px;font-size:16px">
-<span class="muted">Stała opieka od 199 zł / miesiąc, bez umowy na lata.</span>
-<a class="link" href="/wspolpraca" style="font-size:17px">Współpraca stała →</a>
-<a class="link" href="/cennik" style="font-size:17px">Porównaj pakiety i zrób quiz →</a>
-</div>
-</section>
-
-<section id="kalkulator" class="wrap" aria-label="Kalkulator" style="padding-block:24px 88px">
-<div class="calc-box">
-<div class="txt"><strong>Ile zarabiasz na klientach, którzy pytają AI?</strong><p>Prosty szacunek z Twoich liczb. Trzy suwaki, 20 sekund.</p></div>
-<button class="btn btn-outline" id="calc-toggle" type="button" aria-expanded="false" aria-controls="calc-body" style="min-height:48px;padding:0 24px;font-weight:700">Policz</button>
-<div class="calc-body" id="calc-body" hidden>
-<div class="calc-in">
-<div><label for="k-klienci"><span>Nowi klienci z internetu miesięcznie</span><output id="v-klienci" for="k-klienci">10</output></label><input id="k-klienci" type="range" min="1" max="60" step="1" value="10"></div>
-<div><label for="k-wartosc"><span>Średnia wartość klienta</span><output id="v-wartosc" for="k-wartosc">1 500 zł</output></label><input id="k-wartosc" type="range" min="100" max="10000" step="100" value="1500"></div>
-<div><label for="k-udzial"><span>Część z nich, która pyta AI</span><output id="v-udzial" for="k-udzial">20%</output></label><input id="k-udzial" type="range" min="5" max="60" step="5" value="20">
-<p class="hint">Przyjmij ostrożnie. W badaniu z kwietnia 2026 61% dorosłych Polaków użyło AI przy wyborze produktu lub usługi.</p></div>
-</div>
-<div class="calc-out on-navy">
-<div><p class="l">Przychód od klientów pytających AI, miesięcznie</p><p class="big" id="o-mies" aria-live="polite">3 000 zł</p>
-<p class="y">Rocznie: <strong id="o-rok">36 000 zł</strong></p>
-<p class="e">Tyle mogą Ci przynosić klienci, którzy przed wyborem firmy pytają AI. Jeśli AI nie rozumie Twojej strony, część z nich wybierze konkurencję.</p></div>
-<a class="btn btn-primary btn-block" href="#audyt" style="min-height:48px">Sprawdź swoją stronę za darmo</a>
-</div>
-</div>
-</div>
+<section id="wspolpraca" class="wrap sec" aria-label="Jak wygląda współpraca">
+<h2 class="h2 lg">Robimy wszystko za Ciebie.</h2>
+<p class="sub">Twój czas: około godziny w pierwszym miesiącu, potem 15 minut miesięcznie.</p>
+<ol class="steps3">
+<li><span class="num">1</span><strong>Diagnostyka: 190 zł</strong><span class="d">W 3 dni robocze dostajesz wynik: kogo AI poleca w Twojej branży, gdzie Ciebie brakuje i co trzeba zmienić. Omawiamy go w 20-minutowej rozmowie. 190 zł odliczamy od wdrożenia.</span></li>
+<li><span class="num">2</span><strong>Wdrożenie: od 990 zł</strong><span class="d">Dajesz dostęp do strony i wizytówki, odpowiadasz na kilka pytań o firmę. Resztę robimy my, w 2–4 tygodnie.</span></li>
+<li><span class="num">3</span><strong>Opieka i pomiar: od 199 zł / mies.</strong><span class="d">Co miesiąc ten sam test i raport. Wypowiedzenie z miesięcznym okresem, bez kar. Wszystko, co wdrożyliśmy, zostaje u Ciebie.</span></li>
+</ol>
+<div class="guarantee"><strong>Gwarancja 90 dni.</strong> Jeśli 90 dni po wdrożeniu test na tych samych pytaniach nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.</div>
+<div class="btn-row" style="margin-top:28px"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Zamawiam diagnostykę</a><a class="btn btn-outline btn-lg" href="/cennik">Pełny cennik</a></div>
 </section>
 
 <section id="omnie" class="band" aria-label="Kto to robi"><div class="wrap sec"><div class="who">
-<div class="who-logo"><svg role="img" aria-label="Logo Wskazani" width="128" height="128" viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="#FAF8F4"></circle><path d="M14 26L21.5 41.5L29.5 30L37.5 41.5" fill="none" stroke="#13233A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M37.5 41.5L50.5 18.5" fill="none" stroke="#F0743A" stroke-width="6" stroke-linecap="round"></path></svg><span>wskazani</span></div>
+<div class="who-logo">{logo(128, '#FAF8F4', '#13233A').replace('aria-hidden="true"', 'role="img" aria-label="Logo Wskazani"', 1)}<span>wskazani</span></div>
 <div class="who-txt">
 <p class="k">Kto to robi</p>
 <h2>Filip Szmel, Warszawa</h2>
-<p class="p">Klienci coraz częściej pytają AI, komu powierzyć sprawę, a w audytach widzę, że strony wielu firm nie są na to gotowe. Ten rynek dopiero powstaje, dlatego robię to tak, jak sam chciałbym to kupić: konkretnie, z wynikiem przed i po, bez umowy na lata. Rozmawiasz ze mną od pierwszego maila do wyniku po 30 dniach.</p>
-<ul>
-<li>{tick()}<span>Poprawki wprowadzam za Ciebie, nie dostajesz listy zadań</span></li>
-<li>{tick()}<span>Piszę wprost, co sprawdziłem, a czego nie</span></li>
-<li>{tick()}<span>Nie obiecuję poleceń AI, pokazuję wynik przed i po</span></li>
-</ul>
+<p class="p">W USA agencje GEO działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a Twoi klienci już pytają AI. Pracujesz ze mną od diagnostyki do raportu: bez działu obsługi, bez przekazywania sprawy dalej, bez umowy na lata.</p>
 <div class="contact-row"><a class="link" href="tel:+48502890686">Zadzwoń: 502 890 686</a><a class="link" href="mailto:szmelfilip.business@gmail.com">Napisz: szmelfilip.business@gmail.com</a><a class="link" href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></div>
 </div></div></div></section>
 
-<section class="wrap-900 sec" aria-label="Pytania" style="padding-bottom:72px">
-<h2 class="h2 lg">Pytania przed zamówieniem audytu</h2>
-<div style="margin-top:24px">{faq_details(MAIN_FAQ)}</div>
+<section id="faq" class="wrap-900 sec" aria-label="Pytania" style="padding-bottom:72px">
+<h2 class="h2 lg">Pytania</h2>
+<div style="margin-top:24px">{faq}</div>
 <a class="link" href="/faq" style="margin-top:16px;font-size:17px">Wszystkie pytania i słowniczek →</a>
 </section>
 
-<section id="audyt" class="band-navy on-navy" aria-label="Darmowy audyt"><div class="wrap sec"><div class="audit">
+<section id="audyt" class="band-navy on-navy" aria-label="Zamów diagnostykę"><div class="wrap sec"><div class="audit">
 <div class="audit-l">
-<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Podaj adres strony. Resztę zrobię ja.</h2>
-<p class="p">Raport w 48 h roboczych. Płacisz dopiero, jeśli zlecisz poprawki.</p>
-<ul class="ticks"><li>{tick('#86EFAC')}<span>Bez umowy na lata</span></li><li>{tick('#86EFAC')}<span>Przelew, BLIK lub karta</span></li><li>{tick('#86EFAC')}<span>Nie musisz potem niczego kupować</span></li></ul>
+<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Twoi klienci już pytają AI. Sprawdź, co słyszą.</h2>
+<p class="p">{esc(DIAG_NAME)}: Twoja branża, Twoje miasto, {ais}. 190 zł, odliczane od wdrożenia.</p>
+<ul class="ticks"><li>{tick('#86EFAC')}<span>20 pytań Twoich klientów w 4 narzędziach AI</span></li><li>{tick('#86EFAC')}<span>Wynik w 3 dni robocze od wpłaty + rozmowa 20 min</span></li><li>{tick('#86EFAC')}<span>Po zgłoszeniu dostajesz link do płatności online</span></li></ul>
+<p class="p" style="margin-top:20px">Albo zadzwoń: <a class="link" href="tel:+48502890686" style="color:#fff">502 890 686</a></p>
 </div>
 <div class="formbox">
-{audit_form('Czego potrzebujesz?', 'Odpowiadam w 48 h roboczych. Bez zobowiązań.', RODO_MAIN)}
+{audit_form('Czego potrzebujesz?', 'Odpowiadam w ciągu 24 h roboczych z linkiem do płatności.', RODO_MAIN)}
 </div></div></div></section>
-
-<section id="wskazowki" class="band" aria-label="Newsletter Wskazówki" style="border-top:0"><div class="wrap news" style="padding-block:64px">
-<div class="news-l"><h2>„Wskazówki”: poradniki o AI dla firm</h2><p>Co 2 tygodnie jedna praktyczna porada, jedna zmiana na rynku i jedno narzędzie. Bezpłatnie, bez spamu.</p></div>
-<div class="news-r">
-<div id="news-ok" role="status" hidden><p style="font-size:18px;font-weight:700">Dzięki! Pierwsze „Wskazówki” dostaniesz mailem.</p><p class="muted" style="margin-top:8px;font-size:15px">Wypisać się możesz w każdej chwili.</p></div>
-<form class="news-form" id="news-form" novalidate>
-<div class="r"><label class="sr" for="n-email">E-mail do zapisu na „Wskazówki”</label>
-<input id="n-email" type="email" name="email" required placeholder="Twój e-mail" autocomplete="email" autocapitalize="off" spellcheck="false">
-<button class="btn-submit" type="submit">Zapisz się</button></div>
-<div class="err" id="n-err" aria-live="polite"></div>
-<label class="chk" for="n-zgoda"><input id="n-zgoda" type="checkbox" required><span>{esc(NEWS_TEXT)}</span></label>
-<div class="hp" aria-hidden="true"><label for="n-bot">Nie wypełniaj tego pola</label><input type="checkbox" id="n-bot" tabindex="-1"></div>
-</form>
-</div></div></section>
 
 <section id="przypisy" class="wrap foot-notes" aria-label="O Wskazani i przypisy">
 <h2>O Wskazani</h2>
-<p>Wskazani to audyt i wdrożenie widoczności w AI (GEO) dla firm z Warszawy i całej Polski, od jednoosobowych działalności po większe przedsiębiorstwa. Sprawdzam, czy ChatGPT, Perplexity, Gemini i tryb AI Google rozumieją stronę Twojej firmy i mogą ją polecić klientom. Darmowy mini-audyt widoczności w AI pokazuje w 48 godzin roboczych, czy roboty AI mają dostęp do strony, czy dane firmy są spójne w Google i w katalogach firm oraz czego brakuje w opisie usług. Poprawki wprowadzam za Ciebie: dostęp botów AI, dane strukturalne (schema.org), odpowiedzi na pytania klientów, tytuły i opisy w Google, wizytówkę Google i plik llms.txt. Pracuję z biurami rachunkowymi, kancelariami, biurami nieruchomości, doradcami finansowymi i lokalnymi firmami usługowymi. Pierwszy płatny krok kosztuje 199 zł, wdrożenie od 990 zł, nowa strona widoczna w AI od 1990 zł, a stała opieka i monitoring widoczności w AI od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
+<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pełna diagnostyka widoczności w AI kosztuje 190 zł i obejmuje 20 pytań klientów w czterech narzędziach AI. Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
 <h2 class="src">Źródła danych</h2>
-<ul>
-<li>Gemius i PBI (Mediapanel), raport „E-commerce w Polsce 2026”, dane z czerwca 2026, publikacja wrzesień 2026.</li>
-<li>On Board Think Kong / SW Research, badanie internetowe, N=830 dorosłych Polaków, kwiecień 2026. 61% badanych w ciągu ostatnich 6 miesięcy użyło AI przy wyborze produktów lub usług.</li>
-<li>Seer Interactive, 53 marki, 5,47 mln zapytań, publikacja 24.04.2026, dane głównie z USA. Marki cytowane w odpowiedzi AI Google (AI Overview) miały o 120% więcej kliknięć niż marki niecytowane.</li>
-<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia podaję po darmowym audycie, zanim cokolwiek zlecisz. Ceny aktualne: październik 2026.</li>
-<li>Ustalenia ze stron firm sprawdzonych we wrześniu i październiku 2026. Nazwy firm pominięte.</li>
-</ul>
+<ol>
+<li>SparkToro na danych Similarweb, wyszukiwania w Google w USA, styczeń–kwiecień 2026 (68,01% wyszukiwań bez kliknięcia).</li>
+<li>Ahrefs, luty 2026, ponad 300 tys. słów kluczowych: klikalność wyniku nr 1 przy obecności AI Overview niższa o 58%.</li>
+<li>OpenAI, luty 2026: ponad 900 mln aktywnych użytkowników ChatGPT tygodniowo.</li>
+<li>CBOS, komunikat „Korzystanie ze sztucznej inteligencji”, czerwiec 2026, badanie z maja 2026, N=1041 dorosłych mieszkańców Polski.</li>
+<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: październik 2026.</li>
+</ol>
 </section>
 '''
 
@@ -447,9 +434,10 @@ def main_ld():
              'publisher': {'@id': ORG_ID}},
             {'@type': 'Organization', '@id': ORG_ID, 'name': 'Wskazani', 'url': SITE + '/', 'logo': SITE + '/icon-512.png',
              'image': SITE + '/og-image.png', 'email': 'szmelfilip.business@gmail.com', 'telephone': '+48502890686',
-             'description': 'Audyt i wdrożenie widoczności firmy w AI (GEO) dla firm z Warszawy i całej Polski.',
+             'description': 'Agencja GEO: sprawiamy, że ChatGPT, Gemini, Perplexity i Claude polecają polskie firmy. Diagnostyka, wdrożenie i comiesięczny pomiar.',
              'founder': {'@id': PERSON_ID}, 'areaServed': {'@type': 'Country', 'name': 'Polska'},
              'address': {'@type': 'PostalAddress', 'addressLocality': 'Warszawa', 'addressCountry': 'PL'},
+             'knowsAbout': ['Generative Engine Optimization', 'widoczność w AI', 'ChatGPT', 'Gemini', 'Perplexity', 'Claude'],
              'contactPoint': {'@type': 'ContactPoint', 'contactType': 'obsługa klienta', 'telephone': '+48502890686',
                               'email': 'szmelfilip.business@gmail.com', 'availableLanguage': 'pl'},
              'sameAs': ['https://www.linkedin.com/in/filip-szmel-b2993a439/']},
@@ -457,28 +445,30 @@ def main_ld():
              'email': 'szmelfilip.business@gmail.com', 'telephone': '+48502890686', 'worksFor': {'@id': ORG_ID},
              'homeLocation': {'@type': 'Place', 'name': 'Warszawa'},
              'sameAs': ['https://www.linkedin.com/in/filip-szmel-b2993a439/']},
+            dict({'@id': SITE + '/#faq'}, **faq_ld(MAIN_FAQ)),
         ]}]
+
 
 
 # ================================================================= CENNIK
 CMP_ROWS = [
-    ('Raport: co działa, co nie', '✓', '✓', '✓', '✓'),
-    ('Plan poprawek krok po kroku', '—', '✓', '✓', '✓'),
-    ('Poprawki wdrożone za Ciebie', '—', '1–2 szybkie', 'Wszystkie', 'W nowej stronie'),
-    ('Dane o firmie dla Google i AI', '—', '—', '✓', '✓'),
-    ('Pytania i odpowiedzi na stronie', '—', '—', '✓', '✓'),
-    ('Test przed i po 30 dniach', '—', '—', '✓', '✓'),
-    ('Kwota odliczana od Wdrożenia', '—', '✓', '—', '—'),
-    ('Nowa strona 4–6 podstron', '—', '—', '—', '✓'),
-    ('Cena', '0 zł', '199 zł', 'od 990 zł', 'od 1990 zł'),
+    ('Test 20 pytań klientów w 4 narzędziach AI', '✓', '✓', '✓'),
+    ('Kogo AI poleca zamiast Ciebie i dlaczego', '✓', '✓', '✓'),
+    ('Rozmowa 20 min o wyniku', '✓', '✓', '✓'),
+    ('Poprawki wdrożone za Ciebie', '—', 'Wszystkie', 'W nowej stronie'),
+    ('Dane o firmie dla Google i AI', '—', '✓', '✓'),
+    ('Pytania i odpowiedzi na stronie', '—', '✓', '✓'),
+    ('Gwarancja 90 dni', '—', '✓', '✓'),
+    ('Nowa strona 4–6 podstron', '—', '—', '✓'),
+    ('Cena', '190 zł', 'od 990 zł', 'od 1990 zł'),
 ]
 CENNIK_FAQ = [
-    ('Czym różni się darmowy mini-audyt od Startu za 199 zł?', 'Mini-audyt mówi, co jest nie tak. Start to plan poprawek i 1–2 szybkie poprawki, które wprowadzam za Ciebie. Kwota jest odliczana od Wdrożenia.'),
-    ('Czy po darmowym audycie muszę coś kupić?', 'Nie. Raport jest Twój i do niczego nie zobowiązuje.'),
-    ('Czy gwarantujesz, że ChatGPT poleci moją firmę?', 'Nie. Nikt nie może tego uczciwie obiecać. Poprawiam to, co AI czyta, i pokazuję wynik przed i po 30 dniach (we Wdrożeniu i Nowej stronie).'),
+    ('Co dostaję za 190 zł?', '20 pytań, które zadają Twoi klienci, sprawdzonych w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co trzeba zmienić. Wynik w 3 dni robocze i rozmowa 20 min. 190 zł odliczamy od Wdrożenia.'),
+    ('Czy po diagnostyce muszę coś kupić?', 'Nie. Wynik zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
+    ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Ustawiamy wszystko, z czego AI buduje odpowiedź, i mierzymy wynik co miesiąc. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Czy do ceny dochodzi VAT?', 'Nie. Kwoty na stronie są końcowe, nie doliczam VAT.'),
 ]
-STEPS7 = [('Wysyłasz adres strony', '0 zł'), ('Mini-audyt w 48 h roboczych', '0 zł'), ('15 min rozmowy', 'opcjonalnie'), ('Wybierasz pakiet', 'od 199 zł'),
+STEPS7 = [('Zamawiasz diagnostykę', '190 zł'), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
           ('Potwierdzenie mailem i płatność', ''), ('Wdrażam poprawki', ''), ('Test po 30 dniach', '')]
 QUIZ = [
     ('q1', '1. Czy Twoja firma ma stronę internetową?', [('aktualna', 'Tak, aktualną'), ('stara', 'Tak, ale starą'), ('brak', 'Nie mam')]),
@@ -494,52 +484,49 @@ def build_cennik():
         for k, label, opts in QUIZ)
     head_cells = ''.join(
         '<th scope="col" data-k="%s" data-n="%s">%s</th>' % (k, n, extra) for k, n, extra in [
-            ('mini', 'Mini-audyt', 'Mini-audyt'), ('start', 'Start', 'Start'),
+            ('mini', 'Diagnostyka', 'Diagnostyka'),
             ('wdrozenie', 'Wdrożenie', 'Wdrożenie <span class="rec-tag">Polecany</span>'), ('strona', 'Nowa strona', 'Nowa strona')])
-    body_rows = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%s</td><td class="rec">%s</td><td>%s</td></tr>' % tuple(esc(x) for x in r) for r in CMP_ROWS)
+    body_rows = ''.join('<tr><th scope="row">%s</th><td>%s</td><td class="rec">%s</td><td>%s</td></tr>' % tuple(esc(x) for x in r) for r in CMP_ROWS)
     steps = ''.join(
         '<li><span class="n">%d</span><strong>%s</strong>%s</li>' % (i + 1, esc(t), ('<span class="tag%s">%s</span>' % (' free' if tag == '0 zł' else '', esc(tag))) if tag else '<span class="tag"></span>')
         for i, (t, tag) in enumerate(STEPS7))
     return f'''<section id="top" class="wrap center" style="padding-block:88px 32px">
 <h1 class="eyebrow">Cennik · ile kosztuje widoczność w AI</h1>
-<p class="display md">Jasne ceny. Zaczynasz od 0 zł.</p>
-<p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> mini-audyt 0 zł · pierwszy krok (Start) 199 zł · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
+<p class="display md">Jasne ceny. Zaczynasz od diagnostyki za 190 zł.</p>
+<p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> pełna diagnostyka widoczności w AI 190 zł (odliczane od wdrożenia) · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
 <p class="note" style="margin-top:10px">Ceny aktualne: październik 2026</p>
-<p class="note" style="margin-top:14px">Bez umowy na lata · Przelew, BLIK lub karta · Odpowiedź w 48 h roboczych</p>
+<p class="note" style="margin-top:14px">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </section>
 
 <section class="quiz" id="quiz" aria-label="Który pakiet dla Ciebie"><div class="quiz-box">
 <h2>Który pakiet widoczności w AI wybrać?</h2>
 <p>Nie wiesz, co wybrać? Odpowiedz na 3 pytania.</p>
 {quiz}
-<div class="result-box"><div class="rt"><p class="l" id="quiz-label" aria-live="polite">Twój wynik pojawi się tutaj</p><p class="x" id="quiz-text">Odpowiedz na 3 pytania powyżej.</p><p class="s" id="quiz-note" hidden>Dokładną kwotę podam po darmowym audycie.</p></div>
+<div class="result-box"><div class="rt"><p class="l" id="quiz-label" aria-live="polite">Twój wynik pojawi się tutaj</p><p class="x" id="quiz-text">Odpowiedz na 3 pytania powyżej.</p><p class="s" id="quiz-note" hidden>Dokładną kwotę podam po diagnostyce.</p></div>
 <a class="btn btn-primary" id="quiz-pick" href="#audyt" hidden style="min-height:48px;padding:14px 24px">Wybieram ten zestaw</a></div>
 </div></section>
 
 <section class="wrap" aria-label="Pakiety jednorazowe" style="padding-block:88px 24px">
-<h2 class="h2">Pakiety jednorazowe: audyt, wdrożenie, nowa strona</h2>
+<h2 class="h2">Pakiety jednorazowe: diagnostyka, wdrożenie, nowa strona</h2>
 <div class="grid g-240" style="gap:18px;margin-top:32px;align-items:stretch">
-<article class="price-card big"><h3>Mini-audyt</h3><p class="price"><span class="num price-ok">0 zł</span></p><p class="quote">„Chcę sprawdzić”</p>
-<ul><li>Czy AI czyta Twoją stronę</li><li>3 najważniejsze problemy</li><li>Raport w 48 h roboczych</li></ul>
-<a class="btn btn-outline btn-block" href="/cennik?pakiet=mini#audyt" data-pakiet="mini">Zamów za darmo</a></article>
-<article class="price-card big"><h3>Start — test usługi</h3><p class="price"><span class="num">199 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę najpierw spróbować”</p>
-<ul><li>Plan poprawek krok po kroku</li><li>1–2 szybkie poprawki, które wprowadzam za Ciebie</li><li>Kwota odliczana od Wdrożenia</li></ul>
-<a class="btn btn-outline btn-block" href="/cennik?pakiet=start#audyt" data-pakiet="start">Wybierz Start</a></article>
+<article class="price-card big"><h3>Pełna diagnostyka widoczności w AI</h3><p class="price"><span class="num">190 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
+<ul><li>20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude</li><li>Wynik w 3 dni robocze + rozmowa 20 min</li><li>Kwota odliczana od Wdrożenia</li></ul>
+<a class="btn btn-outline btn-block" href="/cennik?pakiet=mini#audyt" data-pakiet="mini">Zamawiam diagnostykę</a></article>
 <article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie widoczności</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
-<ul><li>Wszystkie poprawki z audytu</li><li>Dane o firmie dla Google i AI</li><li>Pytania i odpowiedzi na stronie</li><li>Test przed i po 30 dniach</li></ul>
+<ul><li>Wszystkie poprawki z diagnostyki</li><li>Dane o firmie dla Google i AI</li><li>Pytania i odpowiedzi na stronie</li><li>Gwarancja 90 dni</li></ul>
 <a class="btn btn-primary btn-block" href="/cennik?pakiet=wdrozenie#audyt" data-pakiet="wdrozenie">Wybierz Wdrożenie</a></article>
 <article class="price-card big"><h3>Nowa strona</h3><p class="price"><span class="pre">od</span><span class="num">1990 zł</span></p><p class="quote">„Strona jest stara albo jej nie ma”</p>
 <ul><li>4–6 podstron</li><li>Gotowa pod Google i AI od pierwszego dnia</li><li>Test przed i po 30 dniach</li><li>Płatność: 50% na start, 50% przed publikacją</li></ul>
 <a class="btn btn-outline btn-block" href="/cennik?pakiet=strona#audyt" data-pakiet="strona">Zapytaj o stronę</a></article>
 </div>
 <div class="dep">
-<div class="all"><h3>Od czego zależy cena?</h3><p>Dokładną kwotę znasz po darmowym audycie, zanim cokolwiek zlecisz.</p></div>
+<div class="all"><h3>Od czego zależy cena?</h3><p>Dokładną kwotę znasz po diagnostyce, zanim cokolwiek zlecisz.</p></div>
 <div class="c"><strong>Liczba podstron</strong><p>Więcej podstron to więcej miejsc do poprawienia.</p></div>
 <div class="c"><strong>Stan strony</strong><p>Aktualna strona wymaga mniej pracy niż taka sprzed kilku lat.</p></div>
 <div class="c"><strong>System strony</strong><p>Każdy system (WordPress, Wix, strona pisana ręcznie) wymaga innego podejścia.</p></div>
 </div>
 <div class="big-firms on-navy" id="duze-firmy" aria-label="Dla dużych firm"><div class="t"><span class="k">Dla dużych firm</span>
-<p>Masz kilka oddziałów, wiele usług albo stronę z setkami podstron? Zaczynamy tak samo, od darmowego audytu, a zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz.</p></div>
+<p>Masz kilka oddziałów, wiele usług albo stronę z setkami podstron? Zaczynamy tak samo, od diagnostyki, a zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz.</p></div>
 <a class="btn btn-primary" href="#audyt">Zapytaj o wycenę</a></div>
 <p class="muted" style="margin-top:18px;font-size:15px">Co musisz zrobić Ty: dać dostęp do strony i poświęcić 10 minut na pytania.</p>
 </section>
@@ -572,7 +559,7 @@ def build_cennik():
 <div class="grid g-240">
 <div><p>Bez VAT</p><p>Kwota na stronie jest końcowa. Agencje zwykle podają ceny netto.</p></div>
 <div><p>Bez umowy na lata</p><p>Wypowiedzenie miesięczne. U części konkurencji umowa na 3–6 miesięcy.</p></div>
-<div><p>Start za 199 zł</p><p>Zamiast płatnego audytu za 790–2000 zł u części agencji. Kwota jest odliczana od Wdrożenia.</p></div>
+<div><p>Diagnostyka za 190 zł</p><p>Zamiast audytu za 790–2000 zł u części agencji. Kwota jest odliczana od Wdrożenia.</p></div>
 <div><p>Jedna osoba</p><p>Rozmawiasz z tym, kto robi poprawki. Bez pośredników i infolinii.</p></div>
 </div>
 <p class="foot">Porównanie na podstawie cenników agencji GEO z października 2026.</p>
@@ -582,7 +569,7 @@ def build_cennik():
 <h2 class="h2">Jak przebiega współpraca i jak płacisz?</h2>
 <ol class="steps7">{steps}</ol>
 <div class="pay4">
-<div><p>Start</p><p>100% z góry</p></div>
+<div><p>Diagnostyka</p><p>100% z góry</p></div>
 <div><p>Wdrożenie</p><p>50% przed, 50% do 7 dni po wykonaniu</p></div>
 <div><p>Nowa strona</p><p>50% przed, 50% przed publikacją</p></div>
 <div><p>Opieka i marketing</p><p>Z góry za miesiąc, wypowiedzenie miesięczne, bez kar</p></div>
@@ -599,8 +586,8 @@ def build_cennik():
 <section id="audyt" class="band-navy on-navy" aria-label="Zamówienie" style="margin-top:72px"><span id="formularz"></span><div class="wrap sec"><div class="audit">
 <div class="audit-l">
 <h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Pakiet wybrany? Wyślij zgłoszenie.</h2>
-<p class="p">Nie wiesz jeszcze? Zostaw „Darmowy mini-audyt”. Po raporcie doradzę, od czego zacząć.</p>
-<p class="n2">Bez umowy na lata · Przelew, BLIK lub karta · Odpowiedź w 48 h roboczych</p>
+<p class="p">Nie wiesz jeszcze? Zacznij od diagnostyki. Po wyniku doradzę, od czego zacząć.</p>
+<p class="n2">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </div>
 <div class="formbox">
 {audit_form('Wybrany pakiet', 'Przed płatnością dostaniesz mailem zakres, dokładną kwotę i terminy.', RODO_CENNIK)}
@@ -610,7 +597,7 @@ def build_cennik():
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
 <ul>
 <li>Publiczne cenniki oraz długość umów czterech firm świadczących usługi GEO w Polsce, sprawdzone 17.10.2026. Te firmy podają kwoty netto, do których dochodzi 23% VAT. Nazw firm nie podajemy.</li>
-<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia lub strony podaję po darmowym audycie, zanim cokolwiek zlecisz. Ceny aktualne: październik 2026.</li>
+<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia lub strony podaję po diagnostyce, zanim cokolwiek zlecisz. Ceny aktualne: październik 2026.</li>
 </ul>
 </section>
 '''
@@ -626,7 +613,7 @@ AREAS = [
     ('Ściągawka o firmie dla asystentów AI', 'Krótki plik z najważniejszymi informacjami. Opcjonalny: Google go nie wymaga.', 'llms.txt'),
 ]
 GEO_ROWS = [
-    ('Pierwszy krok', 'U części agencji płatny audyt, 790–2000 zł', 'Darmowy mini-audyt, potem Start za 199 zł, odliczany od Wdrożenia'),
+    ('Pierwszy krok', 'U części agencji płatny audyt, 790–2000 zł', 'Diagnostyka za 190 zł, odliczana od Wdrożenia'),
     ('Ceny', 'Zwykle netto, do tego 23% VAT', 'Kwoty końcowe, bez VAT'),
     ('Umowa', 'U części minimum 3–6 miesięcy', 'Abonament z wypowiedzeniem miesięcznym, bez kar'),
     ('Stały monitoring', 'Od 599 zł / miesiąc netto', 'Od 199 zł / miesiąc'),
@@ -649,13 +636,13 @@ def build_geo():
 <p class="display" style="max-width:900px">Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie.</p>
 <p style="margin:20px 0 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px"><strong>Czym jest GEO?</strong> To dbanie o to, żeby asystenci AI, tacy jak ChatGPT, Perplexity i tryb AI Google, rozumieli Twoją firmę i mogli ją wymienić w odpowiedzi. W praktyce: poprawki na stronie i spójne dane firmy w internecie.</p>
 <p class="lead" style="margin-top:22px;max-width:660px">Konkretny zakres, jawne ceny i bez umowy na lata. Dla firm, które wiedzą, że klienci pytają AI, i szukają kogoś, kto to uporządkuje.</p>
-<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów darmowy audyt</a></div>
+<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
 <p class="note" style="margin-top:20px">Pierwszy krok za 199 zł · kwoty bez VAT · bez umowy na 6 miesięcy</p>
 </section>
 
 <section id="zakres" class="band" aria-label="Zakres usługi"><div class="wrap sec">
 <h2 class="h2">Co obejmuje usługa GEO?</h2>
-<p class="muted" style="margin-top:12px;font-size:18px;max-width:640px">Sześć obszarów. W darmowym mini-audycie dowiesz się, które z nich u Ciebie kuleją.</p>
+<p class="muted" style="margin-top:12px;font-size:18px;max-width:640px">Sześć obszarów. W diagnostyce dowiesz się, które z nich u Ciebie kuleją.</p>
 <div class="areas">{areas}</div>
 <p style="margin-top:24px;font-size:17px;font-weight:700">Wszystkie poprawki wprowadzam za Ciebie.</p>
 </div></section>
@@ -681,8 +668,8 @@ def build_geo():
 <div class="stats s4 grid g-240" style="gap:28px;margin-top:32px">{stats}</div>
 </section>
 
-{cta_band('Zacznij od darmowego audytu albo od Startu za 199 zł.', 'Start: plan poprawek i 1–2 szybkie poprawki, które wprowadzam za Ciebie. Kwota odliczana od Wdrożenia.',
-         ('Zobacz cennik', '/cennik'), ('Zamów darmowy audyt', '/#audyt'), 'Bez umowy na lata · Przelew, BLIK lub karta · Odpowiedź w 48 h roboczych').replace('class="btn btn-primary btn-lg" href="/cennik"', 'class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_dol"')}
+{cta_band('Zacznij od diagnostyki za 190 zł.', 'Kogo AI poleca zamiast Ciebie, w 4 narzędziach. Kwota odliczana od Wdrożenia.',
+         ('Zobacz cennik', '/cennik'), ('Zamów diagnostykę', '/#audyt'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('class="btn btn-primary btn-lg" href="/cennik"', 'class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_dol"')}
 <section id="przypisy" class="wrap foot-notes" aria-label="Źródła danych" style="padding-top:40px">
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
 <ul>
@@ -725,7 +712,7 @@ def build_wsp():
 <h1 class="eyebrow">Stała opieka i monitoring widoczności w AI</h1>
 <p class="display" style="max-width:860px">Bez umowy na lata. Od 199 zł miesięcznie.</p>
 <p class="lead" style="margin-top:22px;max-width:640px">Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Płacisz z góry za miesiąc i możesz zrezygnować w każdym miesiącu.</p>
-<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="#pakiety">Wybierz pakiet</a><a class="btn btn-outline btn-lg" href="/#audyt">Zacznij od darmowego audytu</a></div>
+<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="#pakiety">Wybierz pakiet</a><a class="btn btn-outline btn-lg" href="/#audyt">Zacznij od diagnostyki</a></div>
 <p class="note" style="margin-top:20px">Bez kar za rezygnację · Przelew, BLIK lub karta · Raport co miesiąc</p>
 </section>
 
@@ -734,7 +721,7 @@ def build_wsp():
 {plans}
 </div>
 <p class="muted" style="margin-top:22px;font-size:15px">Kwoty końcowe, bez VAT. Budżet reklam w pakiecie Marketing płacisz osobno, bezpośrednio do Google lub Meta.</p>
-<p class="muted inline" style="margin-top:8px;font-size:15px">Nie wiesz, od czego zacząć? <a class="link" href="/cennik">Zrób quiz w cenniku</a> albo zacznij od Startu za 199 zł i przejdź na Opiekę później.</p>
+<p class="muted inline" style="margin-top:8px;font-size:15px">Nie wiesz, od czego zacząć? <a class="link" href="/cennik">Zrób quiz w cenniku</a> albo zacznij od diagnostyki za 190 zł i przejdź na Opiekę później.</p>
 <p class="muted inline" style="margin-top:8px;font-size:15px">Masz kilka oddziałów, wiele usług albo stronę z setkami podstron? Zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz. <a class="link" href="/cennik#duze-firmy">Wycena dla dużych firm</a></p>
 </section>
 
@@ -769,32 +756,31 @@ def build_wsp():
 <p class="muted inline" style="margin-top:18px;font-size:15px">Więcej odpowiedzi: <a class="link" href="/faq">FAQ</a></p>
 </section>
 
-{cta_band('Najpierw sprawdzę, od czego zacząć.', 'Darmowy mini-audyt pokaże, czy wystarczy Ci Opieka, czy najpierw warto zrobić Wdrożenie.', ('Zamów darmowy audyt', '/#audyt'), ('Porównaj wszystkie pakiety', '/cennik'),
-         'Bez umowy na lata · Przelew, BLIK lub karta · Odpowiedź w 48 h roboczych')}
+{cta_band('Najpierw sprawdzę, od czego zacząć.', 'Diagnostyka pokaże, czy wystarczy Ci Opieka, czy najpierw trzeba zrobić Wdrożenie.', ('Zamów diagnostykę', '/#audyt'), ('Porównaj wszystkie pakiety', '/cennik'),
+         'Bez umowy na lata · Wynik w 3 dni robocze')}
 '''
 
 
 # ================================================================= FAQ
 FAQ_GROUPS = [
-    ('g0', 'Darmowy mini-audyt', [
-        ('Czy mini-audyt jest naprawdę darmowy?', 'Tak. Nie płacisz nic i nie musisz potem niczego kupować. Płacisz tylko, jeśli zlecisz poprawki.'),
+    ('g0', 'Diagnostyka', [
+        ('Co dostaję w diagnostyce za 190 zł?', '20 pytań, które zadają Twoi klienci, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
         ('Co dostaję?', 'Krótki raport prostym językiem: czy AI czyta Twoją stronę i 3 najważniejsze rzeczy do poprawy.'),
         ('Ile czekam?', 'Do 48 godzin roboczych od wysłania formularza.'),
-        ('Czym różni się darmowy mini-audyt od Startu za 199 zł?', 'Mini-audyt mówi, co jest nie tak. Start to naprawia: dostajesz plan poprawek krok po kroku i 1–2 szybkie poprawki, które wprowadzam za Ciebie. Jeśli potem zlecisz Wdrożenie, 199 zł odliczam od jego ceny.'),
     ]),
     ('g1', 'Ceny i rozliczenie', [
-        ('Ile to kosztuje?', 'Mini-audyt 0 zł, Start 199 zł, Wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT. Szczegóły i porównanie pakietów są w cenniku.'),
-        ('Jak się rozliczasz?', 'Start płatny z góry. Wdrożenie: połowa przed startem, połowa do 7 dni po wykonaniu. Nowa strona: połowa przed startem, połowa przed publikacją. Abonament z góry za każdy miesiąc.'),
+        ('Ile to kosztuje?', 'Diagnostyka 190 zł, Wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT. Szczegóły i porównanie pakietów są w cenniku.'),
+        ('Jak się rozliczasz?', 'Diagnostyka płatna z góry. Wdrożenie: połowa przed startem, połowa do 7 dni po wykonaniu. Nowa strona: połowa przed startem, połowa przed publikacją. Abonament z góry za każdy miesiąc.'),
         ('Jak mogę zapłacić?', 'Przelewem albo BLIK-iem lub kartą przez link do płatności, który dostajesz mailem.'),
         ('Czy wystawiasz fakturę?', 'Teraz do każdej wpłaty dostajesz rachunek. Kwoty są końcowe, bez VAT. Gdy będę wystawiać faktury, napiszę o tym przed płatnością.'),
-        ('Od czego zależy cena?', 'Od liczby podstron, stanu strony i systemu, na którym działa. Dokładną kwotę znasz po darmowym audycie, zanim cokolwiek zlecisz.'),
+        ('Od czego zależy cena?', 'Od liczby podstron, stanu strony i systemu, na którym działa. Dokładną kwotę znasz po diagnostyce, zanim cokolwiek zlecisz.'),
         ('Czy jest umowa?', 'Każde zlecenie potwierdzam mailem: zakres, kwota i terminy płatności. Abonament możesz wypowiedzieć w każdym miesiącu, bez kar.'),
-        ('Mam kilka oddziałów albo stronę z setkami podstron. Jak wyceniasz?', 'Zaczynamy tak samo, od darmowego audytu, a zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz.'),
+        ('Mam kilka oddziałów albo stronę z setkami podstron. Jak wyceniasz?', 'Zaczynamy tak samo, od diagnostyki, a zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz.'),
     ]),
     ('g2', 'Współpraca', [
         ('Co muszę zrobić ja?', 'Dać dostęp do strony i znaleźć 10 minut na kilka pytań. Resztę robię ja.'),
-        ('Czy mogę zacząć od małego pakietu?', 'Tak. Start za 199 zł to test usługi: mała kwota, konkretny efekt na Twojej stronie.'),
-        ('Czy gwarantujesz, że AI zacznie polecać moją firmę?', 'Nie. Asystenci AI sami decydują, kogo wymienić. Poprawiam to, co AI czyta, i pokazuję wynik przed i po 30 dniach.'),
+        ('Czy mogę zacząć od małego kroku?', 'Tak. Diagnostyka za 190 zł: mała kwota, konkretny wynik, a kwota wraca w cenie Wdrożenia.'),
+        ('Gwarantujecie, że AI zacznie polecać moją firmę?', 'Nikt nie steruje odpowiedziami AI. Ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
         ('Co, jeśli efekt mnie nie przekona?', 'Widzisz wynik przed i po. Przy Wdrożeniu drugą połowę płacisz do 7 dni po wykonaniu, przy nowej stronie dopiero przed publikacją, a abonament kończysz w dowolnym miesiącu.'),
         ('Od kiedy liczy się miesiąc abonamentu?', 'Od dnia płatności. Przed płatnością dostajesz mailem potwierdzenie: zakres, kwota i terminy.'),
         ('Czy mogę zmienić pakiet?', 'Tak, w górę i w dół. Wystarczy mail, nowy pakiet obowiązuje od kolejnego opłaconego miesiąca.'),
@@ -830,7 +816,7 @@ def build_faq():
 <p class="muted" style="margin-top:10px;font-size:17px">Każde trudne słowo w jednym zdaniu.</p>
 <dl class="gloss">{terms}</dl>
 </div></section>
-{cta_band('Masz jeszcze pytanie? Sprawdź stronę za darmo.', '', ('Zamów darmowy audyt', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Przelew, BLIK lub karta · Odpowiedź w 48 h roboczych').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
+{cta_band('Masz jeszcze pytanie? Zadzwoń: 502 890 686.', '', ('Zamów diagnostykę', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
 '''
 
 
@@ -845,12 +831,12 @@ def build_dziekuje():
 <p class="eyebrow" style="margin:0">Zgłoszenie przyjęte</p>
 <h1>Zgłoszenie wysłane</h1>
 <div id="t-audyt">
-<p class="lead"><span id="t-pakiet"></span>Odpowiem na podany e-mail w ciągu 48 h roboczych. Jeśli chcesz coś dodać, napisz na <a class="link" href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a> lub zadzwoń: <a class="link" href="tel:+48502890686">502 890 686</a>.</p>
+<p class="lead"><span id="t-pakiet"></span>Odpowiem na podany e-mail w ciągu 24 h roboczych, z linkiem do płatności. Jeśli chcesz coś dodać, napisz na <a class="link" href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a> lub zadzwoń: <a class="link" href="tel:+48502890686">502 890 686</a>.</p>
 </div>
 <div id="t-check" hidden>
 <p class="lead">Pełna wersja checklisty jest gotowa do pobrania.</p>
 <p style="margin-top:20px"><a class="btn btn-primary btn-lg" href="/checklista-widocznosc-w-ai.pdf" download>Pobierz checklistę (PDF)</a></p>
-<p style="margin-top:16px">Jeśli plik się nie otworzy, napisz na <a class="link" href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>. Chcesz, żebym sprawdził Twoją stronę? <a class="link" href="/#audyt">Zamów bezpłatny mini-audyt</a>.</p>
+<p style="margin-top:16px">Jeśli plik się nie otworzy, napisz na <a class="link" href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>. Chcesz, żebym sprawdził Twoją stronę? <a class="link" href="/#audyt">Zamów diagnostykę</a>.</p>
 </div>
 <noscript><p style="margin-top:20px"><a class="btn btn-primary btn-lg" href="/checklista-widocznosc-w-ai.pdf" download>Pobierz checklistę (PDF), jeśli o nią prosiłeś</a></p></noscript>
 <p style="margin-top:32px"><a class="btn btn-outline" href="/">Wróć na stronę główną</a></p>
@@ -863,7 +849,7 @@ def build_404():
 <p class="eyebrow" style="margin:0">Błąd 404</p>
 <h1>Tej strony tu nie ma</h1>
 <p>Adres mógł się zmienić albo zawierać literówkę. Wszystko, czego szukasz, jest na stronie głównej.</p>
-<div class="btn-row" style="margin-top:24px"><a class="btn btn-primary btn-lg" href="/">Wróć na stronę główną</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów darmowy audyt</a></div>
+<div class="btn-row" style="margin-top:24px"><a class="btn btn-primary btn-lg" href="/">Wróć na stronę główną</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
 </section>
 '''
 
@@ -877,18 +863,18 @@ def write(name, content):
 
 def main():
     write('index.html', page(
-        '/', 'Darmowy audyt widoczności firmy w AI | Wskazani',
-        'Sprawdzę za darmo, czy ChatGPT i Google polecają Twoją firmę. Analiza jest bezpłatna, płacisz tylko za zlecone poprawki, od 199 zł. Raport w 48 h roboczych.',
+        '/', 'Agencja GEO: AI poleca Twoją firmę, nie konkurencję | Wskazani',
+        'Kiedy klient pyta ChatGPT o firmę z Twojej branży, AI wymienia konkurencję. Robimy tak, że zaczyna polecać Ciebie. Diagnostyka 190 zł, wynik w 3 dni robocze.',
         build_main(), active='/', audyt_href='#audyt', sticky=True, jsonld=main_ld()))
     write('cennik.html', page(
         '/cennik', 'Cennik: ile kosztuje widoczność w AI | Wskazani',
-        'Jasne ceny: mini-audyt 0 zł, Start 199 zł, wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT.',
+        'Jasne ceny: diagnostyka widoczności w AI 190 zł, wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT.',
         build_cennik(), active='/cennik', audyt_href='#audyt', sticky=True,
         jsonld=[service_ld('/cennik', 'Widoczność w AI (GEO): pakiety i ceny',
-                           'Mini-audyt widoczności w AI, Start, Wdrożenie, nowa strona oraz stała opieka i monitoring. Kwoty końcowe, bez VAT.', OFFERS)]))
+                           'Diagnostyka widoczności w AI, Wdrożenie, nowa strona oraz stała opieka i monitoring. Kwoty końcowe, bez VAT.', OFFERS)]))
     write('widocznosc-w-ai.html', page(
         '/widocznosc-w-ai', 'Widoczność w AI (GEO) dla firm | Wskazani',
-        'Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Pierwszy krok za 199 zł.',
+        'Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 190 zł.',
         build_geo(), active='/widocznosc-w-ai',
         bar=('Widoczność w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik')))
     write('wspolpraca.html', page(
@@ -897,10 +883,10 @@ def main():
         build_wsp(), active='/wspolpraca',
         bar=('Współpraca stała', [('#pakiety', 'Pakiety'), ('#raport', 'Raport'), ('#rezygnacja', 'Rezygnacja')], 'Zamów audyt', '/#audyt'),
         jsonld=[service_ld('/wspolpraca', 'Stała opieka i monitoring widoczności w AI',
-                           'Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Bez umowy na lata.', OFFERS[4:])]))
+                           'Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Bez umowy na lata.', OFFERS[3:])]))
     write('faq.html', page(
         '/faq', 'Pytania o widoczność w AI i audyt | Wskazani',
-        'Krótkie odpowiedzi o darmowym mini-audycie, cenach, rozliczeniu, współpracy i technice, plus słowniczek: GEO, AI Overviews, llms.txt.',
+        'Krótkie odpowiedzi o diagnostyce, cenach, rozliczeniu, współpracy i technice, plus słowniczek: GEO, AI Overviews, llms.txt.',
         build_faq(), active='/faq',
         bar=('Pytania i słowniczek', [('#g0', 'Audyt'), ('#g1', 'Rozliczenie'), ('#g2', 'Współpraca'), ('#g3', 'Technika'), ('#slowniczek', 'Słowniczek')], 'Zamów audyt', '/#audyt'),
         jsonld=[dict({'@context': 'https://schema.org'}, **faq_ld(FAQ_ALL))]))
@@ -911,7 +897,7 @@ def main():
     write('dziekuje.html', page(
         '/dziekuje', 'Dziękuję za zgłoszenie | Wskazani', 'Zgłoszenie zostało wysłane.', build_dziekuje(), robots='noindex', mobile_cta=False))
     write('404.html', page(
-        '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów darmowy audyt widoczności firmy w AI.',
+        '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów diagnostykę widoczności firmy w AI.',
         build_404(), robots='noindex', mobile_cta=False))
 
     urls = ['/', '/cennik', '/widocznosc-w-ai', '/wspolpraca', '/faq']

@@ -1,20 +1,19 @@
-# Wskazani — Filip Szmel
+# Wskazani — agencja GEO, Filip Szmel
 
-> Wskazani to audyt i wdrożenie widoczności firmy w AI (GEO) dla firm z Warszawy i całej Polski, od jednoosobowych działalności po większe przedsiębiorstwa. Filip Szmel sprawdza, czy ChatGPT, Perplexity, Gemini i tryb AI Google rozumieją stronę firmy i mogą ją polecić klientom, a następnie wprowadza poprawki za klienta. Darmowy mini-audyt, jawne ceny, bez umowy na lata.
+> Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawia, że ChatGPT, Gemini, Perplexity i Claude polecają firmę klienta, a nie konkurencję: diagnostyka, wdrożenie i comiesięczny pomiar na tych samych pytaniach. Prowadzi Filip Szmel.
 
 ## Pakiety i ceny
-Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: październik 2026. Dokładną kwotę wdrożenia lub strony podaję po darmowym audycie, zanim cokolwiek zlecisz.
-- Mini-audyt: 0 zł. Czy AI czyta stronę i 3 najważniejsze problemy, raport w 48 godzin roboczych.
-- Start (test usługi): 199 zł jednorazowo. Plan poprawek i 1–2 szybkie poprawki. Kwota odliczana od Wdrożenia.
-- Wdrożenie widoczności: od 990 zł. Wszystkie poprawki z audytu, test przed i po 30 dniach.
-- Nowa strona widoczna w AI: od 1990 zł. 4–6 podstron, gotowa pod Google i AI, test przed i po 30 dniach.
-- Opieka i monitoring AI: od 199 zł miesięcznie. Test co miesiąc, raport i drobne poprawki.
+Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: październik 2026.
+- Pełna diagnostyka widoczności w AI: 190 zł. 20 pytań, które zadają klienci firmy, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie firmy brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.
+- Wdrożenie widoczności: od 990 zł. Treść i dane strukturalne na stronie, llms.txt, wizytówka Google, katalogi i opinie. 2–4 tygodnie.
+- Nowa strona widoczna w AI: od 1990 zł. 4–6 podstron, gotowa pod Google i AI od pierwszego dnia.
+- Opieka i pomiar: od 199 zł miesięcznie. Ten sam test co miesiąc, raport i poprawki.
 - Opieka+: od 490 zł miesięcznie. Opieka, do 2 treści miesięcznie, większe zmiany i rozmowa raz w miesiącu.
 - Marketing na zlecenie: od 1490 zł miesięcznie. Social media, Google Ads i treści. Budżet na reklamy płatny osobno.
-Abonamenty płatne z góry za miesiąc, wypowiedzenie miesięczne, bez kar. Płatność: przelew, BLIK, karta.
+Abonamenty płatne z góry za miesiąc, wypowiedzenie miesięczne, bez kar.
 
-## Czego nie obiecuję
-Nie gwarantuję, że asystent AI poleci firmę. Poprawiam to, co AI czyta, i pokazuję wynik przed i po 30 dniach.
+## Gwarancja
+Jeśli 90 dni po wdrożeniu test na tych samych pytaniach nie pokaże postępu (więcej odpowiedzi AI z firmą klienta), praca trwa dalej bez dopłaty, aż pokaże. Nikt nie steruje odpowiedziami AI; Wskazani ustawia to, z czego AI buduje odpowiedź, i mierzy wynik co miesiąc.
 
 ## Kontakt
 E-mail: szmelfilip.business@gmail.com
@@ -23,9 +22,9 @@ LinkedIn: https://www.linkedin.com/in/filip-szmel-b2993a439/
 Forma działalności: działalność nierejestrowana
 
 ## Strony
-- Strona główna, darmowy audyt i formularz: https://wskazani.pl/
-- Cennik, quiz i porównanie pakietów: https://wskazani.pl/cennik
+- Strona główna, diagnostyka i formularz: https://wskazani.pl/
+- Cennik i porównanie pakietów: https://wskazani.pl/cennik
 - Widoczność w AI (GEO) dla firm: https://wskazani.pl/widocznosc-w-ai
-- Stała opieka i monitoring (dla firm): https://wskazani.pl/wspolpraca
+- Stała opieka i pomiar (dla firm): https://wskazani.pl/wspolpraca
 - Pytania i słowniczek: https://wskazani.pl/faq
 - Polityka prywatności: https://wskazani.pl/polityka-prywatnosci
