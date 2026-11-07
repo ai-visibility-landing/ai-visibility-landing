@@ -121,7 +121,7 @@ def site_header(active, audyt_href, sticky):
         '<span class="nav-spacer"></span>\n'
         '<button class="nav-toggle" id="nav-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav-panel">%s</button>\n'
         '<div class="nav-panel" id="nav-panel">\n<div class="nav-links">%s</div>\n'
-        '<a class="btn btn-primary btn-sm" href="%s">Sprawdź, kogo AI poleca</a>\n</div>\n</nav>\n</header>\n'
+        '<a class="btn btn-primary btn-sm" href="%s">Zobacz, czemu AI Cię nie poleca</a>\n</div>\n</nav>\n</header>\n'
         % (' sticky' if sticky else '', ' aria-current="page"' if active == '/' else '', logo(34), BURGER, links, audyt_href))
 
 
@@ -314,7 +314,7 @@ def build_main():
 <p class="eyebrow">Pozycjonowanie w AI · {ais}</p>
 <h1 class="display xl">Klient pyta ChatGPT o firmę z Twojej branży. AI wymienia konkurencję. Ciebie nie.</h1>
 <p class="lead">I właśnie straciłeś klienta, o którym nawet nie wiedziałeś, że go miałeś.</p>
-<div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Sprawdź, kogo AI poleca zamiast Ciebie</a></div>
+<div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Zobacz, czemu AI Cię nie poleca</a></div>
 <p class="note" style="margin-top:18px">{esc(DIAG_NAME)} · 19 zł · wynik w 3 dni robocze</p>
 <p style="margin-top:14px;font-size:17px">Wolisz od razu porozmawiać? <a class="link" href="tel:+48502890686">502 890 686</a></p>
 </div>
