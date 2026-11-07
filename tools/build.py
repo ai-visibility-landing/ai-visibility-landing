@@ -277,13 +277,12 @@ def service_ld(path, name, desc, offers):
 DIAG_NAME = 'Pełna diagnostyka pozycjonowania w AI'
 MAIN_FAQ = [
     ('Czym to się różni od SEO?', 'SEO walczy o miejsce na liście wyników Google. My walczymy o to, żeby AI wymieniło Cię z nazwy, kiedy listy w ogóle nie ma. Część pracy jest wspólna: porządna strona pomaga w obu.'),
-    ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Kto mówi inaczej, kłamie. My ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, czyli więcej odpowiedzi z Twoją firmą, pracujemy dalej bez dopłaty, aż pokaże.'),
+    ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, czyli więcej odpowiedzi z Twoją firmą, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Ile to trwa?', 'Diagnostyka: 3 dni robocze od wpłaty. Wdrożenie: 2–4 tygodnie. Każde narzędzie AI aktualizuje wiedzę we własnym tempie, dlatego wynik mierzymy co miesiąc, a nie raz.'),
     ('Ile kosztuje?', 'Diagnostyka 19 zł, odliczane od ceny wdrożenia. Wdrożenie od 990 zł. Opieka i pomiar od 199 zł miesięcznie. Dokładną kwotę wdrożenia dostajesz po diagnostyce, zanim cokolwiek zlecisz. Kwoty końcowe, bez VAT.'),
     ('Dlaczego diagnostyka jest płatna?', 'Bo to ręczna praca: 20 pytań w czterech narzędziach AI, sprawdzonych i opisanych. Za 19 zł dostajesz wynik, który zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
     ('A jeśli AI już mnie poleca?', 'To dowiesz się o tym czarno na białym i będziesz wiedzieć, czego pilnować. Nie sprzedajemy wdrożenia, którego nie potrzebujesz.'),
     ('Muszę coś robić?', 'Dać dostęp do strony i wizytówki Google oraz odpowiedzieć na kilka pytań o firmę. Tekstami, kodem, wizytówką i katalogami zajmujemy się my.'),
-    ('Kto to robi?', 'Filip Szmel, Warszawa. Pracujesz z jedną osobą od diagnostyki do raportu, bez działu obsługi i przekazywania sprawy dalej.'),
 ]
 
 AI_NAMES = ['ChatGPT', 'Gemini', 'Perplexity', 'Claude']
@@ -329,13 +328,6 @@ def build_main():
 <div class="pp"><strong>Mierzalnie</strong><p>Co miesiąc te same pytania, te same narzędzia i jeden wynik: w ilu odpowiedziach już jesteś.</p></div>
 </div></div></section>
 
-<section id="porownanie" class="wrap sec" aria-label="To samo pytanie, inna odpowiedź">
-<h2 class="h2 lg">To samo pytanie. Inna odpowiedź.</h2>
-<p class="sub">Tak wygląda odpowiedź AI, kiedy klient szuka firmy w Twojej branży.</p>
-<div class="vs">{before}{after}</div>
-<p class="note" style="margin-top:18px">Ilustracja układu odpowiedzi, nie wynik klienta. W diagnostyce dostajesz prawdziwe odpowiedzi dla swojej branży i miasta, ze zrzutami i datą testu.</p>
-</section>
-
 <section id="google" class="band" aria-label="Dlaczego Google to za mało"><div class="wrap sec">
 <h2 class="h2 lg" style="max-width:780px">Google pokazywał listę. AI pokazuje trzy nazwy.</h2>
 <div class="wrap-0 stats s4 grid g-240" style="margin-top:36px;gap:32px">
@@ -351,7 +343,7 @@ def build_main():
 <h2 class="h2 lg">Co dokładnie robimy</h2>
 <ol class="steps3 s4">
 <li><span class="num">1</span><strong>Diagnostyka</strong><span class="d">20 pytań, które zadają Twoi klienci, w {ais}. Wiesz, kogo AI poleca, kogo pomija i dlaczego.</span></li>
-<li><span class="num">2</span><strong>Strona, którą AI rozumie</strong><span class="d">Treść i kod ustawione tak, żeby AI wiedziało, co robisz, gdzie i dla kogo: odpowiedzi na pytania klientów, dane strukturalne, llms.txt.</span></li>
+<li><span class="num">2</span><strong>Strona, którą AI rozumie</strong><span class="d">Poprawiamy stronę tak, żeby AI wiedziało, czym się zajmujesz, gdzie i dla kogo. Dodajemy odpowiedzi na pytania, które zadają Twoi klienci.</span></li>
 <li><span class="num">3</span><strong>Źródła, którym AI wierzy</strong><span class="d">Wizytówka Google, katalogi branżowe, opinie, wzmianki. Jedne dane wszędzie, bez trzech adresów i dwóch numerów telefonu.</span></li>
 <li><span class="num">4</span><strong>Pomiar co miesiąc</strong><span class="d">Te same pytania, ta sama metoda. Raport na jednej stronie: gdzie byłeś, gdzie jesteś, co robimy dalej.</span></li>
 </ol>
@@ -384,12 +376,12 @@ def build_main():
 <div class="btn-row" style="margin-top:28px"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Zamawiam diagnostykę</a><a class="btn btn-outline btn-lg" href="/cennik">Pełny cennik</a></div>
 </section>
 
-<section id="omnie" class="band" aria-label="Kto to robi"><div class="wrap sec"><div class="who">
+<section id="omnie" class="band" aria-label="Kim jesteśmy"><div class="wrap sec"><div class="who">
 <div class="who-logo">{logo(128, '#FAF8F4', '#13233A').replace('aria-hidden="true"', 'role="img" aria-label="Logo Wskazani"', 1)}<span>wskazani</span></div>
 <div class="who-txt">
-<p class="k">Kto to robi</p>
-<h2>Filip Szmel, Warszawa</h2>
-<p class="p">W USA agencje GEO działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a Twoi klienci już pytają AI. Pracujesz ze mną od diagnostyki do raportu: bez działu obsługi, bez przekazywania sprawy dalej, bez umowy na lata.</p>
+<p class="k">Kim jesteśmy</p>
+<h2>Wskazani, Warszawa</h2>
+<p class="p">W USA firmy zajmujące się pozycjonowaniem w AI działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a Twoi klienci już pytają AI. Masz jednego opiekuna od diagnostyki do raportu: bez infolinii, bez przekazywania sprawy dalej, bez umowy na lata.</p>
 <p class="p"><a class="link" href="/o-nas">Więcej o nas i o tym, jak pracujemy →</a></p>
 <div class="contact-row"><a class="link" href="tel:+48502890686">Zadzwoń: 502 890 686</a><a class="link" href="mailto:szmelfilip.business@gmail.com">Napisz: szmelfilip.business@gmail.com</a><a class="link" href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></div>
 </div></div></div></section>
@@ -465,7 +457,7 @@ CMP_ROWS = [
 CENNIK_FAQ = [
     ('Co dostaję za 19 zł?', '20 pytań, które zadają Twoi klienci, sprawdzonych w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co trzeba zmienić. Wynik w 3 dni robocze i rozmowa 20 min. 19 zł odliczamy od Wdrożenia.'),
     ('Czy po diagnostyce muszę coś kupić?', 'Nie. Wynik zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
-    ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Ustawiamy wszystko, z czego AI buduje odpowiedź, i mierzymy wynik co miesiąc. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
+    ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i mierzymy wynik co miesiąc. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Czy do ceny dochodzi VAT?', 'Nie. Kwoty na stronie są końcowe, nie doliczam VAT.'),
 ]
 STEPS7 = [('Zamawiasz diagnostykę', '19 zł'), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
@@ -780,7 +772,7 @@ FAQ_GROUPS = [
     ('g2', 'Współpraca', [
         ('Co muszę zrobić ja?', 'Dać dostęp do strony i znaleźć 10 minut na kilka pytań. Resztę robię ja.'),
         ('Czy mogę zacząć od małego kroku?', 'Tak. Diagnostyka za 19 zł: mała kwota, konkretny wynik, a kwota wraca w cenie Wdrożenia.'),
-        ('Gwarantujecie, że AI zacznie polecać moją firmę?', 'Nikt nie steruje odpowiedziami AI. Ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
+        ('Gwarantujecie, że AI zacznie polecać moją firmę?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
         ('Co, jeśli efekt mnie nie przekona?', 'Widzisz wynik przed i po. Przy Wdrożeniu drugą połowę płacisz do 7 dni po wykonaniu, przy nowej stronie dopiero przed publikacją, a abonament kończysz w dowolnym miesiącu.'),
         ('Od kiedy liczy się miesiąc abonamentu?', 'Od dnia płatności. Przed płatnością dostajesz mailem potwierdzenie: zakres, kwota i terminy.'),
         ('Czy mogę zmienić pakiet?', 'Tak, w górę i w dół. Wystarczy mail, nowy pakiet obowiązuje od kolejnego opłaconego miesiąca.'),
@@ -825,13 +817,13 @@ def build_faq():
 def build_onas():
     return f'''<section class="wrap-900" style="padding-block:88px 32px">
 <p class="eyebrow">O nas</p>
-<h1 class="display">Wskazani: agencja GEO z Warszawy</h1>
+<h1 class="display">Wskazani: pozycjonowanie w AI dla firm</h1>
 <p class="lead" style="margin-top:18px">Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pracujemy dla firm z Warszawy i całej Polski.</p>
 </section>
 
 <section class="wrap-900" style="padding-bottom:56px" aria-label="Dlaczego to robimy">
 <h2 class="h2 sm">Dlaczego to robimy</h2>
-<p class="p" style="margin-top:14px">Klienci coraz częściej pytają AI zamiast wpisywać hasło w Google. W USA agencje GEO działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a firmy nawet nie wiedzą, że AI wymienia ich konkurencję. Chcemy, żeby AI polecało Ciebie.</p>
+<p class="p" style="margin-top:14px">Klienci coraz częściej pytają AI zamiast wpisywać hasło w Google. W USA firmy zajmujące się pozycjonowaniem w AI działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a firmy nawet nie wiedzą, że AI wymienia ich konkurencję. Chcemy, żeby AI polecało Ciebie.</p>
 </section>
 
 <section class="band" aria-label="Jak pracujemy"><div class="wrap-900" style="padding-block:72px">
@@ -903,7 +895,7 @@ def write(name, content):
 
 def main():
     write('index.html', page(
-        '/', 'Agencja GEO: AI poleca Twoją firmę, nie konkurencję | Wskazani',
+        '/', 'Pozycjonowanie w AI: ChatGPT poleca Twoją firmę | Wskazani',
         'Kiedy klient pyta ChatGPT o firmę z Twojej branży, AI wymienia konkurencję. Robimy tak, że zaczyna polecać Ciebie. Diagnostyka 19 zł, wynik w 3 dni robocze.',
         build_main(), active='/', audyt_href='#audyt', sticky=True, jsonld=main_ld()))
     write('cennik.html', page(
@@ -931,8 +923,8 @@ def main():
         bar=('Pytania i słowniczek', [('#g0', 'Audyt'), ('#g1', 'Rozliczenie'), ('#g2', 'Współpraca'), ('#g3', 'Technika'), ('#slowniczek', 'Słowniczek')], 'Zamów audyt', '/#audyt'),
         jsonld=[dict({'@context': 'https://schema.org'}, **faq_ld(FAQ_ALL))]))
     write('o-nas.html', page(
-        '/o-nas', 'O nas: agencja GEO Wskazani z Warszawy',
-        'Wskazani to agencja GEO z Warszawy. Sprawdzamy i poprawiamy, jak ChatGPT, Gemini, Perplexity i Claude polecają polskie firmy. Jawne ceny, bez umowy na lata.',
+        '/o-nas', 'O nas: Wskazani, pozycjonowanie w AI z Warszawy',
+        'Wskazani to agencja z Warszawy. Sprawdzamy i poprawiamy, jak ChatGPT, Gemini, Perplexity i Claude polecają polskie firmy. Jawne ceny, bez umowy na lata.',
         build_onas(), active='/o-nas', jsonld=onas_ld()))
     write('polityka-prywatnosci.html', page(
         '/polityka-prywatnosci', 'Polityka prywatności | Wskazani',

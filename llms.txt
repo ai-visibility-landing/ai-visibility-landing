@@ -13,7 +13,7 @@ Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: paździ
 Abonamenty płatne z góry za miesiąc, wypowiedzenie miesięczne, bez kar.
 
 ## Gwarancja
-Jeśli 90 dni po wdrożeniu test na tych samych pytaniach nie pokaże postępu (więcej odpowiedzi AI z firmą klienta), praca trwa dalej bez dopłaty, aż pokaże. Nikt nie steruje odpowiedziami AI; Wskazani ustawia to, z czego AI buduje odpowiedź, i mierzy wynik co miesiąc.
+Jeśli 90 dni po wdrożeniu test na tych samych pytaniach nie pokaże postępu (więcej odpowiedzi AI z firmą klienta), praca trwa dalej bez dopłaty, aż pokaże. Wskazani poprawia to, z czego AI buduje odpowiedź, i mierzy wynik co miesiąc.
 
 ## Kontakt
 E-mail: szmelfilip.business@gmail.com
