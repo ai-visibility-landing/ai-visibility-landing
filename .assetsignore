@@ -5,3 +5,6 @@ wrangler.jsonc
 README.md
 .wrangler
 .gitignore
+.git
+.git/**
+.DS_Store

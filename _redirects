@@ -14,3 +14,5 @@
 # Stara strona z ofertą: 301 na cennik
 /nowa-strona /cennik 301
 /nowa-strona.html /cennik 301
+/o-mnie /o-nas 301
+/o-mnie.html /o-nas 301
