@@ -58,7 +58,7 @@ ICO_CARD = ('<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" 
 # ---------------------------------------------------------------- nawigacja
 NAV = [('/cennik', 'Cennik'), ('/widocznosc-w-ai', 'Widoczność w AI'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
 FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/widocznosc-w-ai', 'Widoczność w AI'), ('/wspolpraca', 'Dla firm'),
-        ('/faq', 'FAQ'), ('/#omnie', 'O mnie')]
+        ('/faq', 'FAQ'), ('/o-mnie', 'O mnie')]
 
 CONSENT_HEAD = (
     '<script>\n'
@@ -391,6 +391,7 @@ def build_main():
 <p class="k">Kto to robi</p>
 <h2>Filip Szmel, Warszawa</h2>
 <p class="p">W USA agencje GEO działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a Twoi klienci już pytają AI. Pracujesz ze mną od diagnostyki do raportu: bez działu obsługi, bez przekazywania sprawy dalej, bez umowy na lata.</p>
+<p class="p"><a class="link" href="/o-mnie">Więcej o mnie i o tym, jak pracuję →</a></p>
 <div class="contact-row"><a class="link" href="tel:+48502890686">Zadzwoń: 502 890 686</a><a class="link" href="mailto:szmelfilip.business@gmail.com">Napisz: szmelfilip.business@gmail.com</a><a class="link" href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></div>
 </div></div></div></section>
 
@@ -441,7 +442,7 @@ def main_ld():
              'contactPoint': {'@type': 'ContactPoint', 'contactType': 'obsługa klienta', 'telephone': '+48502890686',
                               'email': 'szmelfilip.business@gmail.com', 'availableLanguage': 'pl'},
              'sameAs': ['https://www.linkedin.com/in/filip-szmel-b2993a439/']},
-            {'@type': 'Person', '@id': PERSON_ID, 'name': 'Filip Szmel', 'url': SITE + '/#omnie',
+            {'@type': 'Person', '@id': PERSON_ID, 'name': 'Filip Szmel', 'url': SITE + '/o-mnie',
              'email': 'szmelfilip.business@gmail.com', 'telephone': '+48502890686', 'worksFor': {'@id': ORG_ID},
              'homeLocation': {'@type': 'Place', 'name': 'Warszawa'},
              'sameAs': ['https://www.linkedin.com/in/filip-szmel-b2993a439/']},
@@ -820,6 +821,45 @@ def build_faq():
 '''
 
 
+
+# ================================================================= O MNIE
+def build_omnie():
+    return f'''<section class="wrap-900" style="padding-block:88px 32px">
+<p class="eyebrow">O mnie</p>
+<h1 class="display">Filip Szmel, Warszawa</h1>
+<p class="lead" style="margin-top:18px">Prowadzę Wskazani, agencję GEO dla polskich firm. Sprawdzam i poprawiam to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę.</p>
+</section>
+
+<section class="wrap-900" style="padding-bottom:56px" aria-label="Dlaczego to robię">
+<h2 class="h2 sm">Dlaczego to robię</h2>
+<p class="p" style="margin-top:14px">Twoi klienci coraz częściej pytają AI zamiast wpisywać hasło w Google. W USA agencje GEO działają od dwóch lat. W Polsce prawie nikt nie robi tego dobrze, a firmy nawet nie wiedzą, że AI wymienia ich konkurencję.</p>
+</section>
+
+<section class="band" aria-label="Jak pracuję"><div class="wrap-900" style="padding-block:72px">
+<h2 class="h2 sm">Jak pracuję</h2>
+<ul class="ticks" style="margin-top:18px">
+<li>{tick()}<span><strong>Jedna osoba od początku do końca.</strong> Rozmawiasz z tym, kto robi poprawki. Bez działu obsługi i bez przekazywania sprawy dalej.</span></li>
+<li>{tick()}<span><strong>Ręczna praca, nie automat.</strong> 20 pytań Twoich klientów sprawdzam w czterech narzędziach AI i opisuję wynik.</span></li>
+<li>{tick()}<span><strong>Jawne ceny.</strong> Kwoty na stronie są końcowe, bez VAT. Zakres i cenę wdrożenia dostajesz na piśmie, zanim cokolwiek zlecisz.</span></li>
+<li>{tick()}<span><strong>Bez umowy na lata.</strong> Opieka z miesięcznym wypowiedzeniem, bez kar.</span></li>
+<li>{tick()}<span><strong>Pomiar i gwarancja 90 dni.</strong> Test przed i po wdrożeniu. Jeśli po 90 dniach nie widać postępu, pracuję dalej bez dopłaty, aż będzie widać.</span></li>
+</ul>
+<p class="p" style="margin-top:22px">Szczegóły pakietów: <a class="link" href="/cennik">cennik</a> i <a class="link" href="/widocznosc-w-ai">widoczność w AI</a>.</p>
+</div></section>
+
+<section class="wrap-900" style="padding-block:64px" aria-label="Kontakt">
+<h2 class="h2 sm">Kontakt</h2>
+<div class="contact-row" style="margin-top:18px"><a class="link" href="tel:+48502890686">Zadzwoń: 502 890 686</a><a class="link" href="mailto:szmelfilip.business@gmail.com">Napisz: szmelfilip.business@gmail.com</a><a class="link" href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></div>
+<p class="muted" style="margin-top:14px;font-size:16px">Warszawa, praca zdalna dla firm z całej Polski. Odpowiadam w ciągu 24 h roboczych.</p>
+</section>
+{cta_band('Zacznij od diagnostyki za 19 zł.', '', ('Zamów diagnostykę', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
+'''
+
+
+def omnie_ld():
+    return [{'@context': 'https://schema.org', '@type': 'ProfilePage', '@id': SITE + '/o-mnie#strona', 'url': SITE + '/o-mnie',
+             'name': 'O mnie: Filip Szmel', 'inLanguage': 'pl-PL', 'mainEntity': {'@id': PERSON_ID}, 'isPartOf': {'@id': SITE + '/#strona'}}]
+
 # ================================================================= POZOSTAŁE: polityka, dziękuję, 404
 def build_polityka():
     body = open(os.path.join(ROOT, 'src', 'polityka-body.html'), encoding='utf8').read()
@@ -890,6 +930,10 @@ def main():
         build_faq(), active='/faq',
         bar=('Pytania i słowniczek', [('#g0', 'Audyt'), ('#g1', 'Rozliczenie'), ('#g2', 'Współpraca'), ('#g3', 'Technika'), ('#slowniczek', 'Słowniczek')], 'Zamów audyt', '/#audyt'),
         jsonld=[dict({'@context': 'https://schema.org'}, **faq_ld(FAQ_ALL))]))
+    write('o-mnie.html', page(
+        '/o-mnie', 'O mnie: Filip Szmel, agencja GEO Wskazani',
+        'Filip Szmel, Warszawa. Prowadzę Wskazani: sprawdzam i poprawiam, jak ChatGPT, Gemini, Perplexity i Claude polecają polskie firmy. Jedna osoba, jawne ceny, bez umowy na lata.',
+        build_omnie(), active='/o-mnie', jsonld=omnie_ld()))
     write('polityka-prywatnosci.html', page(
         '/polityka-prywatnosci', 'Polityka prywatności | Wskazani',
         'Jak przetwarzam dane z formularzy: administrator, cel, podstawa prawna, odbiorcy, okres przechowywania i Twoje prawa.',
@@ -900,7 +944,7 @@ def main():
         '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów diagnostykę widoczności firmy w AI.',
         build_404(), robots='noindex', mobile_cta=False))
 
-    urls = ['/', '/cennik', '/widocznosc-w-ai', '/wspolpraca', '/faq']
+    urls = ['/', '/cennik', '/widocznosc-w-ai', '/wspolpraca', '/faq', '/o-mnie']
     sm = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD))
