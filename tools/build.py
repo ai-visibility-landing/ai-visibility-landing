@@ -9,7 +9,7 @@ i widoczny HTML, i JSON-LD, więc zawsze są identyczne.
 """
 import html
 import json
-import os
+import os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://wskazani.pl'
@@ -151,11 +151,13 @@ def page(path, title, desc, main_html, active=None, audyt_href='/#audyt', sticky
     b.append('<main id="tresc">\n%s</main>\n' % main_html)
     b.append(site_footer(active))
     if mobile_cta:
-        b.append('<div class="mobile-cta"><a class="btn btn-primary" href="%s">Diagnostyka AI: 19 zł</a></div>\n' % audyt_href)
+        b.append('<div class="mobile-cta"><a class="btn btn-primary" href="%s">Umów rozmowę</a></div>\n' % audyt_href)
     b.append(CONSENT_BOX)
     b.append(extra_foot)
     b.append('<script src="/site.js" defer></script>\n</body>\n</html>\n')
-    return h + ''.join(b)
+    out = h + ''.join(b)
+    out = re.sub(r' data-pakiet="[^"]*"', '', out)
+    return re.sub(r'href="[^"]*#audyt"', 'href="%s" target="_blank" rel="noopener" data-ga="umow_rozmowe"' % BOOK_URL, out)
 
 
 # ---------------------------------------------------------------- wspólne bloki
@@ -240,6 +242,7 @@ RODO_CENNIK = ('Wysyłając formularz, zgadzasz się na kontakt w sprawie zgłos
                'Szczegóły w <a class="link" href="/polityka-prywatnosci">polityce prywatności</a>.')
 
 ORG_ID = SITE + '/#firma'
+BOOK_URL = 'https://calendar.app.google/SuHs8bxB3i8V8Aiw8'
 PERSON_ID = SITE + '/#filip'
 PROVIDER = {'@type': 'Organization', '@id': ORG_ID, 'name': 'Wskazani', 'url': SITE + '/'}
 
@@ -373,7 +376,7 @@ def build_main():
 <li><span class="num">3</span><strong>Opieka i pomiar: od 199 zł / mies.</strong><span class="d">Co miesiąc ten sam test i raport. Wypowiedzenie z miesięcznym okresem, bez kar. Wszystko, co wdrożyliśmy, zostaje u Ciebie.</span></li>
 </ol>
 <div class="guarantee"><strong>Gwarancja 90 dni.</strong> Jeśli 90 dni po wdrożeniu test na tych samych pytaniach nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.</div>
-<div class="btn-row" style="margin-top:28px"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Zamawiam diagnostykę</a><a class="btn btn-outline btn-lg" href="/cennik">Pełny cennik</a></div>
+<div class="btn-row" style="margin-top:28px"><a class="btn btn-primary btn-lg" href="#audyt">Umów rozmowę</a><a class="btn btn-outline btn-lg" href="/cennik">Pełny cennik</a></div>
 </section>
 
 <section id="omnie" class="band" aria-label="Kim jesteśmy"><div class="wrap sec"><div class="who">
@@ -392,16 +395,12 @@ def build_main():
 <a class="link" href="/faq" style="margin-top:16px;font-size:17px">Wszystkie pytania i słowniczek →</a>
 </section>
 
-<section id="audyt" class="band-navy on-navy" aria-label="Zamów diagnostykę"><div class="wrap sec"><div class="audit">
-<div class="audit-l">
-<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Twoi klienci już pytają AI. Sprawdź, co słyszą.</h2>
-<p class="p">{esc(DIAG_NAME)}: Twoja branża, Twoje miasto, {ais}. 19 zł, odliczane od wdrożenia.</p>
-<ul class="ticks"><li>{tick('#86EFAC')}<span>20 pytań Twoich klientów w 4 narzędziach AI</span></li><li>{tick('#86EFAC')}<span>Wynik w 3 dni robocze od wpłaty + rozmowa 20 min</span></li><li>{tick('#86EFAC')}<span>Po zgłoszeniu dostajesz link do płatności online</span></li></ul>
+<section id="audyt" class="band-navy on-navy" aria-label="Umów rozmowę"><div class="wrap sec" style="text-align:center">
+<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance;max-width:760px;margin-inline:auto">Twoi klienci już pytają AI. Umów rozmowę i zobacz, co słyszą.</h2>
+<p class="p" style="margin:18px auto 0;max-width:620px">Bezpłatna rozmowa online. Sprawdzimy, czy AI poleca Twoją firmę, i powiemy, od czego zacząć.</p>
+<div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn btn-primary btn-lg" href="#audyt">Umów rozmowę</a></div>
 <p class="p" style="margin-top:20px">Albo zadzwoń: <a class="link" href="tel:+48502890686" style="color:#fff">502 890 686</a></p>
-</div>
-<div class="formbox">
-{audit_form('Czego potrzebujesz?', 'Odpowiadamy w ciągu 24 h roboczych z linkiem do płatności.', RODO_MAIN)}
-</div></div></div></section>
+</div></section>
 
 <section id="przypisy" class="wrap foot-notes" aria-label="O Wskazani i przypisy">
 <h2>O Wskazani</h2>
@@ -460,7 +459,7 @@ CENNIK_FAQ = [
     ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i mierzymy wynik co miesiąc. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Czy do ceny dochodzi VAT?', 'Nie. Kwoty na stronie są końcowe, nie doliczamy VAT.'),
 ]
-STEPS7 = [('Zamawiasz diagnostykę', '19 zł'), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
+STEPS7 = [('Umawiasz bezpłatną rozmowę', ''), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
           ('Potwierdzenie mailem i płatność', ''), ('Wdrażamy poprawki', ''), ('Test po 30 dniach', '')]
 QUIZ = [
     ('q1', '1. Czy Twoja firma ma stronę internetową?', [('aktualna', 'Tak, aktualną'), ('stara', 'Tak, ale starą'), ('brak', 'Nie mam')]),
@@ -490,26 +489,20 @@ def build_cennik():
 <p class="note" style="margin-top:14px">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </section>
 
-<section class="quiz" id="quiz" aria-label="Który pakiet dla Ciebie"><div class="quiz-box">
-<h2>Który pakiet pozycjonowania w AI wybrać?</h2>
-<p>Nie wiesz, co wybrać? Odpowiedz na 3 pytania.</p>
-{quiz}
-<div class="result-box"><div class="rt"><p class="l" id="quiz-label" aria-live="polite">Twój wynik pojawi się tutaj</p><p class="x" id="quiz-text">Odpowiedz na 3 pytania powyżej.</p><p class="s" id="quiz-note" hidden>Dokładną kwotę podam po diagnostyce.</p></div>
-<a class="btn btn-primary" id="quiz-pick" href="#audyt" hidden style="min-height:48px;padding:14px 24px">Wybieram ten zestaw</a></div>
-</div></section>
+
 
 <section class="wrap" aria-label="Pakiety jednorazowe" style="padding-block:88px 24px">
-<h2 class="h2">Pakiety jednorazowe: diagnostyka, wdrożenie, nowa strona</h2>
+<h2 class="h2">Wybierz, od czego zaczynamy</h2>
 <div class="grid g-240" style="gap:18px;margin-top:32px;align-items:stretch">
 <article class="price-card big"><h3>Pełna diagnostyka pozycjonowania w AI</h3><p class="price"><span class="num">19 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
 <ul><li>20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude</li><li>Wynik w 3 dni robocze + rozmowa 20 min</li><li>Kwota odliczana od Wdrożenia</li></ul>
-<a class="btn btn-outline btn-block" href="/cennik?pakiet=mini#audyt" data-pakiet="mini">Zamawiam diagnostykę</a></article>
+<a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="diagnostyka">Umów rozmowę</a></article>
 <article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie pozycjonowania</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
 <ul><li>Wszystkie poprawki z diagnostyki</li><li>Dane o firmie dla Google i AI</li><li>Pytania i odpowiedzi na stronie</li><li>Gwarancja 90 dni</li></ul>
-<a class="btn btn-primary btn-block" href="/cennik?pakiet=wdrozenie#audyt" data-pakiet="wdrozenie">Wybierz Wdrożenie</a></article>
+<a class="btn btn-primary btn-block" href="#audyt" data-ga-miejsce="wdrozenie">Umów rozmowę</a></article>
 <article class="price-card big"><h3>Nowa strona</h3><p class="price"><span class="pre">od</span><span class="num">1990 zł</span></p><p class="quote">„Strona jest stara albo jej nie ma”</p>
 <ul><li>4–6 podstron</li><li>Gotowa pod Google i AI od pierwszego dnia</li><li>Test przed i po 30 dniach</li><li>Płatność: 50% na start, 50% przed publikacją</li></ul>
-<a class="btn btn-outline btn-block" href="/cennik?pakiet=strona#audyt" data-pakiet="strona">Zapytaj o stronę</a></article>
+<a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="strona">Umów rozmowę</a></article>
 </div>
 <div class="dep">
 <div class="all"><h3>Od czego zależy cena?</h3><p>Dokładną kwotę znasz po diagnostyce, zanim cokolwiek zlecisz.</p></div>
@@ -519,32 +512,17 @@ def build_cennik():
 </div>
 <div class="big-firms on-navy" id="duze-firmy" aria-label="Dla dużych firm"><div class="t"><span class="k">Dla dużych firm</span>
 <p>Masz kilka oddziałów, wiele usług albo stronę z setkami podstron? Zaczynamy tak samo, od diagnostyki, a zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz.</p></div>
-<a class="btn btn-primary" href="#audyt">Zapytaj o wycenę</a></div>
+<a class="btn btn-primary" href="#audyt">Umów rozmowę</a></div>
 <p class="muted" style="margin-top:18px;font-size:15px">Co musisz zrobić Ty: dać dostęp do strony i poświęcić 10 minut na pytania.</p>
 </section>
 
-<section class="wrap" aria-label="Porównaj pakiety" style="padding-block:72px 24px">
-<h2 class="h2">Co zawiera każdy pakiet? Porównanie</h2>
-<div class="cmp-wrap"><table class="cmp" id="cmp-table"><thead><tr><th scope="col">Co dostajesz</th>{head_cells}</tr></thead><tbody>{body_rows}</tbody></table></div>
-<div class="cmp-mobile" id="cmp-mobile"><p class="muted" style="margin-top:16px;font-size:15px">Wybierz 2 pakiety do porównania.</p>
-<div class="pick"><div><label for="cmp-a">Pakiet 1</label><select id="cmp-a"></select></div><div><label for="cmp-b">Pakiet 2</label><select id="cmp-b"></select></div></div>
-<div class="rows" id="cmp-rows"></div></div>
-</section>
+
 
 <section id="stale" class="wrap" aria-label="Współpraca stała" style="padding-block:72px 24px">
-<h2 class="h2">Ile kosztuje stała opieka nad pozycjonowaniem w AI?</h2>
-<p class="muted" style="margin-top:12px;font-size:18px">Płatność z góry za miesiąc. Wypowiedzenie miesięczne, bez kar.</p>
-<div class="grid g-280" style="gap:18px;margin-top:30px">
-<article class="price-card big mo"><h3>Opieka i monitoring AI</h3><p class="price"><span class="pre">od</span><span class="num">199 zł</span><span class="post">/ miesiąc</span></p>
-<p class="desc">Co miesiąc sprawdzamy, czy AI poleca Twoją firmę, wysyłamy krótki raport i robimy drobne poprawki.</p>
-<a class="btn btn-outline btn-block" href="/cennik?pakiet=opieka#audyt" data-pakiet="opieka">Wybierz Opiekę</a></article>
-<article class="price-card big mo pick"><span class="badge">Dla rosnących firm</span><h3>Opieka+</h3><p class="price"><span class="pre">od</span><span class="num">490 zł</span><span class="post">/ miesiąc</span></p>
-<p class="desc">Wszystko z Opieki, do 2 nowych treści miesięcznie, większe zmiany na stronie i rozmowa raz w miesiącu.</p>
-<a class="btn btn-primary btn-block" style="background:var(--navy);border-color:var(--navy)" href="/cennik?pakiet=opieka-plus#audyt" data-pakiet="opieka-plus">Wybierz Opiekę+</a></article>
-<article class="price-card big mo"><h3>Marketing na zlecenie</h3><p class="price"><span class="pre">od</span><span class="num">1490 zł</span><span class="post">/ miesiąc</span></p>
-<p class="desc">Social media, Google Ads i treści — taniej niż etat w marketingu. Zakres ustalamy w rozmowie. Budżet na reklamy płacisz osobno, bezpośrednio Google lub Meta.</p>
-<a class="btn btn-outline btn-block" href="/cennik?pakiet=marketing#audyt" data-pakiet="marketing">Porozmawiajmy</a></article>
-</div></section>
+<h2 class="h2">Stała opieka nad pozycjonowaniem w AI: od 199 zł / miesiąc</h2>
+<p class="muted" style="margin-top:12px;font-size:18px;max-width:700px">Co miesiąc sprawdzamy, czy AI poleca Twoją firmę, wysyłamy krótki raport i robimy drobne poprawki. Płatność z góry za miesiąc, wypowiedzenie miesięczne, bez kar.</p>
+<div class="btn-row" style="margin-top:22px"><a class="btn btn-outline btn-lg" href="#audyt">Umów rozmowę</a><a class="btn btn-ghost btn-lg" href="/wspolpraca">Zobacz szczegóły opieki</a></div>
+</section>
 
 <section class="wrap" aria-label="Dlaczego Wskazani" style="padding-block:72px 24px"><div class="why on-navy">
 <h2>Czym Wskazani różni się od innych agencji?</h2>
@@ -575,15 +553,7 @@ def build_cennik():
 <div style="margin-top:24px">{faq_details(CENNIK_FAQ, 'faq-cards')}</div>
 </section>
 
-<section id="audyt" class="band-navy on-navy" aria-label="Zamówienie" style="margin-top:72px"><span id="formularz"></span><div class="wrap sec"><div class="audit">
-<div class="audit-l">
-<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Pakiet wybrany? Wyślij zgłoszenie.</h2>
-<p class="p">Nie wiesz jeszcze? Zacznij od diagnostyki. Po wyniku doradzimy, od czego zacząć.</p>
-<p class="n2">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
-</div>
-<div class="formbox">
-{audit_form('Wybrany pakiet', 'Przed płatnością dostaniesz mailem zakres, dokładną kwotę i terminy.', RODO_CENNIK)}
-</div></div></div></section>
+{cta_band('Nie wiesz, co wybrać? Umów rozmowę.', 'Powiemy, od czego zacząć. Bez zobowiązań.', ('Umów rozmowę', '#audyt'), ('Zadzwoń: 502 890 686', 'tel:+48502890686'), 'Bez umowy na lata · Kwoty końcowe, bez VAT')}
 
 <section id="przypisy" class="wrap foot-notes" aria-label="Źródła danych" style="padding-top:40px">
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
@@ -628,7 +598,7 @@ def build_geo():
 <p class="display" style="max-width:900px">Poprawiamy to, co ChatGPT, Perplexity i Google czytają o Twojej firmie.</p>
 <p style="margin:20px 0 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px"><strong>Co to znaczy?</strong> Dbamy o to, żeby ChatGPT, Perplexity i Google rozumiały Twoją firmę i mogły ją wymienić w odpowiedzi. W praktyce: poprawki na stronie i spójne dane firmy w internecie.</p>
 <p class="lead" style="margin-top:22px;max-width:660px">Konkretny zakres, jawne ceny i bez umowy na lata. Dla firm, które wiedzą, że klienci pytają AI, i szukają kogoś, kto to uporządkuje.</p>
-<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="pozycjonowanie_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
+<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="pozycjonowanie_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Umów rozmowę</a></div>
 <p class="note" style="margin-top:20px">Pierwszy krok za 19 zł · kwoty bez VAT · bez umowy na 6 miesięcy</p>
 </section>
 
@@ -661,7 +631,7 @@ def build_geo():
 </section>
 
 {cta_band('Zacznij od diagnostyki za 19 zł.', 'Kogo AI poleca zamiast Ciebie, w 4 narzędziach. Kwota odliczana od Wdrożenia.',
-         ('Zobacz cennik', '/cennik'), ('Zamów diagnostykę', '/#audyt'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('class="btn btn-primary btn-lg" href="/cennik"', 'class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_dol"')}
+         ('Zobacz cennik', '/cennik'), ('Umów rozmowę', '/#audyt'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('class="btn btn-primary btn-lg" href="/cennik"', 'class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_dol"')}
 <section id="przypisy" class="wrap foot-notes" aria-label="Źródła danych" style="padding-top:40px">
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
 <ul>
@@ -694,7 +664,7 @@ def build_wsp():
         btn = 'btn-primary' if feat else 'btn-cta-outline'
         plans.append(f'<article class="plan{" feat" if feat else ""}"><div class="bs">{b}</div><h2>{esc(name)}</h2><p class="for">{esc(forx)}</p>'
                      f'<p class="price"><span class="pre">od</span><span class="num">{price}</span><span class="post">zł / miesiąc</span></p><ul>{lis}</ul>'
-                     f'<a class="btn {btn} btn-block" href="/?pakiet={pid}#audyt" data-pakiet="{pid}">{esc(cta)}</a></article>')
+                     f'<a class="btn {btn} btn-block" href="#audyt" data-ga-miejsce="{pid}">Umów rozmowę</a></article>')
     plans = '\n'.join(plans)
     qa = [('Co zostaje na stronie po rezygnacji?', 'Wszystko, co poprawiłem. Poprawki i treści zostają na Twojej stronie, przestaję tylko co miesiąc sprawdzać i wysyłać raport.'),
           ('Czy mogę zmienić pakiet?', 'Tak, w górę i w dół. Wystarczy mail, nowy pakiet obowiązuje od kolejnego opłaconego miesiąca.'),
@@ -748,7 +718,7 @@ def build_wsp():
 <p class="muted inline" style="margin-top:18px;font-size:15px">Więcej odpowiedzi: <a class="link" href="/faq">FAQ</a></p>
 </section>
 
-{cta_band('Najpierw sprawdzę, od czego zacząć.', 'Diagnostyka pokaże, czy wystarczy Ci Opieka, czy najpierw trzeba zrobić Wdrożenie.', ('Zamów diagnostykę', '/#audyt'), ('Porównaj wszystkie pakiety', '/cennik'),
+{cta_band('Najpierw sprawdzę, od czego zacząć.', 'Diagnostyka pokaże, czy wystarczy Ci Opieka, czy najpierw trzeba zrobić Wdrożenie.', ('Umów rozmowę', '/#audyt'), ('Porównaj wszystkie pakiety', '/cennik'),
          'Bez umowy na lata · Wynik w 3 dni robocze')}
 '''
 
@@ -758,7 +728,7 @@ FAQ_GROUPS = [
     ('g0', 'Diagnostyka', [
         ('Co dostaję w diagnostyce za 19 zł?', '20 pytań, które zadają Twoi klienci, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
         ('Co dostaję?', 'Krótki raport prostym językiem: czy AI czyta Twoją stronę i 3 najważniejsze rzeczy do poprawy.'),
-        ('Ile czekam?', 'Do 48 godzin roboczych od wysłania formularza.'),
+        ('Ile czekam?', 'Do 48 godzin roboczych od umówionej rozmowy.'),
     ]),
     ('g1', 'Ceny i rozliczenie', [
         ('Ile to kosztuje?', 'Diagnostyka 19 zł, Wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT. Szczegóły i porównanie pakietów są w cenniku.'),
@@ -808,7 +778,7 @@ def build_faq():
 <p class="muted" style="margin-top:10px;font-size:17px">Każde trudne słowo w jednym zdaniu.</p>
 <dl class="gloss">{terms}</dl>
 </div></section>
-{cta_band('Masz jeszcze pytanie? Zadzwoń: 502 890 686.', '', ('Zamów diagnostykę', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
+{cta_band('Masz jeszcze pytanie? Zadzwoń: 502 890 686.', '', ('Umów rozmowę', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
 '''
 
 
@@ -843,7 +813,7 @@ def build_onas():
 <div class="contact-row" style="margin-top:18px"><a class="link" href="tel:+48502890686">Zadzwoń: 502 890 686</a><a class="link" href="mailto:szmelfilip.business@gmail.com">Napisz: szmelfilip.business@gmail.com</a><a class="link" href="https://www.linkedin.com/in/filip-szmel-b2993a439/" rel="me noopener" target="_blank">LinkedIn</a></div>
 <p class="muted" style="margin-top:14px;font-size:16px">Warszawa, praca zdalna dla firm z całej Polski. Odpowiadamy w ciągu 24 h roboczych.</p>
 </section>
-{cta_band('Zacznij od diagnostyki za 19 zł.', '', ('Zamów diagnostykę', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
+{cta_band('Zacznij od diagnostyki za 19 zł.', '', ('Umów rozmowę', '/#audyt'), ('Zobacz cennik', '/cennik'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('<div class="in">', '<div class="in" style="padding-block:80px">')}
 '''
 
 
@@ -868,7 +838,7 @@ def build_dziekuje():
 <div id="t-check" hidden>
 <p class="lead">Pełna wersja checklisty jest gotowa do pobrania.</p>
 <p style="margin-top:20px"><a class="btn btn-primary btn-lg" href="/checklista-widocznosc-w-ai.pdf" download>Pobierz checklistę (PDF)</a></p>
-<p style="margin-top:16px">Jeśli plik się nie otworzy, napisz na <a class="link" href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>. Chcesz, żebym sprawdził Twoją stronę? <a class="link" href="/#audyt">Zamów diagnostykę</a>.</p>
+<p style="margin-top:16px">Jeśli plik się nie otworzy, napisz na <a class="link" href="mailto:szmelfilip.business@gmail.com">szmelfilip.business@gmail.com</a>. Chcesz, żebym sprawdził Twoją stronę? <a class="link" href="/#audyt">Umów rozmowę</a>.</p>
 </div>
 <noscript><p style="margin-top:20px"><a class="btn btn-primary btn-lg" href="/checklista-widocznosc-w-ai.pdf" download>Pobierz checklistę (PDF), jeśli o nią prosiłeś</a></p></noscript>
 <p style="margin-top:32px"><a class="btn btn-outline" href="/">Wróć na stronę główną</a></p>
@@ -881,7 +851,7 @@ def build_404():
 <p class="eyebrow" style="margin:0">Błąd 404</p>
 <h1>Tej strony tu nie ma</h1>
 <p>Adres mógł się zmienić albo zawierać literówkę. Wszystko, czego szukasz, jest na stronie głównej.</p>
-<div class="btn-row" style="margin-top:24px"><a class="btn btn-primary btn-lg" href="/">Wróć na stronę główną</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
+<div class="btn-row" style="margin-top:24px"><a class="btn btn-primary btn-lg" href="/">Wróć na stronę główną</a><a class="btn btn-outline btn-lg" href="/#audyt">Umów rozmowę</a></div>
 </section>
 '''
 
@@ -913,14 +883,14 @@ def main():
         '/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI | Wskazani',
         'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło.',
         build_wsp(), active='/wspolpraca',
-        bar=('Współpraca stała', [('#pakiety', 'Pakiety'), ('#raport', 'Raport'), ('#rezygnacja', 'Rezygnacja')], 'Zamów audyt', '/#audyt'),
+        bar=('Współpraca stała', [('#pakiety', 'Pakiety'), ('#raport', 'Raport'), ('#rezygnacja', 'Rezygnacja')], 'Umów rozmowę', '/#audyt'),
         jsonld=[service_ld('/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI',
                            'Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło. Bez umowy na lata.', OFFERS[3:])]))
     write('faq.html', page(
         '/faq', 'Pytania o pozycjonowanie w AI i audyt | Wskazani',
         'Krótkie odpowiedzi o diagnostyce, cenach, rozliczeniu, współpracy i technice, plus słowniczek: GEO, AI Overviews, llms.txt.',
         build_faq(), active='/faq',
-        bar=('Pytania i słowniczek', [('#g0', 'Audyt'), ('#g1', 'Rozliczenie'), ('#g2', 'Współpraca'), ('#g3', 'Technika'), ('#slowniczek', 'Słowniczek')], 'Zamów audyt', '/#audyt'),
+        bar=('Pytania i słowniczek', [('#g0', 'Audyt'), ('#g1', 'Rozliczenie'), ('#g2', 'Współpraca'), ('#g3', 'Technika'), ('#slowniczek', 'Słowniczek')], 'Umów rozmowę', '/#audyt'),
         jsonld=[dict({'@context': 'https://schema.org'}, **faq_ld(FAQ_ALL))]))
     write('o-nas.html', page(
         '/o-nas', 'O nas: Wskazani, pozycjonowanie w AI z Warszawy',
