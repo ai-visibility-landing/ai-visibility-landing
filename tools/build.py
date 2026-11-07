@@ -344,6 +344,15 @@ def build_main():
 <p class="note" style="margin-top:16px">Kwoty końcowe, bez VAT · Bez umowy na lata · <a class="link" href="/cennik">Pełny cennik</a></p>
 </section>
 
+<section id="co-dalej" class="wrap" aria-label="Co dalej" style="padding-block:24px 56px">
+<h2 class="h2">Co dzieje się po kliknięciu?</h2>
+<ol class="steps3" style="margin-top:22px">
+<li><span class="num">1</span><strong>Wybierasz termin</strong><span class="d">Kilka kliknięć w kalendarzu. Rozmowa online jest bezpłatna.</span></li>
+<li><span class="num">2</span><strong>Rozmawiamy o Twojej firmie</strong><span class="d">Mówisz, czym się zajmujesz i skąd masz klientów. My mówimy, od czego zacząć.</span></li>
+<li><span class="num">3</span><strong>Dowiadujesz się, co mówi AI</strong><span class="d">Po diagnostyce wiesz, kogo AI poleca w Twojej branży i czego brakuje Twojej firmie.</span></li>
+</ol>
+</section>
+
 <section class="band" aria-label="Obietnica"><div class="wrap sec promise">
 <h2 class="h2 lg">Robimy tak, że AI zaczyna Cię polecać.</h2>
 <div class="grid g-280" style="margin-top:32px">
@@ -416,7 +425,7 @@ def build_main():
 </section>
 
 <section id="audyt" class="band-navy on-navy" aria-label="Umów rozmowę"><div class="wrap sec" style="text-align:center">
-<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance;max-width:760px;margin-inline:auto">Twoi klienci już pytają AI. Umów rozmowę i zobacz, co słyszą.</h2>
+<h2 class="h2 lg" style="line-height:1.08;text-wrap:balance;max-width:760px;margin-inline:auto">Twoi klienci już pytają AI. Dowiedz się, co o Tobie mówi.</h2>
 <p class="p" style="margin:18px auto 0;max-width:620px">Bezpłatna rozmowa online. Sprawdzimy, czy AI poleca Twoją firmę, i powiemy, od czego zacząć.</p>
 <div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn btn-primary btn-lg" href="#audyt">Umów rozmowę</a></div>
 <p class="p" style="margin-top:20px">Albo zadzwoń: <a class="link" href="tel:+48502890686" style="color:#fff">502 890 686</a></p>
