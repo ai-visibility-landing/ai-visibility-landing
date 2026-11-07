@@ -324,6 +324,26 @@ def build_main():
 <figure class="hero-r" aria-label="Ilustracja odpowiedzi asystenta AI">{hero_chat}</figure>
 </section>
 
+<section id="pakiety" class="wrap" aria-label="Od czego zaczynamy" style="padding-block:56px 24px">
+<h2 class="h2 lg">Od czego zaczynamy?</h2>
+<p class="sub">Wybierz to, co jest Ci teraz najbliższe. Na bezpłatnej rozmowie ustalimy resztę.</p>
+<div class="grid g-240" style="gap:18px;margin-top:28px;align-items:stretch">
+<article class="price-card big"><h3>Diagnostyka</h3><p class="price"><span class="num">19 zł</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
+<ul><li>20 pytań Twoich klientów w 4 narzędziach AI</li><li>Wynik w 3 dni robocze</li></ul>
+<a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="diagnostyka">Umów rozmowę</a></article>
+<article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
+<ul><li>Wszystkie poprawki za Ciebie</li><li>Gwarancja 90 dni</li></ul>
+<a class="btn btn-primary btn-block" href="#audyt" data-ga-miejsce="wdrozenie">Umów rozmowę</a></article>
+<article class="price-card big"><h3>Nowa strona</h3><p class="price"><span class="pre">od</span><span class="num">1990 zł</span></p><p class="quote">„Strona jest stara albo jej nie ma”</p>
+<ul><li>4–6 podstron</li><li>Gotowa pod Google i AI</li></ul>
+<a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="strona">Umów rozmowę</a></article>
+<article class="price-card big"><h3>Stała opieka</h3><p class="price"><span class="pre">od</span><span class="num">199 zł</span><span class="post">/ mies.</span></p><p class="quote">„Chcę, żeby ktoś tego pilnował”</p>
+<ul><li>Co miesiąc test i raport</li><li>Wypowiedzenie miesięczne</li></ul>
+<a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="opieka">Umów rozmowę</a></article>
+</div>
+<p class="note" style="margin-top:16px">Kwoty końcowe, bez VAT · Bez umowy na lata · <a class="link" href="/cennik">Pełny cennik</a></p>
+</section>
+
 <section class="band" aria-label="Obietnica"><div class="wrap sec promise">
 <h2 class="h2 lg">Robimy tak, że AI zaczyna Cię polecać.</h2>
 <div class="grid g-280" style="margin-top:32px">
