@@ -56,8 +56,8 @@ ICO_CARD = ('<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" 
             'stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>')
 
 # ---------------------------------------------------------------- nawigacja
-NAV = [('/cennik', 'Cennik'), ('/widocznosc-w-ai', 'Widoczność w AI'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
-FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/widocznosc-w-ai', 'Widoczność w AI'), ('/wspolpraca', 'Dla firm'),
+NAV = [('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
+FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/wspolpraca', 'Dla firm'),
         ('/faq', 'FAQ'), ('/o-nas', 'O nas')]
 
 CONSENT_HEAD = (
@@ -180,7 +180,7 @@ def cta_band(h2, p, primary, secondary, note):
                '<a class="btn btn-ghost-white btn-lg" href="%s">%s</a>' % (secondary[1], esc(secondary[0])), esc(note)))
 
 
-TILES = [('mini', 'Pełna diagnostyka widoczności w AI', '19 zł'), ('wdrozenie', 'Wdrożenie widoczności', 'od 990 zł'),
+TILES = [('mini', 'Pełna diagnostyka pozycjonowania w AI', '19 zł'), ('wdrozenie', 'Wdrożenie pozycjonowania', 'od 990 zł'),
          ('strona', 'Nowa strona', 'od 1990 zł'), ('opieka', 'Opieka lub marketing', 'od 199 zł / mies.')]
 BRANZE = ['Biuro rachunkowe', 'Kancelaria', 'Doradca finansowy lub kredytowy', 'Biuro nieruchomości', 'Usługi lokalne', 'Inna']
 NEWS_TEXT = 'Chcę dostawać „Wskazówki”: bezpłatne poradniki o AI w firmie, mniej więcej co 2 tygodnie. Mogę się wypisać w każdej chwili.'
@@ -194,7 +194,7 @@ def audit_form(legend, calm, rodo):
     opts = ''.join('<option value="%s">%s</option>' % (attr(b), esc(b)) for b in BRANZE)
     return f'''<form class="form" id="audit-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
 <input type="hidden" name="access_key" value="7003f878-52e8-4f95-ac90-3dbadec662c6">
-<input type="hidden" name="subject" value="Zamówienie: pełna diagnostyka widoczności w AI (19 zł)">
+<input type="hidden" name="subject" value="Zamówienie: pełna diagnostyka pozycjonowania w AI (19 zł)">
 <input type="hidden" name="from_name" value="Wskazani — strona">
 <div class="field" id="f-url"><label for="site-url">Adres strony firmy</label>
 <input id="site-url" name="site" type="text" inputmode="url" placeholder="np. mojafirma.pl" autocomplete="url" spellcheck="false" autocapitalize="off" required>
@@ -211,7 +211,7 @@ def audit_form(legend, calm, rodo):
 <div class="err" id="e-branza" aria-live="polite"></div></div>
 <fieldset class="field"><legend>{esc(legend)}</legend>
 <div class="tiles">{tiles}</div>
-<p class="chosen" aria-live="polite">Wybrany pakiet: <strong id="chosen-name">Pełna diagnostyka widoczności w AI</strong></p></fieldset>
+<p class="chosen" aria-live="polite">Wybrany pakiet: <strong id="chosen-name">Pełna diagnostyka pozycjonowania w AI</strong></p></fieldset>
 <div class="field" id="f-firma"><label class="chk dark" for="firma"><input type="checkbox" id="firma" name="prowadze_firme" value="Tak" required aria-describedby="e-firma"><span>Prowadzę firmę lub odpowiadam za jej stronę</span></label>
 <div class="err" id="e-firma" aria-live="polite"></div></div>
 <label class="chk" for="newsletter"><input type="checkbox" id="newsletter" name="newsletter" value="tak"><span>{esc(NEWS_TEXT)}</span></label>
@@ -245,8 +245,8 @@ PROVIDER = {'@type': 'Organization', '@id': ORG_ID, 'name': 'Wskazani', 'url': S
 
 # ---------------------------------------------------------------- dane: oferta
 OFFERS = [  # (nazwa, cena, "od", co miesiąc, opis)
-    ('Pełna diagnostyka widoczności w AI', 19, False, False, '20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
-    ('Wdrożenie widoczności', 990, True, False, 'Wszystkie poprawki z audytu, dane o firmie dla Google i AI, pytania i odpowiedzi na stronie, test przed i po 30 dniach.'),
+    ('Pełna diagnostyka pozycjonowania w AI', 19, False, False, '20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
+    ('Wdrożenie pozycjonowania', 990, True, False, 'Wszystkie poprawki z audytu, dane o firmie dla Google i AI, pytania i odpowiedzi na stronie, test przed i po 30 dniach.'),
     ('Nowa strona widoczna w AI', 1990, True, False, 'Strona 4–6 podstron, gotowa pod Google i AI od pierwszego dnia, test przed i po 30 dniach.'),
     ('Opieka i monitoring AI', 199, True, True, 'Co miesiąc sprawdzam, czy AI poleca Twoją firmę, wysyłam krótki raport i robię drobne poprawki.'),
     ('Opieka+', 490, True, True, 'Wszystko z Opieki, do 2 nowych treści miesięcznie, większe zmiany na stronie i rozmowa raz w miesiącu.'),
@@ -269,12 +269,12 @@ def offer_ld(name, price, od, monthly, desc):
 
 def service_ld(path, name, desc, offers):
     return {'@context': 'https://schema.org', '@type': 'Service', '@id': SITE + path + '#usluga', 'name': name, 'description': desc,
-            'url': SITE + path, 'serviceType': 'Widoczność firmy w AI (GEO)', 'areaServed': {'@type': 'Country', 'name': 'Polska'},
+            'url': SITE + path, 'serviceType': 'Pozycjonowanie firmy w AI (GEO)', 'areaServed': {'@type': 'Country', 'name': 'Polska'},
             'provider': PROVIDER, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': name, 'itemListElement': [offer_ld(*o) for o in offers]}}
 
 
 # ================================================================= STRONA GŁÓWNA (v2 GEO, 30.10.2026)
-DIAG_NAME = 'Pełna diagnostyka widoczności w AI'
+DIAG_NAME = 'Pełna diagnostyka pozycjonowania w AI'
 MAIN_FAQ = [
     ('Czym to się różni od SEO?', 'SEO walczy o miejsce na liście wyników Google. My walczymy o to, żeby AI wymieniło Cię z nazwy, kiedy listy w ogóle nie ma. Część pracy jest wspólna: porządna strona pomaga w obu.'),
     ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Kto mówi inaczej, kłamie. My ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, czyli więcej odpowiedzi z Twoją firmą, pracujemy dalej bez dopłaty, aż pokaże.'),
@@ -312,7 +312,7 @@ def build_main():
     ais = ' · '.join(AI_NAMES)
     return f'''<section id="top" class="wrap hero">
 <div class="hero-l">
-<p class="eyebrow">Widoczność w AI · {ais}</p>
+<p class="eyebrow">Pozycjonowanie w AI · {ais}</p>
 <h1 class="display xl">Klient pyta ChatGPT o firmę z Twojej branży. AI wymienia konkurencję. Ciebie nie.</h1>
 <p class="lead">I właśnie straciłeś klienta, o którym nawet nie wiedziałeś, że go miałeś.</p>
 <div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Sprawdź, kogo AI poleca zamiast Ciebie</a></div>
@@ -323,7 +323,7 @@ def build_main():
 </section>
 
 <section class="band" aria-label="Obietnica"><div class="wrap sec promise">
-<p class="k">Nie „zwiększamy widoczności w AI”.</p>
+<p class="k">Nie obiecujemy „pierwszego miejsca” w AI.</p>
 <h2 class="h2 lg">Robimy tak, że AI zaczyna Cię polecać.</h2>
 <div class="grid g-280" style="margin-top:32px">
 <div class="pp"><strong>Konkretnie</strong><p>Przy pytaniach, które zadają Twoi klienci, a nie przy hasłach z narzędzia SEO.</p></div>
@@ -414,7 +414,7 @@ def build_main():
 
 <section id="przypisy" class="wrap foot-notes" aria-label="O Wskazani i przypisy">
 <h2>O Wskazani</h2>
-<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pełna diagnostyka widoczności w AI kosztuje 19 zł i obejmuje 20 pytań klientów w czterech narzędziach AI. Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
+<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pełna diagnostyka pozycjonowania w AI kosztuje 19 zł i obejmuje 20 pytań klientów w czterech narzędziach AI. Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
 <h2 class="src">Źródła danych</h2>
 <ol>
 <li>SparkToro na danych Similarweb, wyszukiwania w Google w USA, styczeń–kwiecień 2026 (68,01% wyszukiwań bez kliknięcia).</li>
@@ -438,7 +438,7 @@ def main_ld():
              'description': 'Agencja GEO: sprawiamy, że ChatGPT, Gemini, Perplexity i Claude polecają polskie firmy. Diagnostyka, wdrożenie i comiesięczny pomiar.',
              'founder': {'@id': PERSON_ID}, 'areaServed': {'@type': 'Country', 'name': 'Polska'},
              'address': {'@type': 'PostalAddress', 'addressLocality': 'Warszawa', 'addressCountry': 'PL'},
-             'knowsAbout': ['Generative Engine Optimization', 'widoczność w AI', 'ChatGPT', 'Gemini', 'Perplexity', 'Claude'],
+             'knowsAbout': ['Generative Engine Optimization', 'pozycjonowanie w AI', 'ChatGPT', 'Gemini', 'Perplexity', 'Claude'],
              'contactPoint': {'@type': 'ContactPoint', 'contactType': 'obsługa klienta', 'telephone': '+48502890686',
                               'email': 'szmelfilip.business@gmail.com', 'availableLanguage': 'pl'},
              'sameAs': ['https://www.linkedin.com/in/filip-szmel-b2993a439/']},
@@ -492,15 +492,15 @@ def build_cennik():
         '<li><span class="n">%d</span><strong>%s</strong>%s</li>' % (i + 1, esc(t), ('<span class="tag%s">%s</span>' % (' free' if tag == '0 zł' else '', esc(tag))) if tag else '<span class="tag"></span>')
         for i, (t, tag) in enumerate(STEPS7))
     return f'''<section id="top" class="wrap center" style="padding-block:88px 32px">
-<h1 class="eyebrow">Cennik · ile kosztuje widoczność w AI</h1>
+<h1 class="eyebrow">Cennik · ile kosztuje pozycjonowanie w AI</h1>
 <p class="display md">Jasne ceny. Zaczynasz od diagnostyki za 19 zł.</p>
-<p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> pełna diagnostyka widoczności w AI 19 zł (odliczane od wdrożenia) · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
+<p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> pełna diagnostyka pozycjonowania w AI 19 zł (odliczane od wdrożenia) · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
 <p class="note" style="margin-top:10px">Ceny aktualne: październik 2026</p>
 <p class="note" style="margin-top:14px">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </section>
 
 <section class="quiz" id="quiz" aria-label="Który pakiet dla Ciebie"><div class="quiz-box">
-<h2>Który pakiet widoczności w AI wybrać?</h2>
+<h2>Który pakiet pozycjonowania w AI wybrać?</h2>
 <p>Nie wiesz, co wybrać? Odpowiedz na 3 pytania.</p>
 {quiz}
 <div class="result-box"><div class="rt"><p class="l" id="quiz-label" aria-live="polite">Twój wynik pojawi się tutaj</p><p class="x" id="quiz-text">Odpowiedz na 3 pytania powyżej.</p><p class="s" id="quiz-note" hidden>Dokładną kwotę podam po diagnostyce.</p></div>
@@ -510,10 +510,10 @@ def build_cennik():
 <section class="wrap" aria-label="Pakiety jednorazowe" style="padding-block:88px 24px">
 <h2 class="h2">Pakiety jednorazowe: diagnostyka, wdrożenie, nowa strona</h2>
 <div class="grid g-240" style="gap:18px;margin-top:32px;align-items:stretch">
-<article class="price-card big"><h3>Pełna diagnostyka widoczności w AI</h3><p class="price"><span class="num">19 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
+<article class="price-card big"><h3>Pełna diagnostyka pozycjonowania w AI</h3><p class="price"><span class="num">19 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
 <ul><li>20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude</li><li>Wynik w 3 dni robocze + rozmowa 20 min</li><li>Kwota odliczana od Wdrożenia</li></ul>
 <a class="btn btn-outline btn-block" href="/cennik?pakiet=mini#audyt" data-pakiet="mini">Zamawiam diagnostykę</a></article>
-<article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie widoczności</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
+<article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie pozycjonowania</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
 <ul><li>Wszystkie poprawki z diagnostyki</li><li>Dane o firmie dla Google i AI</li><li>Pytania i odpowiedzi na stronie</li><li>Gwarancja 90 dni</li></ul>
 <a class="btn btn-primary btn-block" href="/cennik?pakiet=wdrozenie#audyt" data-pakiet="wdrozenie">Wybierz Wdrożenie</a></article>
 <article class="price-card big"><h3>Nowa strona</h3><p class="price"><span class="pre">od</span><span class="num">1990 zł</span></p><p class="quote">„Strona jest stara albo jej nie ma”</p>
@@ -541,7 +541,7 @@ def build_cennik():
 </section>
 
 <section id="stale" class="wrap" aria-label="Współpraca stała" style="padding-block:72px 24px">
-<h2 class="h2">Ile kosztuje stała opieka nad widocznością w AI?</h2>
+<h2 class="h2">Ile kosztuje stała opieka nad pozycjonowaniem w AI?</h2>
 <p class="muted" style="margin-top:12px;font-size:18px">Płatność z góry za miesiąc. Wypowiedzenie miesięczne, bez kar.</p>
 <div class="grid g-280" style="gap:18px;margin-top:30px">
 <article class="price-card big mo"><h3>Opieka i monitoring AI</h3><p class="price"><span class="pre">od</span><span class="num">199 zł</span><span class="post">/ miesiąc</span></p>
@@ -580,7 +580,7 @@ def build_cennik():
 </section>
 
 <section class="wrap-900" aria-label="Pytania" style="padding-block:72px 24px">
-<h2 class="h2">Pytania o ceny widoczności w AI</h2>
+<h2 class="h2">Pytania o ceny pozycjonowania w AI</h2>
 <div style="margin-top:24px">{faq_details(CENNIK_FAQ, 'faq-cards')}</div>
 </section>
 
@@ -633,11 +633,11 @@ def build_geo():
     rows = ''.join('<tr><th scope="row">%s</th><td class="a">%s</td><td class="w">%s</td></tr>' % tuple(esc(x) for x in r) for r in GEO_ROWS)
     stats = ''.join('<div><p class="n">%s</p><p class="t">%s</p></div>' % (esc(n), esc(t)) for n, t in GEO_STATS)
     return f'''<section class="wrap" style="padding-block:88px 64px">
-<h1 class="eyebrow">Widoczność w AI (GEO) dla firm</h1>
+<h1 class="eyebrow">Pozycjonowanie w AI (GEO) dla firm</h1>
 <p class="display" style="max-width:900px">Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie.</p>
 <p style="margin:20px 0 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px"><strong>Czym jest GEO?</strong> To dbanie o to, żeby asystenci AI, tacy jak ChatGPT, Perplexity i tryb AI Google, rozumieli Twoją firmę i mogli ją wymienić w odpowiedzi. W praktyce: poprawki na stronie i spójne dane firmy w internecie.</p>
 <p class="lead" style="margin-top:22px;max-width:660px">Konkretny zakres, jawne ceny i bez umowy na lata. Dla firm, które wiedzą, że klienci pytają AI, i szukają kogoś, kto to uporządkuje.</p>
-<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
+<div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="pozycjonowanie_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
 <p class="note" style="margin-top:20px">Pierwszy krok za 199 zł · kwoty bez VAT · bez umowy na 6 miesięcy</p>
 </section>
 
@@ -665,7 +665,7 @@ def build_geo():
 </div></div></section>
 
 <section class="wrap sec" aria-label="Dane rynkowe">
-<h2 class="h2">Dlaczego widoczność w AI ma znaczenie?</h2>
+<h2 class="h2">Dlaczego pozycjonowanie w AI ma znaczenie?</h2>
 <div class="stats s4 grid g-240" style="gap:28px;margin-top:32px">{stats}</div>
 </section>
 
@@ -688,7 +688,7 @@ def build_geo():
 PLANS = [
     ('Opieka i monitoring AI', '199', 'Chcesz mieć spokój i wiedzieć, że AI dalej Cię rozumie.', '', False, 'Wybierz Opiekę', 'opieka',
      ['Co miesiąc test „czy AI Cię poleca” na tych samych pytaniach', 'Kontrola, czy nic nie zablokowało botów AI', 'Drobne poprawki, które wprowadzam za Ciebie', 'Krótki raport mailem']),
-    ('Opieka+', '490', 'Chcesz, żeby widoczność rosła z miesiąca na miesiąc.', 'Dla rosnących firm', True, 'Wybierz Opiekę+', 'opieka-plus',
+    ('Opieka+', '490', 'Chcesz, żeby AI polecało Cię coraz częściej, miesiąc po miesiącu.', 'Dla rosnących firm', True, 'Wybierz Opiekę+', 'opieka-plus',
      ['Wszystko z Opieki', 'Do 2 nowych treści miesięcznie, np. odpowiedzi na pytania klientów', 'Większe zmiany na stronie', 'Rozmowa raz w miesiącu']),
     ('Marketing na zlecenie', '1490', 'Potrzebujesz kogoś od marketingu, bez zatrudniania na etat.', '', False, 'Porozmawiajmy o zakresie', 'marketing',
      ['Social media', 'Kampanie Google Ads', 'Treści na stronę', 'Zakres ustalamy w rozmowie, raport co miesiąc']),
@@ -710,7 +710,7 @@ def build_wsp():
           ('Od kiedy liczy się miesiąc?', 'Od dnia płatności. Przed płatnością dostajesz mailem potwierdzenie: zakres, kwota i terminy.')]
     qas = ''.join('<details class="qa" open><summary><span>%s</span>%s</summary><p>%s</p></details>' % (esc(q), CHEV, esc(a)) for q, a in qa)
     return f'''<section class="wrap" style="padding-block:88px 48px">
-<h1 class="eyebrow">Stała opieka i monitoring widoczności w AI</h1>
+<h1 class="eyebrow">Stała opieka i monitoring pozycjonowania w AI</h1>
 <p class="display" style="max-width:860px">Bez umowy na lata. Od 199 zł miesięcznie.</p>
 <p class="lead" style="margin-top:22px;max-width:640px">Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Płacisz z góry za miesiąc i możesz zrezygnować w każdym miesiącu.</p>
 <div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="#pakiety">Wybierz pakiet</a><a class="btn btn-outline btn-lg" href="/#audyt">Zacznij od diagnostyki</a></div>
@@ -807,7 +807,7 @@ def build_faq():
     groups = ''.join('<section id="%s" aria-label="%s"><h2>%s</h2>%s</section>' % (gid, attr(name), esc(name), faq_details(items)) for gid, name, items in FAQ_GROUPS)
     terms = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % (esc(t), esc(d)) for t, d in TERMS)
     return f'''<section class="wrap-900" style="padding-block:88px 32px">
-<h1 class="eyebrow">Pytania o widoczność w AI i audyt</h1>
+<h1 class="eyebrow">Pytania o pozycjonowanie w AI i audyt</h1>
 <p class="display">Masz pytanie? Tu jest krótka odpowiedź.</p>
 <p class="lead" style="margin-top:18px">Jeśli czegoś brakuje, zadzwoń: <a class="link" href="tel:+48502890686">502 890 686</a>.</p>
 </section>
@@ -844,7 +844,7 @@ def build_onas():
 <li>{tick()}<span><strong>Bez umowy na lata.</strong> Opieka z miesięcznym wypowiedzeniem, bez kar.</span></li>
 <li>{tick()}<span><strong>Pomiar i gwarancja 90 dni.</strong> Test przed i po wdrożeniu. Jeśli po 90 dniach nie widać postępu, pracujemy dalej bez dopłaty, aż będzie widać.</span></li>
 </ul>
-<p class="p" style="margin-top:22px">Szczegóły pakietów: <a class="link" href="/cennik">cennik</a> i <a class="link" href="/widocznosc-w-ai">widoczność w AI</a>.</p>
+<p class="p" style="margin-top:22px">Szczegóły pakietów: <a class="link" href="/cennik">cennik</a> i <a class="link" href="/pozycjonowanie-w-ai">pozycjonowanie w AI</a>.</p>
 </div></section>
 
 <section class="wrap-900" style="padding-block:64px" aria-label="Kontakt">
@@ -908,25 +908,25 @@ def main():
         'Kiedy klient pyta ChatGPT o firmę z Twojej branży, AI wymienia konkurencję. Robimy tak, że zaczyna polecać Ciebie. Diagnostyka 19 zł, wynik w 3 dni robocze.',
         build_main(), active='/', audyt_href='#audyt', sticky=True, jsonld=main_ld()))
     write('cennik.html', page(
-        '/cennik', 'Cennik: ile kosztuje widoczność w AI | Wskazani',
-        'Jasne ceny: diagnostyka widoczności w AI 19 zł, wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT.',
+        '/cennik', 'Cennik: ile kosztuje pozycjonowanie w AI | Wskazani',
+        'Jasne ceny: diagnostyka pozycjonowania w AI 19 zł, wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT.',
         build_cennik(), active='/cennik', audyt_href='#audyt', sticky=True,
-        jsonld=[service_ld('/cennik', 'Widoczność w AI (GEO): pakiety i ceny',
-                           'Diagnostyka widoczności w AI, Wdrożenie, nowa strona oraz stała opieka i monitoring. Kwoty końcowe, bez VAT.', OFFERS)]))
-    write('widocznosc-w-ai.html', page(
-        '/widocznosc-w-ai', 'Widoczność w AI (GEO) dla firm | Wskazani',
+        jsonld=[service_ld('/cennik', 'Pozycjonowanie w AI (GEO): pakiety i ceny',
+                           'Diagnostyka pozycjonowania w AI, Wdrożenie, nowa strona oraz stała opieka i monitoring. Kwoty końcowe, bez VAT.', OFFERS)]))
+    write('pozycjonowanie-w-ai.html', page(
+        '/pozycjonowanie-w-ai', 'Pozycjonowanie w AI (GEO) dla firm | Wskazani',
         'Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 19 zł.',
-        build_geo(), active='/widocznosc-w-ai',
-        bar=('Widoczność w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik')))
+        build_geo(), active='/pozycjonowanie-w-ai',
+        bar=('Pozycjonowanie w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik')))
     write('wspolpraca.html', page(
-        '/wspolpraca', 'Stała opieka i monitoring widoczności w AI | Wskazani',
+        '/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI | Wskazani',
         'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło.',
         build_wsp(), active='/wspolpraca',
         bar=('Współpraca stała', [('#pakiety', 'Pakiety'), ('#raport', 'Raport'), ('#rezygnacja', 'Rezygnacja')], 'Zamów audyt', '/#audyt'),
-        jsonld=[service_ld('/wspolpraca', 'Stała opieka i monitoring widoczności w AI',
+        jsonld=[service_ld('/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI',
                            'Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Bez umowy na lata.', OFFERS[3:])]))
     write('faq.html', page(
-        '/faq', 'Pytania o widoczność w AI i audyt | Wskazani',
+        '/faq', 'Pytania o pozycjonowanie w AI i audyt | Wskazani',
         'Krótkie odpowiedzi o diagnostyce, cenach, rozliczeniu, współpracy i technice, plus słowniczek: GEO, AI Overviews, llms.txt.',
         build_faq(), active='/faq',
         bar=('Pytania i słowniczek', [('#g0', 'Audyt'), ('#g1', 'Rozliczenie'), ('#g2', 'Współpraca'), ('#g3', 'Technika'), ('#slowniczek', 'Słowniczek')], 'Zamów audyt', '/#audyt'),
@@ -942,10 +942,10 @@ def main():
     write('dziekuje.html', page(
         '/dziekuje', 'Dziękuję za zgłoszenie | Wskazani', 'Zgłoszenie zostało wysłane.', build_dziekuje(), robots='noindex', mobile_cta=False))
     write('404.html', page(
-        '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów diagnostykę widoczności firmy w AI.',
+        '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów diagnostykę pozycjonowania firmy w AI.',
         build_404(), robots='noindex', mobile_cta=False))
 
-    urls = ['/', '/cennik', '/widocznosc-w-ai', '/wspolpraca', '/faq', '/o-nas']
+    urls = ['/', '/cennik', '/pozycjonowanie-w-ai', '/wspolpraca', '/faq', '/o-nas']
     sm = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD))

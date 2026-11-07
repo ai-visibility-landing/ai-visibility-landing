@@ -75,16 +75,16 @@
 
   /* ---- Pakiety: wybór kafelka, parametr ?pakiet=… ---- */
   var PK = {
-    'mini':        { tile: 'mini',      name: 'Pełna diagnostyka widoczności w AI' },
-    'start':       { tile: 'mini',      name: 'Pełna diagnostyka widoczności w AI' },
-    'wdrozenie':   { tile: 'wdrozenie', name: 'Wdrożenie widoczności' },
+    'mini':        { tile: 'mini',      name: 'Pełna diagnostyka pozycjonowania w AI' },
+    'start':       { tile: 'mini',      name: 'Pełna diagnostyka pozycjonowania w AI' },
+    'wdrozenie':   { tile: 'wdrozenie', name: 'Wdrożenie pozycjonowania' },
     'strona':      { tile: 'strona',    name: 'Nowa strona' },
     'opieka':      { tile: 'opieka',    name: 'Opieka i monitoring AI' },
     'opieka-plus': { tile: 'opieka',    name: 'Opieka+' },
     'marketing':   { tile: 'opieka',    name: 'Marketing na zlecenie' }
   };
   var form = $('audit-form');
-  var current = { id: 'mini', name: 'Pełna diagnostyka widoczności w AI' };
+  var current = { id: 'mini', name: 'Pełna diagnostyka pozycjonowania w AI' };
   function setPackage(id){
     var p = PK[id]; if(!p || !form) return false;
     var tiles = form.querySelectorAll('.tile');
@@ -134,9 +134,9 @@
     }
     function quizText(){
       var m = '';
-      if(ans.q2 === 'sprawdzic') m = ans.q1 === 'brak' ? 'Nowa strona (od 1990 zł). Zakres i dokładną cenę ustalimy w bezpłatnej rozmowie.' : 'Pełna diagnostyka widoczności w AI (19 zł)';
+      if(ans.q2 === 'sprawdzic') m = ans.q1 === 'brak' ? 'Nowa strona (od 1990 zł). Zakres i dokładną cenę ustalimy w bezpłatnej rozmowie.' : 'Pełna diagnostyka pozycjonowania w AI (19 zł)';
       else if(ans.q1 === 'brak') m = 'Nowa strona (od 1990 zł)';
-      else if(ans.q2 === 'naprawic') m = 'Pełna diagnostyka widoczności w AI (19 zł)';
+      else if(ans.q2 === 'naprawic') m = 'Pełna diagnostyka pozycjonowania w AI (19 zł)';
       else if(ans.q2 === 'komplet') m = ans.q1 === 'stara' ? 'Nowa strona (od 1990 zł)' : 'Wdrożenie (od 990 zł)';
       var x = '';
       if(ans.q3 === 'pilnowac') x = ' + Opieka (od 199 zł/mies.)';
@@ -254,7 +254,7 @@
       var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + mail + '\n' + (tel ? 'Telefon: ' + tel + '\n' : '') +
         'Branża: ' + branza + '\nProwadzi firmę lub odpowiada za jej stronę: Tak\nPakiet: ' + current.name + '\n' +
         (news ? 'Newsletter „Wskazówki”: zgoda (tak)\n' : '') + trackTxt + '\n\n' +
-        (isMini ? 'Zamawiam pełną diagnostykę widoczności w AI (19 zł) dla powyższej strony. Proszę o link do płatności.' : 'Proszę o kontakt w sprawie pakietu: ' + current.name + '.');
+        (isMini ? 'Zamawiam pełną diagnostykę pozycjonowania w AI (19 zł) dla powyższej strony. Proszę o link do płatności.' : 'Proszę o kontakt w sprawie pakietu: ' + current.name + '.');
       $('mail-link').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       var cb = $('copy-box'); cb.textContent = 'Do: ' + EMAIL + '\nTemat: ' + subject + '\n\n' + body;
       $('copy-btn').onclick = function(){
