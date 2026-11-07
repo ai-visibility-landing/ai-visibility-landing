@@ -248,7 +248,7 @@ OFFERS = [  # (nazwa, cena, "od", co miesiąc, opis)
     ('Pełna diagnostyka pozycjonowania w AI', 19, False, False, '20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
     ('Wdrożenie pozycjonowania', 990, True, False, 'Wszystkie poprawki z audytu, dane o firmie dla Google i AI, pytania i odpowiedzi na stronie, test przed i po 30 dniach.'),
     ('Nowa strona widoczna w AI', 1990, True, False, 'Strona 4–6 podstron, gotowa pod Google i AI od pierwszego dnia, test przed i po 30 dniach.'),
-    ('Opieka i monitoring AI', 199, True, True, 'Co miesiąc sprawdzam, czy AI poleca Twoją firmę, wysyłam krótki raport i robię drobne poprawki.'),
+    ('Opieka i monitoring AI', 199, True, True, 'Co miesiąc sprawdzamy, czy AI poleca Twoją firmę, wysyłamy krótki raport i robimy drobne poprawki.'),
     ('Opieka+', 490, True, True, 'Wszystko z Opieki, do 2 nowych treści miesięcznie, większe zmiany na stronie i rozmowa raz w miesiącu.'),
     ('Marketing na zlecenie', 1490, True, True, 'Social media, Google Ads i treści. Zakres ustalamy w rozmowie. Budżet na reklamy płacisz osobno, bezpośrednio Google lub Meta.'),
 ]
@@ -400,7 +400,7 @@ def build_main():
 <p class="p" style="margin-top:20px">Albo zadzwoń: <a class="link" href="tel:+48502890686" style="color:#fff">502 890 686</a></p>
 </div>
 <div class="formbox">
-{audit_form('Czego potrzebujesz?', 'Odpowiadam w ciągu 24 h roboczych z linkiem do płatności.', RODO_MAIN)}
+{audit_form('Czego potrzebujesz?', 'Odpowiadamy w ciągu 24 h roboczych z linkiem do płatności.', RODO_MAIN)}
 </div></div></div></section>
 
 <section id="przypisy" class="wrap foot-notes" aria-label="O Wskazani i przypisy">
@@ -458,10 +458,10 @@ CENNIK_FAQ = [
     ('Co dostaję za 19 zł?', '20 pytań, które zadają Twoi klienci, sprawdzonych w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co trzeba zmienić. Wynik w 3 dni robocze i rozmowa 20 min. 19 zł odliczamy od Wdrożenia.'),
     ('Czy po diagnostyce muszę coś kupić?', 'Nie. Wynik zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
     ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i mierzymy wynik co miesiąc. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
-    ('Czy do ceny dochodzi VAT?', 'Nie. Kwoty na stronie są końcowe, nie doliczam VAT.'),
+    ('Czy do ceny dochodzi VAT?', 'Nie. Kwoty na stronie są końcowe, nie doliczamy VAT.'),
 ]
 STEPS7 = [('Zamawiasz diagnostykę', '19 zł'), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
-          ('Potwierdzenie mailem i płatność', ''), ('Wdrażam poprawki', ''), ('Test po 30 dniach', '')]
+          ('Potwierdzenie mailem i płatność', ''), ('Wdrażamy poprawki', ''), ('Test po 30 dniach', '')]
 QUIZ = [
     ('q1', '1. Czy Twoja firma ma stronę internetową?', [('aktualna', 'Tak, aktualną'), ('stara', 'Tak, ale starą'), ('brak', 'Nie mam')]),
     ('q2', '2. Czego potrzebujesz teraz?', [('sprawdzic', 'Tylko sprawdzić'), ('naprawic', 'Naprawić najważniejsze'), ('komplet', 'Mieć to zrobione kompleksowo')]),
@@ -536,7 +536,7 @@ def build_cennik():
 <p class="muted" style="margin-top:12px;font-size:18px">Płatność z góry za miesiąc. Wypowiedzenie miesięczne, bez kar.</p>
 <div class="grid g-280" style="gap:18px;margin-top:30px">
 <article class="price-card big mo"><h3>Opieka i monitoring AI</h3><p class="price"><span class="pre">od</span><span class="num">199 zł</span><span class="post">/ miesiąc</span></p>
-<p class="desc">Co miesiąc sprawdzam, czy AI poleca Twoją firmę, wysyłam krótki raport i robię drobne poprawki.</p>
+<p class="desc">Co miesiąc sprawdzamy, czy AI poleca Twoją firmę, wysyłamy krótki raport i robimy drobne poprawki.</p>
 <a class="btn btn-outline btn-block" href="/cennik?pakiet=opieka#audyt" data-pakiet="opieka">Wybierz Opiekę</a></article>
 <article class="price-card big mo pick"><span class="badge">Dla rosnących firm</span><h3>Opieka+</h3><p class="price"><span class="pre">od</span><span class="num">490 zł</span><span class="post">/ miesiąc</span></p>
 <p class="desc">Wszystko z Opieki, do 2 nowych treści miesięcznie, większe zmiany na stronie i rozmowa raz w miesiącu.</p>
@@ -547,14 +547,14 @@ def build_cennik():
 </div></section>
 
 <section class="wrap" aria-label="Dlaczego Wskazani" style="padding-block:72px 24px"><div class="why on-navy">
-<h2>Czym Wskazani różni się od agencji GEO?</h2>
+<h2>Czym Wskazani różni się od innych agencji?</h2>
 <div class="grid g-240">
 <div><p>Bez VAT</p><p>Kwota na stronie jest końcowa. Agencje zwykle podają ceny netto.</p></div>
 <div><p>Bez umowy na lata</p><p>Wypowiedzenie miesięczne. U części konkurencji umowa na 3–6 miesięcy.</p></div>
 <div><p>Diagnostyka za 19 zł</p><p>Zamiast audytu za 790–2000 zł u części agencji. Kwota jest odliczana od Wdrożenia.</p></div>
 <div><p>Jedna osoba</p><p>Rozmawiasz z tym, kto robi poprawki. Bez pośredników i infolinii.</p></div>
 </div>
-<p class="foot">Porównanie na podstawie cenników agencji GEO z października 2026.</p>
+<p class="foot">Porównanie na podstawie cenników tych agencji z października 2026.</p>
 </div></section>
 
 <section id="rozliczenie" class="wrap" aria-label="Jak płacisz" style="padding-block:72px 24px">
@@ -578,7 +578,7 @@ def build_cennik():
 <section id="audyt" class="band-navy on-navy" aria-label="Zamówienie" style="margin-top:72px"><span id="formularz"></span><div class="wrap sec"><div class="audit">
 <div class="audit-l">
 <h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Pakiet wybrany? Wyślij zgłoszenie.</h2>
-<p class="p">Nie wiesz jeszcze? Zacznij od diagnostyki. Po wyniku doradzę, od czego zacząć.</p>
+<p class="p">Nie wiesz jeszcze? Zacznij od diagnostyki. Po wyniku doradzimy, od czego zacząć.</p>
 <p class="n2">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </div>
 <div class="formbox">
@@ -588,8 +588,8 @@ def build_cennik():
 <section id="przypisy" class="wrap foot-notes" aria-label="Źródła danych" style="padding-top:40px">
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
 <ul>
-<li>Publiczne cenniki oraz długość umów czterech firm świadczących usługi GEO w Polsce, sprawdzone 17.10.2026. Te firmy podają kwoty netto, do których dochodzi 23% VAT. Nazw firm nie podajemy.</li>
-<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia lub strony podaję po diagnostyce, zanim cokolwiek zlecisz. Ceny aktualne: październik 2026.</li>
+<li>Publiczne cenniki oraz długość umów czterech firm oferujących pozycjonowanie w AI w Polsce, sprawdzone 17.10.2026. Te firmy podają kwoty netto, do których dochodzi 23% VAT. Nazw firm nie podajemy.</li>
+<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia lub strony podajemy po diagnostyce, zanim cokolwiek zlecisz. Ceny aktualne: październik 2026.</li>
 </ul>
 </section>
 '''
@@ -597,9 +597,9 @@ def build_cennik():
 
 # ================================================================= WIDOCZNOŚĆ W AI
 AREAS = [
-    ('Dostęp botów AI do strony', 'Sprawdzam, czy strona nie blokuje robotów ChatGPT, Perplexity i Google, i otwieram im drogę do ważnych podstron.', 'robots.txt'),
+    ('Dostęp robotów AI do strony', 'Sprawdzamy, czy strona nie blokuje robotów ChatGPT, Perplexity i Google, i otwieramy im drogę do ważnych podstron.', 'robots.txt'),
     ('Spójne dane firmy', 'Nazwa, adres, telefon i godziny takie same na stronie, w wizytówce Google i w katalogach firm.', 'NAP, wizytówka Google'),
-    ('Opis firmy, który Google czyta bez zgadywania', 'Dodaję do strony uporządkowany opis: kim jesteś, co oferujesz, gdzie działasz.', 'dane strukturalne (schema.org)'),
+    ('Opis firmy, który Google czyta bez zgadywania', 'Dodajemy do strony uporządkowany opis: kim jesteś, co oferujesz, gdzie działasz.', 'dane strukturalne (schema.org)'),
     ('Odpowiedzi na pytania klientów', 'Pytania, które klienci zadają AI, z odpowiedzią już w pierwszym zdaniu.', 'FAQ'),
     ('Tytuł i opis w wynikach Google', 'Tak, żeby nie były ucinane i od razu mówiły, czym się zajmujesz i gdzie.', 'meta title i description'),
     ('Ściągawka o firmie dla asystentów AI', 'Krótki plik z najważniejszymi informacjami. Opcjonalny: Google go nie wymaga.', 'llms.txt'),
@@ -620,38 +620,38 @@ GEO_STATS = [
 
 
 def build_geo():
-    areas = ''.join('<div><strong>%s</strong><p>%s</p><span class="term">Termin fachowy: %s</span></div>' % (esc(t), esc(d), esc(term)) for t, d, term in AREAS)
+    areas = ''.join('<div><strong>%s</strong><p>%s</p></div>' % (esc(t), esc(d)) for t, d, term in AREAS)
     rows = ''.join('<tr><th scope="row">%s</th><td class="a">%s</td><td class="w">%s</td></tr>' % tuple(esc(x) for x in r) for r in GEO_ROWS)
     stats = ''.join('<div><p class="n">%s</p><p class="t">%s</p></div>' % (esc(n), esc(t)) for n, t in GEO_STATS)
     return f'''<section class="wrap" style="padding-block:88px 64px">
-<h1 class="eyebrow">Pozycjonowanie w AI (GEO) dla firm</h1>
-<p class="display" style="max-width:900px">Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie.</p>
-<p style="margin:20px 0 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px"><strong>Czym jest GEO?</strong> To dbanie o to, żeby asystenci AI, tacy jak ChatGPT, Perplexity i tryb AI Google, rozumieli Twoją firmę i mogli ją wymienić w odpowiedzi. W praktyce: poprawki na stronie i spójne dane firmy w internecie.</p>
+<h1 class="eyebrow">Pozycjonowanie w AI dla firm</h1>
+<p class="display" style="max-width:900px">Poprawiamy to, co ChatGPT, Perplexity i Google czytają o Twojej firmie.</p>
+<p style="margin:20px 0 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px"><strong>Co to znaczy?</strong> Dbamy o to, żeby ChatGPT, Perplexity i Google rozumiały Twoją firmę i mogły ją wymienić w odpowiedzi. W praktyce: poprawki na stronie i spójne dane firmy w internecie.</p>
 <p class="lead" style="margin-top:22px;max-width:660px">Konkretny zakres, jawne ceny i bez umowy na lata. Dla firm, które wiedzą, że klienci pytają AI, i szukają kogoś, kto to uporządkuje.</p>
 <div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="pozycjonowanie_hero">Zobacz cennik</a><a class="btn btn-outline btn-lg" href="/#audyt">Zamów diagnostykę</a></div>
-<p class="note" style="margin-top:20px">Pierwszy krok za 199 zł · kwoty bez VAT · bez umowy na 6 miesięcy</p>
+<p class="note" style="margin-top:20px">Pierwszy krok za 19 zł · kwoty bez VAT · bez umowy na 6 miesięcy</p>
 </section>
 
 <section id="zakres" class="band" aria-label="Zakres usługi"><div class="wrap sec">
-<h2 class="h2">Co obejmuje usługa GEO?</h2>
+<h2 class="h2">Co dokładnie robimy?</h2>
 <p class="muted" style="margin-top:12px;font-size:18px;max-width:640px">Sześć obszarów. W diagnostyce dowiesz się, które z nich u Ciebie kuleją.</p>
 <div class="areas">{areas}</div>
-<p style="margin-top:24px;font-size:17px;font-weight:700">Wszystkie poprawki wprowadzam za Ciebie.</p>
+<p style="margin-top:24px;font-size:17px;font-weight:700">Wszystkie poprawki wprowadzamy za Ciebie.</p>
 </div></section>
 
 <section id="porownanie" class="wrap sec" aria-label="Porównanie z agencją">
-<h2 class="h2">Czym Wskazani różni się od agencji GEO?</h2>
-<p class="muted" style="margin-top:12px;font-size:18px;max-width:660px">Na podstawie publicznych cenników czterech agencji GEO w Polsce, sprawdzonych 17.10.2026.</p>
-<div class="tbl-wrap"><table class="tbl"><thead><tr><th scope="col" style="width:28%"><span class="sr">Kryterium</span></th><th scope="col" class="a">Agencje GEO (zwykle)</th><th scope="col" class="w">Wskazani</th></tr></thead><tbody>{rows}</tbody></table></div>
-<p class="small" style="margin-top:14px">Porównanie na podstawie cenników agencji GEO z października 2026.</p>
+<h2 class="h2">Czym Wskazani różni się od innych agencji?</h2>
+<p class="muted" style="margin-top:12px;font-size:18px;max-width:660px">Na podstawie publicznych cenników czterech agencji zajmujących się pozycjonowaniem w AI w Polsce, sprawdzonych 17.10.2026.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th scope="col" style="width:28%"><span class="sr">Kryterium</span></th><th scope="col" class="a">Inne agencje (zwykle)</th><th scope="col" class="w">Wskazani</th></tr></thead><tbody>{rows}</tbody></table></div>
+<p class="small" style="margin-top:14px">Porównanie na podstawie cenników tych agencji z października 2026.</p>
 </section>
 
 <section id="ustalenia" class="band" aria-label="Przykładowe ustalenia"><div class="wrap sec">
 <h2 class="h2">Co najczęściej blokuje firmy w AI?</h2>
-<p class="muted" style="margin-top:12px;font-size:18px;max-width:640px">Prawdziwe ustalenia ze stron firm, które sprawdziłem we wrześniu i październiku 2026. Bez nazw.</p>
+<p class="muted" style="margin-top:12px;font-size:18px;max-width:640px">Prawdziwe ustalenia ze stron firm, które sprawdziliśmy we wrześniu i październiku 2026. Bez nazw.</p>
 <div class="grid g-300" style="margin-top:32px">
-<div class="finding"><p class="k">Klinika</p><p class="v">Plik dla robotów blokował stronę „Pierwsza wizyta”, której pacjent szuka najczęściej.</p><p class="o">Obszar: dostęp botów AI</p></div>
-<div class="finding"><p class="k">Firma budowlana</p><p class="v">Najnowsze treści na stronie były z 2017 roku, a strona nie miała formularza kontaktowego, mapy ani opisu firmy, który Google czyta bez zgadywania.</p><p class="o">Obszar: dane strukturalne i kontakt</p></div>
+<div class="finding"><p class="k">Klinika</p><p class="v">Plik dla robotów blokował stronę „Pierwsza wizyta”, której pacjent szuka najczęściej.</p><p class="o">Obszar: dostęp robotów AI</p></div>
+<div class="finding"><p class="k">Firma budowlana</p><p class="v">Najnowsze treści na stronie były z 2017 roku, a strona nie miała formularza kontaktowego, mapy ani opisu firmy, który Google czyta bez zgadywania.</p><p class="o">Obszar: opis firmy i kontakt</p></div>
 <div class="finding"><p class="k">Hotel</p><p class="v">Najmocniejszy argument, darmowy transfer 24 h, nie trafił do opisu, który pokazuje Google.</p><p class="o">Obszar: tytuł i opis w Google</p></div>
 </div></div></section>
 
@@ -665,7 +665,7 @@ def build_geo():
 <section id="przypisy" class="wrap foot-notes" aria-label="Źródła danych" style="padding-top:40px">
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
 <ul>
-<li>Publiczne cenniki czterech firm świadczących usługi GEO w Polsce, sprawdzone 17.10.2026: audyt 790–2000 zł, abonament od 599 zł/mies., umowy minimum 3–6 miesięcy; kwoty netto. Nazw firm nie podajemy.</li>
+<li>Publiczne cenniki czterech firm oferujących pozycjonowanie w AI w Polsce, sprawdzone 17.10.2026: audyt 790–2000 zł, abonament od 599 zł/mies., umowy minimum 3–6 miesięcy; kwoty netto. Nazw firm nie podajemy.</li>
 <li>Gemius i PBI (Mediapanel), raport „E-commerce w Polsce 2026”, dane z czerwca 2026, publikacja wrzesień 2026.</li>
 <li>On Board Think Kong / SW Research, badanie internetowe, N=830 dorosłych Polaków, kwiecień 2026. 61% badanych w ciągu ostatnich 6 miesięcy użyło AI przy wyborze produktów lub usług.</li>
 <li>Seer Interactive, 53 marki, 5,47 mln zapytań, publikacja 24.04.2026, dane głównie z USA. Marki cytowane w odpowiedzi AI Google miały o 120% więcej kliknięć niż marki niecytowane.</li>
@@ -678,7 +678,7 @@ def build_geo():
 # ================================================================= WSPÓŁPRACA
 PLANS = [
     ('Opieka i monitoring AI', '199', 'Chcesz mieć spokój i wiedzieć, że AI dalej Cię rozumie.', '', False, 'Wybierz Opiekę', 'opieka',
-     ['Co miesiąc test „czy AI Cię poleca” na tych samych pytaniach', 'Kontrola, czy nic nie zablokowało botów AI', 'Drobne poprawki, które wprowadzam za Ciebie', 'Krótki raport mailem']),
+     ['Co miesiąc test „czy AI Cię poleca” na tych samych pytaniach', 'Kontrola, czy nic nie zablokowało robotów AI', 'Drobne poprawki, które wprowadzamy za Ciebie', 'Krótki raport mailem']),
     ('Opieka+', '490', 'Chcesz, żeby AI polecało Cię coraz częściej, miesiąc po miesiącu.', 'Dla rosnących firm', True, 'Wybierz Opiekę+', 'opieka-plus',
      ['Wszystko z Opieki', 'Do 2 nowych treści miesięcznie, np. odpowiedzi na pytania klientów', 'Większe zmiany na stronie', 'Rozmowa raz w miesiącu']),
     ('Marketing na zlecenie', '1490', 'Potrzebujesz kogoś od marketingu, bez zatrudniania na etat.', '', False, 'Porozmawiajmy o zakresie', 'marketing',
@@ -703,7 +703,7 @@ def build_wsp():
     return f'''<section class="wrap" style="padding-block:88px 48px">
 <h1 class="eyebrow">Stała opieka i monitoring pozycjonowania w AI</h1>
 <p class="display" style="max-width:860px">Bez umowy na lata. Od 199 zł miesięcznie.</p>
-<p class="lead" style="margin-top:22px;max-width:640px">Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Płacisz z góry za miesiąc i możesz zrezygnować w każdym miesiącu.</p>
+<p class="lead" style="margin-top:22px;max-width:640px">Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło. Płacisz z góry za miesiąc i możesz zrezygnować w każdym miesiącu.</p>
 <div class="btn-row" style="margin-top:32px"><a class="btn btn-primary btn-lg" href="#pakiety">Wybierz pakiet</a><a class="btn btn-outline btn-lg" href="/#audyt">Zacznij od diagnostyki</a></div>
 <p class="note" style="margin-top:20px">Bez kar za rezygnację · Przelew, BLIK lub karta · Raport co miesiąc</p>
 </section>
@@ -720,7 +720,7 @@ def build_wsp():
 <section id="raport" class="band" aria-label="Przykładowy raport"><div class="wrap sec" style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
 <div style="flex:1 1 340px;min-width:0">
 <h2 class="h2" style="text-wrap:balance">Co zawiera raport miesięczny?</h2>
-<p class="muted" style="margin-top:14px;font-size:18px;line-height:1.55">Jedna strona, bez żargonu. Widzisz, co sprawdziłem, co się zmieniło i co poprawiłem. Raz w miesiącu, mailem.</p>
+<p class="muted" style="margin-top:14px;font-size:18px;line-height:1.55">Jedna strona, bez żargonu. Widzisz, co sprawdziliśmy, co się zmieniło i co poprawiliśmy. Raz w miesiącu, mailem.</p>
 <p class="note" style="margin-top:14px">Przykład układu. Bez danych żadnego klienta.</p>
 </div>
 <figure class="rep" aria-label="Przykładowy raport miesięczny">
@@ -770,7 +770,7 @@ FAQ_GROUPS = [
         ('Mam kilka oddziałów albo stronę z setkami podstron. Jak wyceniasz?', 'Zaczynamy tak samo, od diagnostyki, a zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz.'),
     ]),
     ('g2', 'Współpraca', [
-        ('Co muszę zrobić ja?', 'Dać dostęp do strony i znaleźć 10 minut na kilka pytań. Resztę robię ja.'),
+        ('Co muszę zrobić ja?', 'Dać dostęp do strony i znaleźć 10 minut na kilka pytań. Resztę robimy my.'),
         ('Czy mogę zacząć od małego kroku?', 'Tak. Diagnostyka za 19 zł: mała kwota, konkretny wynik, a kwota wraca w cenie Wdrożenia.'),
         ('Gwarantujecie, że AI zacznie polecać moją firmę?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
         ('Co, jeśli efekt mnie nie przekona?', 'Widzisz wynik przed i po. Przy Wdrożeniu drugą połowę płacisz do 7 dni po wykonaniu, przy nowej stronie dopiero przed publikacją, a abonament kończysz w dowolnym miesiącu.'),
@@ -779,8 +779,8 @@ FAQ_GROUPS = [
         ('Co zostaje na stronie po rezygnacji?', 'Wszystko, co poprawiłem. Poprawki i treści zostają na Twojej stronie, przestaję tylko co miesiąc sprawdzać i wysyłać raport.'),
     ]),
     ('g3', 'Technika', [
-        ('Czy muszę mieć plik llms.txt?', 'Nie. Google nie wymaga go do AI Overviews. To opcjonalna ściągawka o firmie dla asystentów AI, którą mogę dodać przy okazji.'),
-        ('Na jakim systemie musi działać strona?', 'Na każdym popularnym: WordPress, Wix albo strona pisana ręcznie. Każdy system wymaga innego podejścia, dlatego sprawdzam go w audycie, bo wpływa na zakres i cenę.'),
+        ('Czy muszę mieć plik llms.txt?', 'Nie. Google nie wymaga go do AI Overviews. To opcjonalna ściągawka o firmie dla asystentów AI, którą możemy dodać przy okazji.'),
+        ('Na jakim systemie musi działać strona?', 'Na każdym popularnym: WordPress, Wix albo strona pisana ręcznie. Każdy system wymaga innego podejścia, dlatego sprawdzamy go w audycie, bo wpływa na zakres i cenę.'),
     ]),
 ]
 FAQ_ALL = [qa for _, _, items in FAQ_GROUPS for qa in items]
@@ -905,17 +905,17 @@ def main():
         jsonld=[service_ld('/cennik', 'Pozycjonowanie w AI (GEO): pakiety i ceny',
                            'Diagnostyka pozycjonowania w AI, Wdrożenie, nowa strona oraz stała opieka i monitoring. Kwoty końcowe, bez VAT.', OFFERS)]))
     write('pozycjonowanie-w-ai.html', page(
-        '/pozycjonowanie-w-ai', 'Pozycjonowanie w AI (GEO) dla firm | Wskazani',
-        'Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 19 zł.',
+        '/pozycjonowanie-w-ai', 'Pozycjonowanie w AI dla firm | Wskazani',
+        'Poprawiamy to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 19 zł.',
         build_geo(), active='/pozycjonowanie-w-ai',
         bar=('Pozycjonowanie w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik')))
     write('wspolpraca.html', page(
         '/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI | Wskazani',
-        'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło.',
+        'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło.',
         build_wsp(), active='/wspolpraca',
         bar=('Współpraca stała', [('#pakiety', 'Pakiety'), ('#raport', 'Raport'), ('#rezygnacja', 'Rezygnacja')], 'Zamów audyt', '/#audyt'),
         jsonld=[service_ld('/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI',
-                           'Co miesiąc sprawdzam, czy AI dalej rozumie Twoją firmę, i poprawiam to, co się zmieniło. Bez umowy na lata.', OFFERS[3:])]))
+                           'Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło. Bez umowy na lata.', OFFERS[3:])]))
     write('faq.html', page(
         '/faq', 'Pytania o pozycjonowanie w AI i audyt | Wskazani',
         'Krótkie odpowiedzi o diagnostyce, cenach, rozliczeniu, współpracy i technice, plus słowniczek: GEO, AI Overviews, llms.txt.',
