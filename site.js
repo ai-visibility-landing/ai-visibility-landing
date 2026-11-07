@@ -94,7 +94,7 @@
     });
     current = { id: id, name: p.name };
     var ch = $('chosen-name'); if(ch) ch.textContent = p.name;
-    var sb = $('submit-btn'); if(sb) sb.textContent = (p.tile === 'mini') ? 'Zamawiam diagnostykę: 190 zł' : 'Wyślij zgłoszenie';
+    var sb = $('submit-btn'); if(sb) sb.textContent = (p.tile === 'mini') ? 'Zamawiam diagnostykę: 19 zł' : 'Wyślij zgłoszenie';
     return true;
   }
   if(form){
@@ -134,9 +134,9 @@
     }
     function quizText(){
       var m = '';
-      if(ans.q2 === 'sprawdzic') m = ans.q1 === 'brak' ? 'Nowa strona (od 1990 zł). Zakres i dokładną cenę ustalimy w bezpłatnej rozmowie.' : 'Pełna diagnostyka widoczności w AI (190 zł)';
+      if(ans.q2 === 'sprawdzic') m = ans.q1 === 'brak' ? 'Nowa strona (od 1990 zł). Zakres i dokładną cenę ustalimy w bezpłatnej rozmowie.' : 'Pełna diagnostyka widoczności w AI (19 zł)';
       else if(ans.q1 === 'brak') m = 'Nowa strona (od 1990 zł)';
-      else if(ans.q2 === 'naprawic') m = 'Pełna diagnostyka widoczności w AI (190 zł)';
+      else if(ans.q2 === 'naprawic') m = 'Pełna diagnostyka widoczności w AI (19 zł)';
       else if(ans.q2 === 'komplet') m = ans.q1 === 'stara' ? 'Nowa strona (od 1990 zł)' : 'Wdrożenie (od 990 zł)';
       var x = '';
       if(ans.q3 === 'pilnowac') x = ' + Opieka (od 199 zł/mies.)';
@@ -254,7 +254,7 @@
       var body = 'Strona: ' + site + '\nE-mail kontaktowy: ' + mail + '\n' + (tel ? 'Telefon: ' + tel + '\n' : '') +
         'Branża: ' + branza + '\nProwadzi firmę lub odpowiada za jej stronę: Tak\nPakiet: ' + current.name + '\n' +
         (news ? 'Newsletter „Wskazówki”: zgoda (tak)\n' : '') + trackTxt + '\n\n' +
-        (isMini ? 'Zamawiam pełną diagnostykę widoczności w AI (190 zł) dla powyższej strony. Proszę o link do płatności.' : 'Proszę o kontakt w sprawie pakietu: ' + current.name + '.');
+        (isMini ? 'Zamawiam pełną diagnostykę widoczności w AI (19 zł) dla powyższej strony. Proszę o link do płatności.' : 'Proszę o kontakt w sprawie pakietu: ' + current.name + '.');
       $('mail-link').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       var cb = $('copy-box'); cb.textContent = 'Do: ' + EMAIL + '\nTemat: ' + subject + '\n\n' + body;
       $('copy-btn').onclick = function(){

@@ -151,7 +151,7 @@ def page(path, title, desc, main_html, active=None, audyt_href='/#audyt', sticky
     b.append('<main id="tresc">\n%s</main>\n' % main_html)
     b.append(site_footer(active))
     if mobile_cta:
-        b.append('<div class="mobile-cta"><a class="btn btn-primary" href="%s">Diagnostyka AI: 190 zł</a></div>\n' % audyt_href)
+        b.append('<div class="mobile-cta"><a class="btn btn-primary" href="%s">Diagnostyka AI: 19 zł</a></div>\n' % audyt_href)
     b.append(CONSENT_BOX)
     b.append(extra_foot)
     b.append('<script src="/site.js" defer></script>\n</body>\n</html>\n')
@@ -180,7 +180,7 @@ def cta_band(h2, p, primary, secondary, note):
                '<a class="btn btn-ghost-white btn-lg" href="%s">%s</a>' % (secondary[1], esc(secondary[0])), esc(note)))
 
 
-TILES = [('mini', 'Pełna diagnostyka widoczności w AI', '190 zł'), ('wdrozenie', 'Wdrożenie widoczności', 'od 990 zł'),
+TILES = [('mini', 'Pełna diagnostyka widoczności w AI', '19 zł'), ('wdrozenie', 'Wdrożenie widoczności', 'od 990 zł'),
          ('strona', 'Nowa strona', 'od 1990 zł'), ('opieka', 'Opieka lub marketing', 'od 199 zł / mies.')]
 BRANZE = ['Biuro rachunkowe', 'Kancelaria', 'Doradca finansowy lub kredytowy', 'Biuro nieruchomości', 'Usługi lokalne', 'Inna']
 NEWS_TEXT = 'Chcę dostawać „Wskazówki”: bezpłatne poradniki o AI w firmie, mniej więcej co 2 tygodnie. Mogę się wypisać w każdej chwili.'
@@ -194,7 +194,7 @@ def audit_form(legend, calm, rodo):
     opts = ''.join('<option value="%s">%s</option>' % (attr(b), esc(b)) for b in BRANZE)
     return f'''<form class="form" id="audit-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
 <input type="hidden" name="access_key" value="7003f878-52e8-4f95-ac90-3dbadec662c6">
-<input type="hidden" name="subject" value="Zamówienie: pełna diagnostyka widoczności w AI (190 zł)">
+<input type="hidden" name="subject" value="Zamówienie: pełna diagnostyka widoczności w AI (19 zł)">
 <input type="hidden" name="from_name" value="Wskazani — strona">
 <div class="field" id="f-url"><label for="site-url">Adres strony firmy</label>
 <input id="site-url" name="site" type="text" inputmode="url" placeholder="np. mojafirma.pl" autocomplete="url" spellcheck="false" autocapitalize="off" required>
@@ -217,7 +217,7 @@ def audit_form(legend, calm, rodo):
 <label class="chk" for="newsletter"><input type="checkbox" id="newsletter" name="newsletter" value="tak"><span>{esc(NEWS_TEXT)}</span></label>
 <div class="field" id="f-captcha"><div class="h-captcha captcha" data-captcha="true" data-theme="light"></div><div class="err" id="e-captcha" aria-live="polite"></div></div>
 <div class="hp" aria-hidden="true"><label for="botcheck">Nie wypełniaj tego pola</label><input type="checkbox" id="botcheck" name="botcheck" tabindex="-1"></div>
-<button class="btn-submit" id="submit-btn" type="submit">Zamawiam diagnostykę: 190 zł</button>
+<button class="btn-submit" id="submit-btn" type="submit">Zamawiam diagnostykę: 19 zł</button>
 <p class="calm">{esc(calm)}</p>
 <p class="rodo">{rodo}</p>
 </form>
@@ -245,7 +245,7 @@ PROVIDER = {'@type': 'Organization', '@id': ORG_ID, 'name': 'Wskazani', 'url': S
 
 # ---------------------------------------------------------------- dane: oferta
 OFFERS = [  # (nazwa, cena, "od", co miesiąc, opis)
-    ('Pełna diagnostyka widoczności w AI', 190, False, False, '20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
+    ('Pełna diagnostyka widoczności w AI', 19, False, False, '20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
     ('Wdrożenie widoczności', 990, True, False, 'Wszystkie poprawki z audytu, dane o firmie dla Google i AI, pytania i odpowiedzi na stronie, test przed i po 30 dniach.'),
     ('Nowa strona widoczna w AI', 1990, True, False, 'Strona 4–6 podstron, gotowa pod Google i AI od pierwszego dnia, test przed i po 30 dniach.'),
     ('Opieka i monitoring AI', 199, True, True, 'Co miesiąc sprawdzam, czy AI poleca Twoją firmę, wysyłam krótki raport i robię drobne poprawki.'),
@@ -279,8 +279,8 @@ MAIN_FAQ = [
     ('Czym to się różni od SEO?', 'SEO walczy o miejsce na liście wyników Google. My walczymy o to, żeby AI wymieniło Cię z nazwy, kiedy listy w ogóle nie ma. Część pracy jest wspólna: porządna strona pomaga w obu.'),
     ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Kto mówi inaczej, kłamie. My ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, czyli więcej odpowiedzi z Twoją firmą, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Ile to trwa?', 'Diagnostyka: 3 dni robocze od wpłaty. Wdrożenie: 2–4 tygodnie. Każde narzędzie AI aktualizuje wiedzę we własnym tempie, dlatego wynik mierzymy co miesiąc, a nie raz.'),
-    ('Ile kosztuje?', 'Diagnostyka 190 zł, odliczane od ceny wdrożenia. Wdrożenie od 990 zł. Opieka i pomiar od 199 zł miesięcznie. Dokładną kwotę wdrożenia dostajesz po diagnostyce, zanim cokolwiek zlecisz. Kwoty końcowe, bez VAT.'),
-    ('Dlaczego diagnostyka jest płatna?', 'Bo to ręczna praca: 20 pytań w czterech narzędziach AI, sprawdzonych i opisanych. Za 190 zł dostajesz wynik, który zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
+    ('Ile kosztuje?', 'Diagnostyka 19 zł, odliczane od ceny wdrożenia. Wdrożenie od 990 zł. Opieka i pomiar od 199 zł miesięcznie. Dokładną kwotę wdrożenia dostajesz po diagnostyce, zanim cokolwiek zlecisz. Kwoty końcowe, bez VAT.'),
+    ('Dlaczego diagnostyka jest płatna?', 'Bo to ręczna praca: 20 pytań w czterech narzędziach AI, sprawdzonych i opisanych. Za 19 zł dostajesz wynik, który zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
     ('A jeśli AI już mnie poleca?', 'To dowiesz się o tym czarno na białym i będziesz wiedzieć, czego pilnować. Nie sprzedajemy wdrożenia, którego nie potrzebujesz.'),
     ('Muszę coś robić?', 'Dać dostęp do strony i wizytówki Google oraz odpowiedzieć na kilka pytań o firmę. Tekstami, kodem, wizytówką i katalogami zajmujemy się my.'),
     ('Kto to robi?', 'Filip Szmel, Warszawa. Pracujesz z jedną osobą od diagnostyki do raportu, bez działu obsługi i przekazywania sprawy dalej.'),
@@ -316,7 +316,7 @@ def build_main():
 <h1 class="display xl">Klient pyta ChatGPT o firmę z Twojej branży. AI wymienia konkurencję. Ciebie nie.</h1>
 <p class="lead">I właśnie straciłeś klienta, o którym nawet nie wiedziałeś, że go miałeś.</p>
 <div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt" data-pakiet="mini">Sprawdź, kogo AI poleca zamiast Ciebie</a></div>
-<p class="note" style="margin-top:18px">{esc(DIAG_NAME)} · 190 zł · wynik w 3 dni robocze</p>
+<p class="note" style="margin-top:18px">{esc(DIAG_NAME)} · 19 zł · wynik w 3 dni robocze</p>
 <p style="margin-top:14px;font-size:17px">Wolisz od razu porozmawiać? <a class="link" href="tel:+48502890686">502 890 686</a></p>
 </div>
 <figure class="hero-r" aria-label="Ilustracja odpowiedzi asystenta AI">{hero_chat}</figure>
@@ -377,7 +377,7 @@ def build_main():
 <h2 class="h2 lg">Robimy wszystko za Ciebie.</h2>
 <p class="sub">Twój czas: około godziny w pierwszym miesiącu, potem 15 minut miesięcznie.</p>
 <ol class="steps3">
-<li><span class="num">1</span><strong>Diagnostyka: 190 zł</strong><span class="d">W 3 dni robocze dostajesz wynik: kogo AI poleca w Twojej branży, gdzie Ciebie brakuje i co trzeba zmienić. Omawiamy go w 20-minutowej rozmowie. 190 zł odliczamy od wdrożenia.</span></li>
+<li><span class="num">1</span><strong>Diagnostyka: 19 zł</strong><span class="d">W 3 dni robocze dostajesz wynik: kogo AI poleca w Twojej branży, gdzie Ciebie brakuje i co trzeba zmienić. Omawiamy go w 20-minutowej rozmowie. 19 zł odliczamy od wdrożenia.</span></li>
 <li><span class="num">2</span><strong>Wdrożenie: od 990 zł</strong><span class="d">Dajesz dostęp do strony i wizytówki, odpowiadasz na kilka pytań o firmę. Resztę robimy my, w 2–4 tygodnie.</span></li>
 <li><span class="num">3</span><strong>Opieka i pomiar: od 199 zł / mies.</strong><span class="d">Co miesiąc ten sam test i raport. Wypowiedzenie z miesięcznym okresem, bez kar. Wszystko, co wdrożyliśmy, zostaje u Ciebie.</span></li>
 </ol>
@@ -403,7 +403,7 @@ def build_main():
 <section id="audyt" class="band-navy on-navy" aria-label="Zamów diagnostykę"><div class="wrap sec"><div class="audit">
 <div class="audit-l">
 <h2 class="h2 lg" style="line-height:1.08;text-wrap:balance">Twoi klienci już pytają AI. Sprawdź, co słyszą.</h2>
-<p class="p">{esc(DIAG_NAME)}: Twoja branża, Twoje miasto, {ais}. 190 zł, odliczane od wdrożenia.</p>
+<p class="p">{esc(DIAG_NAME)}: Twoja branża, Twoje miasto, {ais}. 19 zł, odliczane od wdrożenia.</p>
 <ul class="ticks"><li>{tick('#86EFAC')}<span>20 pytań Twoich klientów w 4 narzędziach AI</span></li><li>{tick('#86EFAC')}<span>Wynik w 3 dni robocze od wpłaty + rozmowa 20 min</span></li><li>{tick('#86EFAC')}<span>Po zgłoszeniu dostajesz link do płatności online</span></li></ul>
 <p class="p" style="margin-top:20px">Albo zadzwoń: <a class="link" href="tel:+48502890686" style="color:#fff">502 890 686</a></p>
 </div>
@@ -413,7 +413,7 @@ def build_main():
 
 <section id="przypisy" class="wrap foot-notes" aria-label="O Wskazani i przypisy">
 <h2>O Wskazani</h2>
-<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pełna diagnostyka widoczności w AI kosztuje 190 zł i obejmuje 20 pytań klientów w czterech narzędziach AI. Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
+<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pełna diagnostyka widoczności w AI kosztuje 19 zł i obejmuje 20 pytań klientów w czterech narzędziach AI. Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
 <h2 class="src">Źródła danych</h2>
 <ol>
 <li>SparkToro na danych Similarweb, wyszukiwania w Google w USA, styczeń–kwiecień 2026 (68,01% wyszukiwań bez kliknięcia).</li>
@@ -460,15 +460,15 @@ CMP_ROWS = [
     ('Pytania i odpowiedzi na stronie', '—', '✓', '✓'),
     ('Gwarancja 90 dni', '—', '✓', '✓'),
     ('Nowa strona 4–6 podstron', '—', '—', '✓'),
-    ('Cena', '190 zł', 'od 990 zł', 'od 1990 zł'),
+    ('Cena', '19 zł', 'od 990 zł', 'od 1990 zł'),
 ]
 CENNIK_FAQ = [
-    ('Co dostaję za 190 zł?', '20 pytań, które zadają Twoi klienci, sprawdzonych w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co trzeba zmienić. Wynik w 3 dni robocze i rozmowa 20 min. 190 zł odliczamy od Wdrożenia.'),
+    ('Co dostaję za 19 zł?', '20 pytań, które zadają Twoi klienci, sprawdzonych w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co trzeba zmienić. Wynik w 3 dni robocze i rozmowa 20 min. 19 zł odliczamy od Wdrożenia.'),
     ('Czy po diagnostyce muszę coś kupić?', 'Nie. Wynik zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
     ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Nikt nie steruje odpowiedziami AI. Ustawiamy wszystko, z czego AI buduje odpowiedź, i mierzymy wynik co miesiąc. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Czy do ceny dochodzi VAT?', 'Nie. Kwoty na stronie są końcowe, nie doliczam VAT.'),
 ]
-STEPS7 = [('Zamawiasz diagnostykę', '190 zł'), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
+STEPS7 = [('Zamawiasz diagnostykę', '19 zł'), ('Wynik w 3 dni robocze', ''), ('20 min rozmowy', 'w cenie'), ('Wybierasz pakiet', 'od 990 zł'),
           ('Potwierdzenie mailem i płatność', ''), ('Wdrażam poprawki', ''), ('Test po 30 dniach', '')]
 QUIZ = [
     ('q1', '1. Czy Twoja firma ma stronę internetową?', [('aktualna', 'Tak, aktualną'), ('stara', 'Tak, ale starą'), ('brak', 'Nie mam')]),
@@ -492,8 +492,8 @@ def build_cennik():
         for i, (t, tag) in enumerate(STEPS7))
     return f'''<section id="top" class="wrap center" style="padding-block:88px 32px">
 <h1 class="eyebrow">Cennik · ile kosztuje widoczność w AI</h1>
-<p class="display md">Jasne ceny. Zaczynasz od diagnostyki za 190 zł.</p>
-<p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> pełna diagnostyka widoczności w AI 190 zł (odliczane od wdrożenia) · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
+<p class="display md">Jasne ceny. Zaczynasz od diagnostyki za 19 zł.</p>
+<p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> pełna diagnostyka widoczności w AI 19 zł (odliczane od wdrożenia) · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
 <p class="note" style="margin-top:10px">Ceny aktualne: październik 2026</p>
 <p class="note" style="margin-top:14px">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </section>
@@ -509,7 +509,7 @@ def build_cennik():
 <section class="wrap" aria-label="Pakiety jednorazowe" style="padding-block:88px 24px">
 <h2 class="h2">Pakiety jednorazowe: diagnostyka, wdrożenie, nowa strona</h2>
 <div class="grid g-240" style="gap:18px;margin-top:32px;align-items:stretch">
-<article class="price-card big"><h3>Pełna diagnostyka widoczności w AI</h3><p class="price"><span class="num">190 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
+<article class="price-card big"><h3>Pełna diagnostyka widoczności w AI</h3><p class="price"><span class="num">19 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
 <ul><li>20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude</li><li>Wynik w 3 dni robocze + rozmowa 20 min</li><li>Kwota odliczana od Wdrożenia</li></ul>
 <a class="btn btn-outline btn-block" href="/cennik?pakiet=mini#audyt" data-pakiet="mini">Zamawiam diagnostykę</a></article>
 <article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie widoczności</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
@@ -559,7 +559,7 @@ def build_cennik():
 <div class="grid g-240">
 <div><p>Bez VAT</p><p>Kwota na stronie jest końcowa. Agencje zwykle podają ceny netto.</p></div>
 <div><p>Bez umowy na lata</p><p>Wypowiedzenie miesięczne. U części konkurencji umowa na 3–6 miesięcy.</p></div>
-<div><p>Diagnostyka za 190 zł</p><p>Zamiast audytu za 790–2000 zł u części agencji. Kwota jest odliczana od Wdrożenia.</p></div>
+<div><p>Diagnostyka za 19 zł</p><p>Zamiast audytu za 790–2000 zł u części agencji. Kwota jest odliczana od Wdrożenia.</p></div>
 <div><p>Jedna osoba</p><p>Rozmawiasz z tym, kto robi poprawki. Bez pośredników i infolinii.</p></div>
 </div>
 <p class="foot">Porównanie na podstawie cenników agencji GEO z października 2026.</p>
@@ -613,7 +613,7 @@ AREAS = [
     ('Ściągawka o firmie dla asystentów AI', 'Krótki plik z najważniejszymi informacjami. Opcjonalny: Google go nie wymaga.', 'llms.txt'),
 ]
 GEO_ROWS = [
-    ('Pierwszy krok', 'U części agencji płatny audyt, 790–2000 zł', 'Diagnostyka za 190 zł, odliczana od Wdrożenia'),
+    ('Pierwszy krok', 'U części agencji płatny audyt, 790–2000 zł', 'Diagnostyka za 19 zł, odliczana od Wdrożenia'),
     ('Ceny', 'Zwykle netto, do tego 23% VAT', 'Kwoty końcowe, bez VAT'),
     ('Umowa', 'U części minimum 3–6 miesięcy', 'Abonament z wypowiedzeniem miesięcznym, bez kar'),
     ('Stały monitoring', 'Od 599 zł / miesiąc netto', 'Od 199 zł / miesiąc'),
@@ -668,7 +668,7 @@ def build_geo():
 <div class="stats s4 grid g-240" style="gap:28px;margin-top:32px">{stats}</div>
 </section>
 
-{cta_band('Zacznij od diagnostyki za 190 zł.', 'Kogo AI poleca zamiast Ciebie, w 4 narzędziach. Kwota odliczana od Wdrożenia.',
+{cta_band('Zacznij od diagnostyki za 19 zł.', 'Kogo AI poleca zamiast Ciebie, w 4 narzędziach. Kwota odliczana od Wdrożenia.',
          ('Zobacz cennik', '/cennik'), ('Zamów diagnostykę', '/#audyt'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('class="btn btn-primary btn-lg" href="/cennik"', 'class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_dol"')}
 <section id="przypisy" class="wrap foot-notes" aria-label="Źródła danych" style="padding-top:40px">
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
@@ -721,7 +721,7 @@ def build_wsp():
 {plans}
 </div>
 <p class="muted" style="margin-top:22px;font-size:15px">Kwoty końcowe, bez VAT. Budżet reklam w pakiecie Marketing płacisz osobno, bezpośrednio do Google lub Meta.</p>
-<p class="muted inline" style="margin-top:8px;font-size:15px">Nie wiesz, od czego zacząć? <a class="link" href="/cennik">Zrób quiz w cenniku</a> albo zacznij od diagnostyki za 190 zł i przejdź na Opiekę później.</p>
+<p class="muted inline" style="margin-top:8px;font-size:15px">Nie wiesz, od czego zacząć? <a class="link" href="/cennik">Zrób quiz w cenniku</a> albo zacznij od diagnostyki za 19 zł i przejdź na Opiekę później.</p>
 <p class="muted inline" style="margin-top:8px;font-size:15px">Masz kilka oddziałów, wiele usług albo stronę z setkami podstron? Zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz. <a class="link" href="/cennik#duze-firmy">Wycena dla dużych firm</a></p>
 </section>
 
@@ -764,12 +764,12 @@ def build_wsp():
 # ================================================================= FAQ
 FAQ_GROUPS = [
     ('g0', 'Diagnostyka', [
-        ('Co dostaję w diagnostyce za 190 zł?', '20 pytań, które zadają Twoi klienci, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
+        ('Co dostaję w diagnostyce za 19 zł?', '20 pytań, które zadają Twoi klienci, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
         ('Co dostaję?', 'Krótki raport prostym językiem: czy AI czyta Twoją stronę i 3 najważniejsze rzeczy do poprawy.'),
         ('Ile czekam?', 'Do 48 godzin roboczych od wysłania formularza.'),
     ]),
     ('g1', 'Ceny i rozliczenie', [
-        ('Ile to kosztuje?', 'Diagnostyka 190 zł, Wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT. Szczegóły i porównanie pakietów są w cenniku.'),
+        ('Ile to kosztuje?', 'Diagnostyka 19 zł, Wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT. Szczegóły i porównanie pakietów są w cenniku.'),
         ('Jak się rozliczasz?', 'Diagnostyka płatna z góry. Wdrożenie: połowa przed startem, połowa do 7 dni po wykonaniu. Nowa strona: połowa przed startem, połowa przed publikacją. Abonament z góry za każdy miesiąc.'),
         ('Jak mogę zapłacić?', 'Przelewem albo BLIK-iem lub kartą przez link do płatności, który dostajesz mailem.'),
         ('Czy wystawiasz fakturę?', 'Teraz do każdej wpłaty dostajesz rachunek. Kwoty są końcowe, bez VAT. Gdy będę wystawiać faktury, napiszę o tym przed płatnością.'),
@@ -779,7 +779,7 @@ FAQ_GROUPS = [
     ]),
     ('g2', 'Współpraca', [
         ('Co muszę zrobić ja?', 'Dać dostęp do strony i znaleźć 10 minut na kilka pytań. Resztę robię ja.'),
-        ('Czy mogę zacząć od małego kroku?', 'Tak. Diagnostyka za 190 zł: mała kwota, konkretny wynik, a kwota wraca w cenie Wdrożenia.'),
+        ('Czy mogę zacząć od małego kroku?', 'Tak. Diagnostyka za 19 zł: mała kwota, konkretny wynik, a kwota wraca w cenie Wdrożenia.'),
         ('Gwarantujecie, że AI zacznie polecać moją firmę?', 'Nikt nie steruje odpowiedziami AI. Ustawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, pracujemy dalej bez dopłaty, aż pokaże.'),
         ('Co, jeśli efekt mnie nie przekona?', 'Widzisz wynik przed i po. Przy Wdrożeniu drugą połowę płacisz do 7 dni po wykonaniu, przy nowej stronie dopiero przed publikacją, a abonament kończysz w dowolnym miesiącu.'),
         ('Od kiedy liczy się miesiąc abonamentu?', 'Od dnia płatności. Przed płatnością dostajesz mailem potwierdzenie: zakres, kwota i terminy.'),
@@ -864,17 +864,17 @@ def write(name, content):
 def main():
     write('index.html', page(
         '/', 'Agencja GEO: AI poleca Twoją firmę, nie konkurencję | Wskazani',
-        'Kiedy klient pyta ChatGPT o firmę z Twojej branży, AI wymienia konkurencję. Robimy tak, że zaczyna polecać Ciebie. Diagnostyka 190 zł, wynik w 3 dni robocze.',
+        'Kiedy klient pyta ChatGPT o firmę z Twojej branży, AI wymienia konkurencję. Robimy tak, że zaczyna polecać Ciebie. Diagnostyka 19 zł, wynik w 3 dni robocze.',
         build_main(), active='/', audyt_href='#audyt', sticky=True, jsonld=main_ld()))
     write('cennik.html', page(
         '/cennik', 'Cennik: ile kosztuje widoczność w AI | Wskazani',
-        'Jasne ceny: diagnostyka widoczności w AI 190 zł, wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT.',
+        'Jasne ceny: diagnostyka widoczności w AI 19 zł, wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT.',
         build_cennik(), active='/cennik', audyt_href='#audyt', sticky=True,
         jsonld=[service_ld('/cennik', 'Widoczność w AI (GEO): pakiety i ceny',
                            'Diagnostyka widoczności w AI, Wdrożenie, nowa strona oraz stała opieka i monitoring. Kwoty końcowe, bez VAT.', OFFERS)]))
     write('widocznosc-w-ai.html', page(
         '/widocznosc-w-ai', 'Widoczność w AI (GEO) dla firm | Wskazani',
-        'Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 190 zł.',
+        'Poprawiam to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 19 zł.',
         build_geo(), active='/widocznosc-w-ai',
         bar=('Widoczność w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik')))
     write('wspolpraca.html', page(
