@@ -14,7 +14,7 @@ import os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://wskazani.pl'
 LASTMOD = '2026-10-30'
-OG_ALT = 'Wskazani: AI poleca Twoją firmę, nie konkurencję'
+OG_ALT = 'Wskazani: Pozycjonowanie Twojej Firmy w AI. ChatGPT, Gemini, Perplexity, Claude'
 
 
 def esc(s):
@@ -99,10 +99,10 @@ def head(title, desc, path, jsonld=(), robots=None, og_type='website'):
                '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n')
     out.append('<meta property="og:type" content="%s">\n<meta property="og:locale" content="pl_PL">\n<meta property="og:site_name" content="Wskazani">\n'
                '<meta property="og:title" content="%s">\n<meta property="og:description" content="%s">\n<meta property="og:url" content="%s">\n'
-               '<meta property="og:image" content="%s/og-image.png">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+               '<meta property="og:image" content="%s/og-image.png?v=2">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
                '<meta property="og:image:alt" content="%s">\n'
                '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="%s">\n<meta name="twitter:description" content="%s">\n'
-               '<meta name="twitter:image" content="%s/og-image.png">\n'
+               '<meta name="twitter:image" content="%s/og-image.png?v=2">\n'
                % (og_type, attr(title), attr(desc), url, SITE, attr(OG_ALT), attr(title), attr(desc), SITE))
     out.append('<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>\n')
     out.append('<link rel="stylesheet" href="/style.css">\n')
