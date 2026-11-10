@@ -14,10 +14,23 @@ import os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://wskazani.pl'
 LASTMOD = '2026-11-10'
-LASTMOD_OLD = {'/o-nas': '2026-10-30'}  # strony bez zmian od poprzedniej wersji
+LASTMOD_OLD = {}  # strony bez zmian od poprzedniej wersji
 DIAG = ("Diagnostyka widoczności w AI (19 zł) sprawdza, skąd AI bierze wiedzę o Twojej firmie: stronę (treść, dane strukturalne, plik llms.txt), "
         "wizytówkę i Mapy Google, katalogi i opinie oraz czy dane firmy wszędzie się zgadzają. Plus test 20 pytań klientów w 4 narzędziach AI. "
         "W 3 dni robocze wiesz, dlaczego AI poleca konkurencję i co poprawić. 19 zł odliczamy od wdrożenia.")
+TRYB_AI_ALT = 'Odpowiedź Trybu AI w Google na pytanie »daj mi listę polskich agencji geo«: Wskazani na pierwszym miejscu wśród agencji wyspecjalizowanych w GEO.'
+TRYB_AI_CAP = 'Tak AI Google odpowiada na pytanie o polskie agencje GEO.'
+
+
+def tryb_ai_figure(max_w, style=''):
+    return ('<figure style="max-width:%dpx;margin:%s">'
+            '<picture><source type="image/webp" srcset="/tryb-ai-google-agencje-geo.webp">'
+            '<img src="/tryb-ai-google-agencje-geo.png" width="1210" height="1312" loading="lazy" decoding="async" alt="%s" '
+            'style="display:block;width:100%%;height:auto;border-radius:16px;box-shadow:0 8px 28px rgba(19,35,58,.16)"></picture>'
+            '<figcaption class="muted" style="margin-top:10px;font-size:15px;text-align:center">%s</figcaption></figure>'
+            % (max_w, style or '28px auto 0', attr(TRYB_AI_ALT), esc(TRYB_AI_CAP)))
+
+
 OG_ALT = 'Wskazani: Pozycjonowanie Twojej Firmy w AI. ChatGPT, Gemini, Perplexity, Claude'
 
 
@@ -310,6 +323,13 @@ def build_main():
 <div class="pp"><strong>Konkretnie</strong><p>Przy pytaniach, które zadają Twoi klienci, a nie przy hasłach z narzędzia SEO.</p></div>
 <div class="pp"><strong>Mierzalnie</strong><p>Co miesiąc te same pytania, te same narzędzia i jeden wynik: w ilu odpowiedziach już jesteś.</p></div>
 </div></div></section>
+
+<section id="dowod" class="wrap sec" aria-label="Dowód" style="text-align:center">
+<h2 class="h2 lg">Robimy to najpierw dla siebie.</h2>
+<p class="sub" style="max-width:720px;margin-inline:auto">Zapytaliśmy AI w Google o polskie agencje GEO. Wskazani jest na pierwszym miejscu listy. Tę samą metodę stosujemy u klientów.</p>
+{tryb_ai_figure(640, '32px auto 0')}
+<div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn btn-primary btn-lg" href="#audyt" data-ga-miejsce="dowod">Zobacz, czemu AI Cię nie poleca</a></div>
+</section>
 
 <section id="google" class="band" aria-label="Dlaczego Google to za mało"><div class="wrap sec">
 <h2 class="h2 lg" style="max-width:780px">Google pokazywał listę. AI pokazuje trzy nazwy.</h2>
@@ -769,6 +789,7 @@ def build_onas():
 <p class="eyebrow">O nas</p>
 <h1 class="display">Wskazani: pozycjonowanie w AI dla firm</h1>
 <p class="lead" style="margin-top:18px">Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pracujemy dla firm z Warszawy i całej Polski.</p>
+{tryb_ai_figure(480, '32px 0 0')}
 </section>
 
 <section class="wrap-900" style="padding-bottom:56px" aria-label="Dlaczego to robimy">
