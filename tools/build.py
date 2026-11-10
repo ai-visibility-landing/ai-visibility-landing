@@ -73,8 +73,8 @@ ICO_CARD = ('<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" 
             'stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>')
 
 # ---------------------------------------------------------------- nawigacja
-NAV = [('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/przyklady', 'Przykłady'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
-FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/przyklady', 'Przykłady'), ('/wspolpraca', 'Dla firm'),
+NAV = [('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/przyklady', 'Przykłady'), ('/blog', 'Blog'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
+FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/przyklady', 'Przykłady'), ('/blog', 'Blog'), ('/wspolpraca', 'Dla firm'),
         ('/faq', 'FAQ'), ('/o-nas', 'O nas')]
 
 CONSENT_HEAD = (
@@ -160,8 +160,8 @@ def site_footer(active):
 
 
 def page(path, title, desc, main_html, active=None, audyt_href='/#audyt', sticky=False, bar=None, jsonld=(), robots=None,
-         mobile_cta=True, extra_foot=''):
-    h = head(title, desc, path, jsonld, robots)
+         mobile_cta=True, extra_foot='', og_type='website'):
+    h = head(title, desc, path, jsonld, robots, og_type)
     b = ['<body>\n<a class="skip" href="#tresc">Przejdź do treści</a>\n', site_header(active, audyt_href, sticky)]
     if bar:
         b.append(subbar(*bar))
@@ -403,6 +403,7 @@ def build_main():
 <h2 class="h2 lg">Pytania</h2>
 <div style="margin-top:24px">{faq}</div>
 <a class="link" href="/faq" style="margin-top:16px;font-size:17px">Wszystkie pytania i słowniczek →</a>
+<a class="link" href="/blog/co-to-jest-geo" style="margin-top:12px;font-size:17px">Co to jest GEO? Przeczytaj na blogu →</a>
 </section>
 
 <section id="audyt" class="band-navy on-navy" aria-label="Umów rozmowę"><div class="wrap sec" style="text-align:center">
@@ -639,6 +640,8 @@ def build_geo():
 <h2 class="h2">Dlaczego pozycjonowanie w AI ma znaczenie?</h2>
 <div class="stats s4 grid g-240" style="gap:28px;margin-top:32px">{stats}</div>
 </section>
+
+<section class="wrap" aria-label="Blog" style="padding-block:0 56px"><a class="link" href="/blog/co-to-jest-geo" style="font-size:17px">Co to jest GEO? Przeczytaj na blogu →</a></section>
 
 {cta_band('Zacznij od diagnostyki za 19 zł.', 'Kogo AI poleca zamiast Ciebie, w 4 narzędziach. Kwota odliczana od Wdrożenia.',
          ('Zobacz cennik', '/cennik'), ('Umów rozmowę', '/#audyt'), 'Bez umowy na lata · Wynik w 3 dni robocze').replace('class="btn btn-primary btn-lg" href="/cennik"', 'class="btn btn-primary btn-lg" href="/cennik" data-ga="zobacz_ceny" data-ga-miejsce="widocznosc_dol"')}
@@ -957,6 +960,183 @@ def build_404():
 '''
 
 
+# ================================================================= BLOG
+BLOG_DATE = '2026-11-10'
+BLOG_DATE_PL = '10.11.2026'
+LINKEDIN = 'https://www.linkedin.com/in/filip-szmel-b2993a439/'
+
+
+def md_inline(s):
+    """**pogrubienie** i [tekst](/adres) w tekstach artykułów."""
+    s = esc(s)
+    s = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', s)
+    return re.sub(r'\[(.+?)\]\((.+?)\)', r'<a class="link" href="\2">\1</a>', s)
+
+
+BLOG = [
+    {
+        'slug': 'co-to-jest-geo',
+        'title': 'Co to jest GEO? Pozycjonowanie w AI wyjaśnione dla firm | Wskazani',
+        'desc': 'GEO (Generative Engine Optimization) to praca nad tym, żeby ChatGPT, Gemini i Perplexity wymieniały Twoją firmę. Czym różni się od SEO i dlaczego to dotyczy polskich firm już teraz.',
+        'h1': 'Co to jest GEO? Pozycjonowanie w AI wyjaśnione dla firm',
+        'read': '5 min',
+        'skrot': '**W skrócie:** GEO (Generative Engine Optimization), po polsku pozycjonowanie w AI, to praca nad tym, żeby asystenci AI, czyli ChatGPT, Gemini, Perplexity i Claude, wymieniali Twoją firmę z nazwy, gdy klient pyta ich o usługę z Twojej branży. SEO walczy o miejsce na liście wyników Google. GEO walczy o miejsce w odpowiedzi, w której listy nie ma.',
+        'body': [
+            ('h2', 'Skąd się wzięło GEO'),
+            ('p', 'Nazwa pochodzi z pracy naukowej „GEO: Generative Engine Optimization” zespołu z Princeton University i IIT Delhi, opublikowanej w 2023 r. i zaprezentowanej na konferencji KDD w 2024 r. Autorzy sprawdzili, które zmiany w treści strony sprawiają, że silnik oparty na AI chętniej ją cytuje. Najlepiej wypadły treści z konkretnymi danymi, cytatami i podanymi źródłami. W badaniu takie zmiany zwiększały widoczność strony w odpowiedziach AI nawet o około 40%.'),
+            ('p', 'W USA firmy specjalizujące się w GEO działają od około dwóch lat. W Polsce ta usługa dopiero się pojawia, a pytania do AI zadają już Twoi klienci.'),
+            ('h2', 'Dlaczego to dotyczy Twojej firmy już teraz'),
+            ('p', 'Cztery liczby pokazują, jak zmienia się droga klienta:'),
+            ('ul', [
+                '**68%** wyszukiwań w Google kończy się bez kliknięcia w żadną stronę (SparkToro na danych Similarweb, USA, styczeń–kwiecień 2026).',
+                '**O 58%** spada klikalność pierwszego wyniku, gdy nad nim pojawia się odpowiedź AI (Ahrefs, luty 2026, ponad 300 tys. słów kluczowych).',
+                '**Ponad 900 mln** ludzi co tydzień korzysta z ChatGPT (OpenAI, luty 2026).',
+                '**81%** Polaków w wieku 18–24 lata korzystało z AI w ostatnich 3 miesiącach, a wśród wszystkich dorosłych 36% (CBOS, czerwiec 2026).']),
+            ('p', 'Klient, który kiedyś przejrzałby dziesięć stron, dziś pyta: „Polecisz dobre biuro rachunkowe w Warszawie dla małej firmy?”. Dostaje trzy nazwy. Jeśli Twojej wśród nich nie ma, nie wiesz nawet, że go straciłeś.'),
+            ('h2', 'Czym GEO różni się od SEO'),
+            ('table', ['', 'SEO', 'GEO'], [
+                ['Cel', 'Miejsce na liście wyników', 'Wymienienie z nazwy w odpowiedzi AI'],
+                ['Co widzi klient', '10 linków', '2–5 nazw z uzasadnieniem'],
+                ['Na czym się opiera', 'Strona, linki, słowa kluczowe', 'Strona plus to, co o firmie mówią inne źródła'],
+                ['Pomiar', 'Pozycja w Google', 'W ilu odpowiedziach na pytania klientów pojawia się firma']]),
+            ('p', 'Część pracy jest wspólna, bo porządna strona pomaga w obu. Różnica polega na tym, że AI nie pokazuje listy do przewinięcia. Wybiera za klienta.'),
+            ('h2', 'Skąd AI bierze wiedzę o firmie'),
+            ('p', 'Asystenci z dostępem do internetu budują odpowiedź z tych samych źródeł, które pokazuje wyszukiwarka, i składają je w całość. Liczy się więc nie jedna strona, tylko obraz firmy w wielu miejscach:'),
+            ('ul', [
+                '**własna strona:** czy jasno mówi, czym się zajmujesz, gdzie i dla kogo;',
+                '**wizytówka i Mapy Google;**',
+                '**katalogi branżowe i serwisy z opiniami;**',
+                '**spójność danych:** ta sama nazwa, adres i telefon wszędzie.']),
+            ('h2', 'Co widzimy w diagnozach polskich firm'),
+            ('p', 'Najczęstszy obraz: firma ma dobre opinie i zadowolonych klientów, a w odpowiedziach AI jej nie ma. Przykład z jednej z naszych diagnoz: klinika z ponad setką najwyżej ocenionych opinii nie miała ani jednego własnego wyniku na 6 pytań o swoje zabiegi. Wygrywały gabinety ze słabszymi opiniami, ale z osobną podstroną o każdym zabiegu. Więcej takich przykładów jest na stronie [Przykłady z diagnoz](/przyklady).'),
+            ('h2', 'Jak to robimy w Wskazani'),
+            ('p', 'Zaczynamy od diagnostyki. Sprawdzamy, skąd AI bierze wiedzę o firmie, i zadajemy pytania, które zadają jej klienci, w czterech narzędziach AI. Potem poprawiamy to, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Nikt nie może zagwarantować, że AI wymieni konkretną firmę w każdej odpowiedzi. Można natomiast sprawić, że będzie miało z czego to zrobić.'),
+        ],
+        'cta_note': 'Diagnostyka 19 zł, wynik w 3 dni robocze.',
+        'faq': [
+            ('Czy GEO zastępuje SEO?', 'Nie. Uzupełnia je. Bez porządnej strony nie ma ani jednego, ani drugiego.'),
+            ('Ile trwa, zanim widać efekt?', 'Każde narzędzie AI aktualizuje wiedzę we własnym tempie. Pierwsze zmiany w wynikach widać zwykle najwcześniej po około 30 dniach od wprowadzenia poprawek.'),
+            ('Czy można kupić miejsce w odpowiedzi ChatGPT?', 'W zwykłych odpowiedziach nie. Miejsce w odpowiedzi zależy od tego, co AI znajdzie o firmie w internecie.')],
+        'author': 'Filip Szmel, założyciel Wskazani, agencji GEO z Warszawy. Zajmuje się diagnostyką i poprawą widoczności polskich firm w odpowiedziach asystentów AI.',
+    },
+    {
+        'slug': 'jak-pozycjonowac-firme-w-ai',
+        'title': 'Jak pozycjonować firmę w AI: 6 zasad, które działają | Wskazani',
+        'desc': 'Jak sprawić, żeby ChatGPT i Gemini polecały Twoją firmę? 6 zasad pozycjonowania w AI opartych na badaniach i diagnozach polskich firm. Poradnik dla właścicieli.',
+        'h1': 'Jak pozycjonować firmę w AI: 6 zasad, które działają',
+        'read': '6 min',
+        'skrot': '**W skrócie:** AI poleca firmy, o których znajdzie w internecie jasne, spójne i potwierdzone informacje. Pozycjonowanie w AI to porządkowanie tych informacji w miejscach, z których korzystają asystenci: na stronie, w wizytówce Google, w katalogach i w opiniach. Poniżej 6 zasad, które stosujemy w Wskazani.',
+        'body': [
+            ('h2', '1. Napisz wprost, czym się zajmujesz, gdzie i dla kogo'),
+            ('p', 'AI nie zgaduje. Jeśli na stronie nie ma zdania w rodzaju „Biuro rachunkowe dla jednoosobowych firm na Mokotowie”, asystent nie połączy Twojej firmy z takim pytaniem. W diagnozach często widzimy, że główna specjalizacja firmy nie pada w żadnym tekście. Jest na zdjęciach, na Instagramie albo w głowie właściciela.'),
+            ('h2', '2. Jedna usługa, jedna podstrona'),
+            ('p', 'Na pytania o konkretną usługę wygrywają strony, które mają osobną podstronę dokładnie o niej. Ogólna strona „Oferta” z dziesięcioma usługami w jednym akapicie przegrywa z podstroną, która odpowiada na jedno pytanie: dla kogo jest usługa, jak wygląda i ile mniej więcej kosztuje.'),
+            ('h2', '3. Odpowiedź na górze, szczegóły niżej'),
+            ('p', 'Badanie GEO (Princeton i IIT Delhi, 2023–2024) pokazało, że silniki AI chętniej cytują treści z konkretnymi danymi, cytatami i źródłami. W praktyce pierwsze zdania podstrony powinny same w sobie być odpowiedzią, którą AI może przytoczyć. Szczegóły, historia i zdjęcia mogą być niżej.'),
+            ('h2', '4. Te same dane wszędzie'),
+            ('p', 'Nazwa, adres i telefon muszą być identyczne na stronie, w wizytówce Google, w katalogach i na platformach rezerwacji. W jednej z diagnoz firma miała trzy różne zapisy adresu i dwie wersje nazwy, a w innym mieście działała firma o niemal tej samej nazwie. AI, które nie jest pewne, która firma jest która, często nie poleca żadnej.'),
+            ('h2', '5. Bądź tam, gdzie AI szuka potwierdzenia'),
+            ('p', 'AI nie ufa samej stronie firmy. Sprawdza, co mówią o niej inni: wizytówka i Mapy Google, katalogi branżowe, serwisy z opiniami, artykuły. Firma, której nie ma nigdzie poza własną stroną, dla AI właściwie nie istnieje. Ważne są prawdziwe opinie od prawdziwych klientów. Kupione albo nagradzane opinie szkodzą bardziej, niż pomagają.'),
+            ('h2', '6. Nie przeszkadzaj robotom i mierz wynik'),
+            ('p', 'Trzy techniczne rzeczy, które sprawdzamy w każdej diagnozie:'),
+            ('ul', [
+                '**Czy roboty AI mają dostęp do strony.** Plik robots.txt może je blokować, czasem bez wiedzy właściciela.',
+                '**Czy treść jest widoczna bez uruchamiania skryptów.** Część nowoczesnych stron pokazuje tekst dopiero po załadowaniu skryptów. Człowiek widzi stronę, a robot pustą kartkę.',
+                '**Czy każda podstrona ma własny tytuł i opis.** Tytuł „Strona główna” albo nazwa systemu, na którym zbudowano stronę, to częsty błąd. Ten tytuł widać w Google i ten tytuł cytuje AI.']),
+            ('p', 'Na koniec pomiar: te same pytania klientów, te same narzędzia AI, co miesiąc. Bez tego nie wiadomo, czy zmiany cokolwiek dały.'),
+            ('h2', 'Czego nie robić'),
+            ('ul', [
+                '**Nie publikuj rankingu „najlepszych firm w branży”, w którym sam stawiasz się na pierwszym miejscu.** Taki tekst szybko traci wiarygodność u klientów i u wyszukiwarek.',
+                '**Nie dopisuj słów kluczowych na siłę** ani ukrytego tekstu. AI czyta tekst jak człowiek.',
+                '**Nie obiecuj sobie efektu w tydzień.** Narzędzia AI aktualizują wiedzę we własnym tempie.']),
+            ('h2', 'Jak to robimy w Wskazani'),
+            ('p', 'Te zasady to fundament. Diagnostyka pokazuje, które z nich u Ciebie nie działają i co trzeba poprawić najpierw, bo w każdej firmie kolejność jest inna. Wdrożenie robimy za Ciebie: tekst, kod, wizytówkę i katalogi. Ty dajesz dostęp i odpowiadasz na kilka pytań o firmę. Potem co miesiąc mierzymy wynik na tych samych pytaniach.'),
+        ],
+        'cta_note': 'Diagnostyka 19 zł, 19 zł odliczamy od wdrożenia.',
+        'faq': [
+            ('Czy mogę to zrobić sam?', 'Część tak, zwłaszcza zasady 1, 2 i 4. Trudniejsze jest ustalenie, co blokuje akurat Twoją firmę, i pomiar.'),
+            ('Czy potrzebuję nowej strony?', 'Nie zawsze. Często wystarczą poprawki. Nowa strona ma sens, gdy obecnej nie da się czytać bez skryptów albo jej po prostu nie ma.'),
+            ('Czy plik llms.txt jest konieczny?', 'To prosty plik z opisem firmy dla asystentów AI. Pomaga uporządkować informacje, ale sam w sobie nie zastąpi pozostałych pięciu zasad.')],
+        'author': 'Filip Szmel, założyciel Wskazani, agencji GEO z Warszawy.',
+    },
+]
+for _a in BLOG:
+    _a['path'] = '/blog/' + _a['slug']
+    _a['teaser'] = re.sub(r'^\*\*W skrócie:\*\* ', '', _a['skrot']).split('. ')[0] + '.'
+
+BLOG_TITLE = 'Blog o pozycjonowaniu w AI | Wskazani'
+BLOG_DESC = ('Jak ChatGPT, Gemini i Perplexity wybierają firmy, które polecają. Wiedza, badania i przykłady z diagnoz polskich firm. '
+             'Pisze Filip Szmel, Wskazani.')
+
+
+def crumbs_ld(items, anchor):
+    return {'@type': 'BreadcrumbList', '@id': SITE + anchor, 'itemListElement': [
+        {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': SITE + p} for i, (n, p) in enumerate(items)]}
+
+
+def build_blog_post(a):
+    parts = []
+    for b in a['body']:
+        kind = b[0]
+        if kind == 'h2':
+            parts.append('<h2>%s</h2>' % esc(b[1]))
+        elif kind == 'p':
+            parts.append('<p>%s</p>' % md_inline(b[1]))
+        elif kind == 'ul':
+            parts.append('<ul>%s</ul>' % ''.join('<li>%s</li>' % md_inline(x) for x in b[1]))
+        elif kind == 'table':
+            head = ''.join('<th scope="col">%s</th>' % esc(h) for h in b[1])
+            rows = ''.join('<tr><th scope="row">%s</th>%s</tr>' % (esc(r[0]), ''.join('<td>%s</td>' % esc(c) for c in r[1:])) for r in b[2])
+            parts.append('<div class="post-tbl"><table><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div>' % (head, rows))
+    body = '\n'.join(parts)
+    return f'''<article class="post">
+<h1 class="display md">{esc(a['h1'])}</h1>
+<p class="meta"><a class="link" href="/o-nas">Filip Szmel</a>, Wskazani · <time datetime="{BLOG_DATE}">{BLOG_DATE_PL}</time> · {esc(a['read'])}</p>
+<div class="guarantee">{md_inline(a['skrot'])}</div>
+{body}
+<p class="post-cta"><a class="btn btn-primary btn-lg" href="#audyt" data-ga-miejsce="blog-{a['slug']}">Zobacz, czemu AI Cię nie poleca</a><span class="muted"> {esc(a['cta_note'])}</span></p>
+<h2>Najczęstsze pytania</h2>
+{faq_details(a['faq'])}
+<aside class="author" aria-label="Autor"><p>{esc(a['author'])} <a class="link" href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn</a></p></aside>
+</article>
+'''
+
+
+def blog_post_ld(a):
+    url = SITE + a['path']
+    return [{'@context': 'https://schema.org', '@graph': [
+        {'@type': 'BlogPosting', '@id': url + '#artykul', 'headline': a['h1'], 'description': a['desc'], 'datePublished': BLOG_DATE,
+         'dateModified': BLOG_DATE, 'inLanguage': 'pl-PL', 'author': {'@id': PERSON_ID}, 'publisher': {'@id': ORG_ID},
+         'mainEntityOfPage': {'@type': 'WebPage', '@id': url}, 'image': SITE + '/og-image.png', 'url': url},
+        dict({'@id': url + '#faq'}, **faq_ld(a['faq'])),
+        crumbs_ld([('Strona główna', '/'), ('Blog', '/blog'), (a['h1'], a['path'])], a['path'] + '#okruszki')]}]
+
+
+def build_blog_index():
+    cards = ''.join(
+        '<article class="price-card"><h2 style="font-size:22px;font-weight:800;line-height:1.2">%s</h2>'
+        '<p class="muted" style="font-size:15px"><time datetime="%s">%s</time></p><p>%s</p>'
+        '<a class="link" href="%s">Czytaj →</a></article>' % (esc(a['h1']), BLOG_DATE, BLOG_DATE_PL, esc(a['teaser']), a['path'])
+        for a in BLOG)
+    return f'''<section class="wrap-900" style="padding-block:88px 32px">
+<h1 class="display md">Blog: pozycjonowanie w AI dla polskich firm</h1>
+<p class="lead" style="margin-top:18px">Piszemy o tym, jak asystenci AI wybierają firmy, które polecają. Opieramy się na badaniach, danych z rynku amerykańskiego, gdzie ta zmiana zaczęła się wcześniej, i na tym, co widzimy w diagnozach polskich firm.</p>
+</section>
+<section class="wrap-900" style="padding-bottom:88px" aria-label="Artykuły">
+<div class="grid g-300" style="gap:18px;align-items:stretch">{cards}</div>
+</section>
+'''
+
+
+def blog_index_ld():
+    return [{'@context': 'https://schema.org', '@graph': [
+        {'@type': 'Blog', '@id': SITE + '/blog#blog', 'url': SITE + '/blog', 'name': 'Blog: pozycjonowanie w AI dla polskich firm',
+         'description': BLOG_DESC, 'inLanguage': 'pl-PL', 'publisher': {'@id': ORG_ID},
+         'blogPost': [{'@type': 'BlogPosting', '@id': SITE + a['path'] + '#artykul', 'headline': a['h1'], 'url': SITE + a['path'],
+                       'datePublished': BLOG_DATE, 'author': {'@id': PERSON_ID}} for a in BLOG]},
+        crumbs_ld([('Strona główna', '/'), ('Blog', '/blog')], '/blog#okruszki')]}]
+
+
 # ================================================================= MONTAŻ
 def write(name, content):
     with open(os.path.join(ROOT, name), 'w', encoding='utf8') as f:
@@ -985,6 +1165,10 @@ def main():
                 breadcrumb_ld('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI')]))
     write('przyklady.html', page(
         '/przyklady', PRZYKLADY_TITLE, PRZYKLADY_DESC, build_przyklady(), active='/przyklady', jsonld=przyklady_ld()))
+    write('blog.html', page('/blog', BLOG_TITLE, BLOG_DESC, build_blog_index(), active='/blog', jsonld=blog_index_ld()))
+    os.makedirs(os.path.join(ROOT, 'blog'), exist_ok=True)
+    for a in BLOG:
+        write('blog/%s.html' % a['slug'], page(a['path'], a['title'], a['desc'], build_blog_post(a), active='/blog', jsonld=blog_post_ld(a), og_type='article'))
     write('wspolpraca.html', page(
         '/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI | Wskazani',
         'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło.',
@@ -1012,7 +1196,7 @@ def main():
         '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów diagnostykę pozycjonowania firmy w AI.',
         build_404(), robots='noindex', mobile_cta=False))
 
-    urls = ['/', '/cennik', '/pozycjonowanie-w-ai', '/przyklady', '/wspolpraca', '/faq', '/o-nas']
+    urls = ['/', '/cennik', '/pozycjonowanie-w-ai', '/przyklady', '/blog'] + [a['path'] for a in BLOG] + ['/wspolpraca', '/faq', '/o-nas']
     sm = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD_OLD.get(u, LASTMOD)))
