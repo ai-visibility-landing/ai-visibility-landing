@@ -3,7 +3,7 @@
 > Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawia, że ChatGPT, Gemini, Perplexity i Claude polecają firmę klienta, a nie konkurencję: diagnostyka, wdrożenie i comiesięczny pomiar na tych samych pytaniach. Prowadzi Filip Szmel.
 
 ## Pakiety i ceny
-Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: październik 2026.
+Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: listopad 2026.
 - Pełna diagnostyka pozycjonowania w AI: 19 zł. 20 pytań, które zadają klienci firmy, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie firmy brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.
 - Wdrożenie pozycjonowania: od 990 zł. Treść i dane strukturalne na stronie, llms.txt, wizytówka Google, katalogi i opinie. 2–4 tygodnie.
 - Nowa strona widoczna w AI: od 1990 zł. 4–6 podstron, gotowa pod Google i AI od pierwszego dnia.

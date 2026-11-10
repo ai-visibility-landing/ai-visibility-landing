@@ -13,7 +13,11 @@ import os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://wskazani.pl'
-LASTMOD = '2026-10-30'
+LASTMOD = '2026-11-10'
+LASTMOD_OLD = {'/o-nas': '2026-10-30'}  # strony bez zmian od poprzedniej wersji
+DIAG = ("Diagnostyka widoczności w AI (19 zł) sprawdza, skąd AI bierze wiedzę o Twojej firmie: stronę (treść, dane strukturalne, plik llms.txt), "
+        "wizytówkę i Mapy Google, katalogi i opinie oraz czy dane firmy wszędzie się zgadzają. Plus test 20 pytań klientów w 4 narzędziach AI. "
+        "W 3 dni robocze wiesz, dlaczego AI poleca konkurencję i co poprawić. 19 zł odliczamy od wdrożenia.")
 OG_ALT = 'Wskazani: Pozycjonowanie Twojej Firmy w AI. ChatGPT, Gemini, Perplexity, Claude'
 
 
@@ -182,65 +186,6 @@ def cta_band(h2, p, primary, secondary, note):
                '<a class="btn btn-ghost-white btn-lg" href="%s">%s</a>' % (secondary[1], esc(secondary[0])), esc(note)))
 
 
-TILES = [('mini', 'Pełna diagnostyka pozycjonowania w AI', '19 zł'), ('wdrozenie', 'Wdrożenie pozycjonowania', 'od 990 zł'),
-         ('strona', 'Nowa strona', 'od 1990 zł'), ('opieka', 'Opieka lub marketing', 'od 199 zł / mies.')]
-BRANZE = ['Biuro rachunkowe', 'Kancelaria', 'Doradca finansowy lub kredytowy', 'Biuro nieruchomości', 'Usługi lokalne', 'Inna']
-NEWS_TEXT = 'Chcę dostawać „Wskazówki”: bezpłatne poradniki o AI w firmie, mniej więcej co 2 tygodnie. Mogę się wypisać w każdej chwili.'
-
-
-def audit_form(legend, calm, rodo):
-    tiles = ''.join(
-        '<label class="tile%s"><input type="radio" name="kafelek" value="%s"%s><span class="n">%s</span><span class="p%s">%s</span></label>'
-        % (' on' if i == 0 else '', v, ' checked' if i == 0 else '', esc(n), '', esc(p))
-        for i, (v, n, p) in enumerate(TILES))
-    opts = ''.join('<option value="%s">%s</option>' % (attr(b), esc(b)) for b in BRANZE)
-    return f'''<form class="form" id="audit-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-<input type="hidden" name="access_key" value="7003f878-52e8-4f95-ac90-3dbadec662c6">
-<input type="hidden" name="subject" value="Zamówienie: pełna diagnostyka pozycjonowania w AI (19 zł)">
-<input type="hidden" name="from_name" value="Wskazani — strona">
-<div class="field" id="f-url"><label for="site-url">Adres strony firmy</label>
-<input id="site-url" name="site" type="text" inputmode="url" placeholder="np. mojafirma.pl" autocomplete="url" spellcheck="false" autocapitalize="off" required>
-<div class="err" id="e-url" aria-live="polite"></div></div>
-<div class="frow">
-<div class="field" id="f-email"><label for="email">E-mail</label>
-<input id="email" name="email" type="email" placeholder="imie@firma.pl" autocomplete="email" spellcheck="false" autocapitalize="off" required>
-<div class="err" id="e-email" aria-live="polite"></div></div>
-<div class="field"><label for="tel">Telefon <span class="optional">(opcjonalnie)</span></label>
-<input id="tel" name="telefon" type="tel" placeholder="np. 600 000 000" autocomplete="tel"></div>
-</div>
-<div class="field" id="f-branza"><label for="branza">Branża</label>
-<select id="branza" name="branza" required aria-describedby="e-branza"><option value="" selected disabled>Wybierz branżę</option>{opts}</select>
-<div class="err" id="e-branza" aria-live="polite"></div></div>
-<fieldset class="field"><legend>{esc(legend)}</legend>
-<div class="tiles">{tiles}</div>
-<p class="chosen" aria-live="polite">Wybrany pakiet: <strong id="chosen-name">Pełna diagnostyka pozycjonowania w AI</strong></p></fieldset>
-<div class="field" id="f-firma"><label class="chk dark" for="firma"><input type="checkbox" id="firma" name="prowadze_firme" value="Tak" required aria-describedby="e-firma"><span>Prowadzę firmę lub odpowiadam za jej stronę</span></label>
-<div class="err" id="e-firma" aria-live="polite"></div></div>
-<label class="chk" for="newsletter"><input type="checkbox" id="newsletter" name="newsletter" value="tak"><span>{esc(NEWS_TEXT)}</span></label>
-<div class="field" id="f-captcha"><div class="h-captcha captcha" data-captcha="true" data-theme="light"></div><div class="err" id="e-captcha" aria-live="polite"></div></div>
-<div class="hp" aria-hidden="true"><label for="botcheck">Nie wypełniaj tego pola</label><input type="checkbox" id="botcheck" name="botcheck" tabindex="-1"></div>
-<button class="btn-submit" id="submit-btn" type="submit">Zamawiam diagnostykę: 19 zł</button>
-<p class="calm">{esc(calm)}</p>
-<p class="rodo">{rodo}</p>
-</form>
-<script src="https://web3forms.com/client/script.js" async defer></script>
-<div class="result" id="result" hidden aria-live="polite">
-<div id="r-sending"><div class="status">Wysyłanie…</div></div>
-<div id="r-ok" hidden><div class="status">Zgłoszenie przyjęte</div><p>Dziękuję! Przechodzę do strony z potwierdzeniem…</p></div>
-<div id="r-fail" hidden>
-<div class="status bad">Nie udało się wysłać automatycznie</div>
-<p>Kliknij poniżej, żeby otworzyć pocztę z gotową wiadomością. Jeśli się nie otworzy, skopiuj treść i wyślij ją na szmelfilip.business@gmail.com.</p>
-<p><a class="btn btn-outline" id="mail-link" href="mailto:szmelfilip.business@gmail.com">Otwórz e-mail</a></p>
-<div class="copy-box" id="copy-box"></div>
-<p><button class="btn btn-outline btn-sm" id="copy-btn" type="button">Kopiuj treść</button></p>
-</div></div>'''
-
-
-RODO_MAIN = ('Wysyłając formularz, zgadzasz się na kontakt w sprawie zamówienia. Administrator danych: Filip Szmel. '
-             'Szczegóły w <a class="link" href="/polityka-prywatnosci">polityce prywatności</a>.')
-RODO_CENNIK = ('Wysyłając formularz, zgadzasz się na kontakt w sprawie zgłoszenia. Administrator danych: Filip Szmel. '
-               'Szczegóły w <a class="link" href="/polityka-prywatnosci">polityce prywatności</a>.')
-
 ORG_ID = SITE + '/#firma'
 BOOK_URL = 'https://calendar.app.google/SuHs8bxB3i8V8Aiw8'
 PERSON_ID = SITE + '/#filip'
@@ -276,6 +221,12 @@ def service_ld(path, name, desc, offers):
             'provider': PROVIDER, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': name, 'itemListElement': [offer_ld(*o) for o in offers]}}
 
 
+def breadcrumb_ld(path, name):
+    return {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Wskazani', 'item': SITE + '/'},
+        {'@type': 'ListItem', 'position': 2, 'name': name, 'item': SITE + path}]}
+
+
 # ================================================================= STRONA GŁÓWNA (v2 GEO, 30.10.2026)
 DIAG_NAME = 'Pełna diagnostyka pozycjonowania w AI'
 MAIN_FAQ = [
@@ -283,7 +234,7 @@ MAIN_FAQ = [
     ('Gwarantujecie, że ChatGPT zacznie mnie polecać?', 'Dajemy gwarancję 90 dni. Poprawiamy wszystko, z czego AI buduje odpowiedź, i co miesiąc mierzymy wynik na tych samych pytaniach. Jeśli 90 dni po wdrożeniu test nie pokaże postępu, czyli więcej odpowiedzi z Twoją firmą, pracujemy dalej bez dopłaty, aż pokaże.'),
     ('Ile to trwa?', 'Diagnostyka: 3 dni robocze od wpłaty. Wdrożenie: 2–4 tygodnie. Każde narzędzie AI aktualizuje wiedzę we własnym tempie, dlatego wynik mierzymy co miesiąc, a nie raz.'),
     ('Ile kosztuje?', 'Diagnostyka 19 zł, odliczane od ceny wdrożenia. Wdrożenie od 990 zł. Opieka i pomiar od 199 zł miesięcznie. Dokładną kwotę wdrożenia dostajesz po diagnostyce, zanim cokolwiek zlecisz. Kwoty końcowe, bez VAT.'),
-    ('Dlaczego diagnostyka jest płatna?', 'Bo to ręczna praca: 20 pytań w czterech narzędziach AI, sprawdzonych i opisanych. Za 19 zł dostajesz wynik, który zostaje u Ciebie, nawet jeśli nie zlecisz nic więcej.'),
+    ('Dlaczego diagnostyka jest płatna?', 'Bo to ręczna praca, nie automat. ' + DIAG),
     ('A jeśli AI już mnie poleca?', 'To dowiesz się o tym czarno na białym i będziesz wiedzieć, czego pilnować. Nie sprzedajemy wdrożenia, którego nie potrzebujesz.'),
     ('Muszę coś robić?', 'Dać dostęp do strony i wizytówki Google oraz odpowiedzieć na kilka pytań o firmę. Tekstami, kodem, wizytówką i katalogami zajmujemy się my.'),
 ]
@@ -329,7 +280,7 @@ def build_main():
 <p class="sub">Wybierz to, co jest Ci teraz najbliższe. Na bezpłatnej rozmowie ustalimy resztę.</p>
 <div class="grid g-240" style="gap:18px;margin-top:28px;align-items:stretch">
 <article class="price-card big"><h3>Diagnostyka</h3><p class="price"><span class="num">19 zł</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
-<ul><li>20 pytań Twoich klientów w 4 narzędziach AI</li><li>Wynik w 3 dni robocze</li></ul>
+<ul><li>Skąd AI bierze wiedzę o Twojej firmie</li><li>Wynik w 3 dni robocze</li></ul>
 <a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="diagnostyka">Umów rozmowę</a></article>
 <article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
 <ul><li>Wszystkie poprawki za Ciebie</li><li>Gwarancja 90 dni</li></ul>
@@ -374,7 +325,7 @@ def build_main():
 <section id="jak" class="wrap sec" aria-label="Co dokładnie robimy">
 <h2 class="h2 lg">Co dokładnie robimy</h2>
 <ol class="steps3 s4">
-<li><span class="num">1</span><strong>Diagnostyka</strong><span class="d">20 pytań, które zadają Twoi klienci, w {ais}. Wiesz, kogo AI poleca, kogo pomija i dlaczego.</span></li>
+<li><span class="num">1</span><strong>Diagnostyka</strong><span class="d">{DIAG}</span></li>
 <li><span class="num">2</span><strong>Strona, którą AI rozumie</strong><span class="d">Poprawiamy stronę tak, żeby AI wiedziało, czym się zajmujesz, gdzie i dla kogo. Dodajemy odpowiedzi na pytania, które zadają Twoi klienci.</span></li>
 <li><span class="num">3</span><strong>Źródła, którym AI wierzy</strong><span class="d">Wizytówka Google, katalogi branżowe, opinie, wzmianki. Jedne dane wszędzie, bez trzech adresów i dwóch numerów telefonu.</span></li>
 <li><span class="num">4</span><strong>Pomiar co miesiąc</strong><span class="d">Te same pytania, ta sama metoda. Raport na jednej stronie: gdzie byłeś, gdzie jesteś, co robimy dalej.</span></li>
@@ -400,7 +351,7 @@ def build_main():
 <h2 class="h2 lg">Robimy wszystko za Ciebie.</h2>
 <p class="sub">Twój czas: około godziny w pierwszym miesiącu, potem 15 minut miesięcznie.</p>
 <ol class="steps3">
-<li><span class="num">1</span><strong>Diagnostyka: 19 zł</strong><span class="d">W 3 dni robocze dostajesz wynik: kogo AI poleca w Twojej branży, gdzie Ciebie brakuje i co trzeba zmienić. Omawiamy go w 20-minutowej rozmowie. 19 zł odliczamy od wdrożenia.</span></li>
+<li><span class="num">1</span><strong>Diagnostyka: 19 zł</strong><span class="d">{DIAG}</span></li>
 <li><span class="num">2</span><strong>Wdrożenie: od 990 zł</strong><span class="d">Dajesz dostęp do strony i wizytówki, odpowiadasz na kilka pytań o firmę. Resztę robimy my, w 2–4 tygodnie.</span></li>
 <li><span class="num">3</span><strong>Opieka i pomiar: od 199 zł / mies.</strong><span class="d">Co miesiąc ten sam test i raport. Wypowiedzenie z miesięcznym okresem, bez kar. Wszystko, co wdrożyliśmy, zostaje u Ciebie.</span></li>
 </ol>
@@ -426,21 +377,21 @@ def build_main():
 
 <section id="audyt" class="band-navy on-navy" aria-label="Umów rozmowę"><div class="wrap sec" style="text-align:center">
 <h2 class="h2 lg" style="line-height:1.08;text-wrap:balance;max-width:760px;margin-inline:auto">Twoi klienci już pytają AI. Dowiedz się, co o Tobie mówi.</h2>
-<p class="p" style="margin:18px auto 0;max-width:620px">Bezpłatna rozmowa online. Sprawdzimy, czy AI poleca Twoją firmę, i powiemy, od czego zacząć.</p>
+<p class="p" style="margin:18px auto 0;max-width:620px">Bezpłatna rozmowa online. Powiemy, od czego zacząć i czy diagnostyka ma u Ciebie sens.</p>
 <div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn btn-primary btn-lg" href="#audyt">Umów rozmowę</a></div>
 <p class="p" style="margin-top:20px">Albo zadzwoń: <a class="link" href="tel:+48502890686" style="color:#fff">502 890 686</a></p>
 </div></section>
 
 <section id="przypisy" class="wrap foot-notes" aria-label="O Wskazani i przypisy">
 <h2>O Wskazani</h2>
-<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. Pełna diagnostyka pozycjonowania w AI kosztuje 19 zł i obejmuje 20 pytań klientów w czterech narzędziach AI. Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Wskazani prowadzi Filip Szmel.</p>
+<p>Wskazani to agencja GEO (Generative Engine Optimization) dla firm z Warszawy i całej Polski. Sprawdzamy i poprawiamy to, jak ChatGPT, Gemini, Perplexity i Claude opisują i polecają Twoją firmę. {DIAG} Wdrożenie od 990 zł: treść i dane strukturalne (schema.org) na stronie, plik llms.txt, wizytówka Google, katalogi i opinie. Opieka i comiesięczny pomiar od 199 zł miesięcznie, bez umowy na lata. Robimy też strony internetowe oraz reklamy Google i Meta. Wskazani prowadzi Filip Szmel.</p>
 <h2 class="src">Źródła danych</h2>
 <ol>
 <li>SparkToro na danych Similarweb, wyszukiwania w Google w USA, styczeń–kwiecień 2026 (68,01% wyszukiwań bez kliknięcia).</li>
 <li>Ahrefs, luty 2026, ponad 300 tys. słów kluczowych: klikalność wyniku nr 1 przy obecności AI Overview niższa o 58%.</li>
 <li>OpenAI, luty 2026: ponad 900 mln aktywnych użytkowników ChatGPT tygodniowo.</li>
 <li>CBOS, komunikat „Korzystanie ze sztucznej inteligencji”, czerwiec 2026, badanie z maja 2026, N=1041 dorosłych mieszkańców Polski.</li>
-<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: październik 2026.</li>
+<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Ceny aktualne: listopad 2026.</li>
 </ol>
 </section>
 '''
@@ -514,7 +465,7 @@ def build_cennik():
 <h1 class="eyebrow">Cennik · ile kosztuje pozycjonowanie w AI</h1>
 <p class="display md">Jasne ceny. Zaczynasz od diagnostyki za 19 zł.</p>
 <p style="margin:22px auto 0;font-size:18px;line-height:1.6;max-width:760px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;text-align:left"><strong>W skrócie:</strong> pełna diagnostyka pozycjonowania w AI 19 zł (odliczane od wdrożenia) · wdrożenie od 990 zł · nowa strona od 1990 zł · stała opieka od 199 zł / miesiąc. Kwoty końcowe, bez VAT.</p>
-<p class="note" style="margin-top:10px">Ceny aktualne: październik 2026</p>
+<p class="note" style="margin-top:10px">Ceny aktualne: listopad 2026</p>
 <p class="note" style="margin-top:14px">Bez umowy na lata · Przelew, BLIK lub karta · Wynik w 3 dni robocze</p>
 </section>
 
@@ -524,7 +475,7 @@ def build_cennik():
 <h2 class="h2">Wybierz, od czego zaczynamy</h2>
 <div class="grid g-240" style="gap:18px;margin-top:32px;align-items:stretch">
 <article class="price-card big"><h3>Pełna diagnostyka pozycjonowania w AI</h3><p class="price"><span class="num">19 zł</span><span class="post">jednorazowo</span></p><p class="quote">„Chcę wiedzieć, kogo AI poleca zamiast mnie”</p>
-<ul><li>20 pytań Twoich klientów w ChatGPT, Gemini, Perplexity i Claude</li><li>Wynik w 3 dni robocze + rozmowa 20 min</li><li>Kwota odliczana od Wdrożenia</li></ul>
+<ul><li>Skąd AI bierze wiedzę o Twojej firmie</li><li>Wynik w 3 dni robocze + rozmowa 20 min</li><li>Kwota odliczana od Wdrożenia</li></ul>
 <a class="btn btn-outline btn-block" href="#audyt" data-ga-miejsce="diagnostyka">Umów rozmowę</a></article>
 <article class="price-card big pick"><span class="badge">Polecany na start</span><h3>Wdrożenie pozycjonowania</h3><p class="price"><span class="pre">od</span><span class="num">990 zł</span></p><p class="quote">„Chcę mieć to zrobione porządnie”</p>
 <ul><li>Wszystkie poprawki z diagnostyki</li><li>Dane o firmie dla Google i AI</li><li>Pytania i odpowiedzi na stronie</li><li>Gwarancja 90 dni</li></ul>
@@ -588,7 +539,7 @@ def build_cennik():
 <h2 class="src" style="margin-top:0">Źródła danych</h2>
 <ul>
 <li>Publiczne cenniki oraz długość umów czterech firm oferujących pozycjonowanie w AI w Polsce, sprawdzone 17.10.2026. Te firmy podają kwoty netto, do których dochodzi 23% VAT. Nazw firm nie podajemy.</li>
-<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia lub strony podajemy po diagnostyce, zanim cokolwiek zlecisz. Ceny aktualne: październik 2026.</li>
+<li>Kwoty końcowe, bez VAT (działalność nierejestrowana). Dokładną kwotę wdrożenia lub strony podajemy po diagnostyce, zanim cokolwiek zlecisz. Ceny aktualne: listopad 2026.</li>
 </ul>
 </section>
 '''
@@ -712,7 +663,7 @@ def build_wsp():
 {plans}
 </div>
 <p class="muted" style="margin-top:22px;font-size:15px">Kwoty końcowe, bez VAT. Budżet reklam w pakiecie Marketing płacisz osobno, bezpośrednio do Google lub Meta.</p>
-<p class="muted inline" style="margin-top:8px;font-size:15px">Nie wiesz, od czego zacząć? <a class="link" href="/cennik">Zrób quiz w cenniku</a> albo zacznij od diagnostyki za 19 zł i przejdź na Opiekę później.</p>
+<p class="muted inline" style="margin-top:8px;font-size:15px">Nie wiesz, od czego zacząć? Zacznij od diagnostyki za 19 zł i przejdź na Opiekę później.</p>
 <p class="muted inline" style="margin-top:8px;font-size:15px">Masz kilka oddziałów, wiele usług albo stronę z setkami podstron? Zakres i cenę ustalamy indywidualnie, na piśmie, zanim cokolwiek zlecisz. <a class="link" href="/cennik#duze-firmy">Wycena dla dużych firm</a></p>
 </section>
 
@@ -756,8 +707,8 @@ def build_wsp():
 FAQ_GROUPS = [
     ('g0', 'Diagnostyka', [
         ('Co dostaję w diagnostyce za 19 zł?', '20 pytań, które zadają Twoi klienci, w ChatGPT, Gemini, Perplexity i Claude: kogo AI poleca, gdzie Ciebie brakuje i co zmienić. Wynik w 3 dni robocze, rozmowa 20 min. Kwota odliczana od Wdrożenia.'),
-        ('Co dostaję?', 'Krótki raport prostym językiem: czy AI czyta Twoją stronę i 3 najważniejsze rzeczy do poprawy.'),
-        ('Ile czekam?', 'Do 48 godzin roboczych od umówionej rozmowy.'),
+        ('Co dostaję?', DIAG),
+        ('Ile czekam?', 'Diagnostyka: 3 dni robocze od wpłaty. Wdrożenie: 2–4 tygodnie.'),
     ]),
     ('g1', 'Ceny i rozliczenie', [
         ('Ile to kosztuje?', 'Diagnostyka 19 zł, Wdrożenie od 990 zł, nowa strona od 1990 zł, stała opieka od 199 zł miesięcznie. Kwoty końcowe, bez VAT. Szczegóły i porównanie pakietów są w cenniku.'),
@@ -907,7 +858,10 @@ def main():
         '/pozycjonowanie-w-ai', 'Pozycjonowanie w AI dla firm | Wskazani',
         'Poprawiamy to, co ChatGPT, Perplexity i Google czytają o Twojej firmie. Konkretny zakres, jawne ceny i bez umowy na lata. Diagnostyka za 19 zł.',
         build_geo(), active='/pozycjonowanie-w-ai',
-        bar=('Pozycjonowanie w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik')))
+        bar=('Pozycjonowanie w AI (GEO)', [('#zakres', 'Zakres'), ('#porownanie', 'Porównanie'), ('#ustalenia', 'Ustalenia')], 'Zobacz cennik', '/cennik'),
+        jsonld=[service_ld('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI dla firm',
+                           'Poprawiamy to, co ChatGPT, Gemini, Perplexity i Claude czytają o Twojej firmie: treść i dane na stronie, wizytówkę Google, katalogi i opinie. Kwoty końcowe, bez VAT.', OFFERS[:3]),
+                breadcrumb_ld('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI')]))
     write('wspolpraca.html', page(
         '/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI | Wskazani',
         'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło.',
@@ -938,7 +892,7 @@ def main():
     urls = ['/', '/cennik', '/pozycjonowanie-w-ai', '/wspolpraca', '/faq', '/o-nas']
     sm = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
-        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD))
+        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD_OLD.get(u, LASTMOD)))
     sm.append('</urlset>\n')
     write('sitemap.xml', '\n'.join(sm))
 
