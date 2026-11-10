@@ -73,8 +73,8 @@ ICO_CARD = ('<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" 
             'stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>')
 
 # ---------------------------------------------------------------- nawigacja
-NAV = [('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
-FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/wspolpraca', 'Dla firm'),
+NAV = [('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/przyklady', 'Przykłady'), ('/wspolpraca', 'Dla firm'), ('/faq', 'FAQ')]
+FOOT = [('/', 'Strona główna'), ('/cennik', 'Cennik'), ('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI'), ('/przyklady', 'Przykłady'), ('/wspolpraca', 'Dla firm'),
         ('/faq', 'FAQ'), ('/o-nas', 'O nas')]
 
 CONSENT_HEAD = (
@@ -234,9 +234,9 @@ def service_ld(path, name, desc, offers):
             'provider': PROVIDER, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': name, 'itemListElement': [offer_ld(*o) for o in offers]}}
 
 
-def breadcrumb_ld(path, name):
+def breadcrumb_ld(path, name, home='Wskazani'):
     return {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': 1, 'name': 'Wskazani', 'item': SITE + '/'},
+        {'@type': 'ListItem', 'position': 1, 'name': home, 'item': SITE + '/'},
         {'@type': 'ListItem', 'position': 2, 'name': name, 'item': SITE + path}]}
 
 
@@ -275,6 +275,9 @@ def build_main():
                     [('you', 'Twoja firma', 'z powodem, dla którego AI ją wybiera'), ('c', 'Firma A', ''), ('c', 'Firma B', '')],
                     'AI opisuje Cię Twoimi słowami. Wiesz, przy których pytaniach jesteś, a przy których jeszcze nie.', 'good')
     faq = faq_details(MAIN_FAQ)
+    przyklady_cards = ''.join(
+        '<article class="price-card"><h3>%s</h3><p class="muted">%s</p><a class="link" href="/przyklady#%s">Czytaj →</a></article>' % (esc(t), esc(d), a)
+        for t, d, a in PRZYKLADY_CARDS)
     ais = ' · '.join(AI_NAMES)
     return f'''<section id="top" class="wrap hero">
 <div class="hero-l">
@@ -329,6 +332,13 @@ def build_main():
 <p class="sub" style="max-width:720px;margin-inline:auto">Zapytaliśmy AI w Google o polskie agencje GEO. Wskazani jest na pierwszym miejscu listy. Tę samą metodę stosujemy u klientów.</p>
 {tryb_ai_figure(640, '32px auto 0')}
 <div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn btn-primary btn-lg" href="#audyt" data-ga-miejsce="dowod">Zobacz, czemu AI Cię nie poleca</a></div>
+</section>
+
+<section id="przyklady" class="wrap sec" aria-label="Co znajdujemy w diagnozach">
+<h2 class="h2 lg">Co znajdujemy w diagnozach</h2>
+<div class="grid g-240" style="gap:18px;margin-top:28px;align-items:stretch">
+{przyklady_cards}
+</div>
 </section>
 
 <section id="google" class="band" aria-label="Dlaczego Google to za mało"><div class="wrap sec">
@@ -784,6 +794,96 @@ def build_faq():
 
 
 # ================================================================= O NAS
+PRZYKLADY_CARDS = [
+    ('Klinika kosmetologii', 'Najwyższe oceny klientek, a na 6 pytań o zabiegi zero własnych wyników w Google.', 'klinika'),
+    ('Platforma online', 'Na 7 pytań klientów ani jednego wyniku, nawet na własną nazwę.', 'platforma'),
+    ('Producent maszyn B2B', 'Strona zatytułowana nazwą systemu, a w sekcji »firma w liczbach« same zera.', 'producent'),
+]
+PRZYKLADY_TITLE = 'Przykłady z diagnoz pozycjonowania w AI | Wskazani'
+PRZYKLADY_DESC = ('Trzy anonimowe przykłady z naszych diagnoz: co AI i Google widzą o firmie, co przez to traci i jaki plan proponujemy. '
+                  'Klinika, platforma online, producent B2B.')
+# (id, nazwa, firma, sprawdziliśmy, [(pogrubienie, reszta)], znaczy, nagłówek planu, [(pogrubienie, reszta)])
+PRZYKLADY = [
+    ('klinika', 'Klinika kosmetologii i laseroterapii',
+     'mały zespół (do 9 osób), dwa miasta, drugi gabinet w trakcie otwierania. Opinie klientek: najwyższe możliwe, ponad sto ocen. Mocny profil na Instagramie, kilkanaście tysięcy obserwujących.',
+     'platformę rezerwacji, katalogi, media społecznościowe i 9 pytań, które zadaje klientka gabinetu („laseroterapia w [mieście]”, „drenaż limfatyczny”, „pielęgnacja skóry po ciąży”).',
+     [('Na żadne z 6 pytań o zabiegi', ' firma nie ma własnego wyniku w pierwszej dziesiątce. Wygrywają gabinety, które mają osobną podstronę o danym zabiegu.'),
+      ('Drugiego miasta nie ma w żadnym źródle.', ' Na nazwę marki z tym miastem wyszukiwarka pokazuje inną firmę o niemal tej samej nazwie, z prawie dziesięć razy większą liczbą opinii.'),
+      ('Domena z nazwą marki pokazuje błąd', ', a profil rezerwacji kieruje do nieistniejących kont w mediach społecznościowych.'),
+      ('Laseroterapia, czyli główna specjalizacja,', ' nie pada w ani jednym opisie, który czyta wyszukiwarka.')],
+     'nowa klientka, która pyta Google albo ChatGPT o zabieg, dostaje nazwy konkurencji. Do gabinetu trafiają głównie osoby, które już znają markę z Instagrama.',
+     'Plan, który proponujemy (90 dni):',
+     [('Miesiąc 1:', ' własna strona dla obu miast, jedna nazwa i te same dane wszędzie, uporządkowany profil rezerwacji i wizytówki Google.'),
+      ('Miesiąc 2:', ' podstrony zabiegów z odpowiedzią w pierwszych zdaniach (dla kogo, przebieg, cena „od”) i podstrona drugiego miasta, która odróżnia markę od firmy o podobnej nazwie.'),
+      ('Miesiąc 3:', ' spójne wpisy w katalogach, prawdziwe opinie także w Google, co miesiąc ten sam test 9 pytań.'),
+      ('Do tego:', ' kampanie reklamowe w mediach społecznościowych osobno dla każdego miasta.')]),
+    ('platforma', 'Platforma online w branży sportowej',
+     'młoda spółka (mikrofirma), nowa platforma rezerwacji usług z kontami użytkowników i płatnościami online.',
+     'platformę technicznie i 7 pytań, które zadaje osoba szukająca takiej usługi, oraz pytanie o samą nazwę.',
+     [('Na żadne z 7 pytań platforma się nie pojawia', ', nawet na własną nazwę. AI myli ją z innym serwisem o podobnej nazwie.'),
+      ('Treść pokazuje się dopiero po uruchomieniu skryptów.', ' Wszystkie podstrony mają ten sam tytuł, mapa strony jest pusta, a danych strukturalnych nie ma. Wyszukiwarka i asystenci AI widzą prawie pustą stronę.'),
+      ('Na każdej karcie usługodawcy widnieje ocena „0,0”.', ' Dla nowej osoby to wygląda jak źle oceniana usługa, a nie jak usługa jeszcze bez opinii.'),
+      ('Najciekawsza część oferty', ', czyli wyróżnik platformy, jest dla wyszukiwarki niewidoczna.')],
+     'platforma płaci za każdego użytkownika z reklamy, bo z bezpłatnych wyników nie przychodzi prawie nikt. Ocena „0,0” obniża skuteczność każdej złotówki wydanej na reklamę.',
+     'Plan, który proponujemy (90 dni):',
+     [('Miesiąc 1:', ' poprawki na platformie (bez budowy od nowa): tytuły i opisy każdej podstrony, treść czytelna bez skryptów, mapa strony, dane strukturalne, karta bez „0,0”.'),
+      ('Miesiąc 2:', ' dwie kampanie reklamowe, osobno po usługodawców i osobno po klientów (ta druga rusza po poprawce ocen), oraz krótkie filmy z usługodawcami.'),
+      ('Miesiąc 3:', ' wpisy w katalogach branżowych, wizytówka Google, co miesiąc ten sam test pytań.')]),
+    ('producent', 'Producent maszyn dla przemysłu spożywczego (B2B)',
+     'rodzinny producent z wieloletnią historią i spółką powiązaną za granicą. Sprzedaje przez handlowców i na targach. Wielkość zespołu: nieustalona.',
+     'stronę i pytanie, które zadaje zakład szukający takiej maszyny, w polskich wynikach wyszukiwania.',
+     [('Na pytanie o produkt wiodący', ' firma jest na 7. miejscu, ale pod adresem zagranicznej spółki. Polskiej strony z polskim telefonem nie ma wcale.'),
+      ('Tytuł strony głównej i podstron to nazwa systemu', ', na którym zrobiono stronę, a nie nazwa firmy. Ten tytuł widać w wynikach Google i ten tytuł cytuje AI.'),
+      ('Sekcja „firma w liczbach” pokazuje same zera', ': 0 krajów, 0 pracowników, 0 klientów.'),
+      ('Adresu e-mail nie da się odczytać', ', bo jest zamaskowany i to w dwóch różnych wersjach.')],
+     'zakład, który szuka dostawcy po targach, trafia na stronę bez polskiego kontaktu albo na konkurenta z wyższej pozycji. A asystent AI opisuje firmę na podstawie strony zatytułowanej nazwą systemu.',
+     'Plan, który proponujemy:',
+     [('Na start (przed sezonem targowym):', ' tytuły i opisy stron, prawdziwe liczby, czytelny kontakt, dane firmy w formie, którą czytają wyszukiwarki i AI.'),
+      ('Potem:', ' podstrony produktów z odpowiedzią na pytania zakładów (wydajność, pojemność, serwis w Polsce), wizytówka Google i katalogi branżowe.'),
+      ('Co miesiąc:', ' ten sam test pytań, raport na jednej stronie.')]),
+]
+
+
+def build_przyklady():
+    def li(items):
+        return ''.join('<li><strong>%s</strong>%s</li>' % (esc(b), esc(r)) for b, r in items)
+    arts = []
+    for i, (aid, name, firma, sprawdz, found, znaczy, plan_h, plan) in enumerate(PRZYKLADY):
+        inner = (f'<h2 class="h2 lg">{esc(name)}</h2>\n'
+                 f'<p class="p" style="margin-top:18px"><strong>Firma:</strong> {esc(firma)}</p>\n'
+                 f'<p class="p" style="margin-top:14px"><strong>Co sprawdziliśmy:</strong> {esc(sprawdz)}</p>\n'
+                 f'<p class="p" style="margin-top:14px"><strong>Co znaleźliśmy:</strong></p>\n'
+                 f'<ul class="ticks" style="margin-top:10px">{"".join("<li>%s<span><strong>%s</strong>%s</span></li>" % (tick(), esc(b), esc(r)) for b, r in found)}</ul>\n'
+                 f'<p class="p" style="margin-top:18px"><strong>Co to znaczy dla firmy:</strong> {esc(znaczy)}</p>\n'
+                 f'<p class="p" style="margin-top:18px"><strong>{esc(plan_h)}</strong></p>\n'
+                 f'<ol class="p" style="margin:10px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:10px">{li(plan)}</ol>')
+        if i % 2:
+            arts.append(f'<article id="{aid}" class="band" style="scroll-margin-top:72px"><div class="wrap-900" style="padding-block:72px">\n{inner}\n</div></article>')
+        else:
+            arts.append(f'<article id="{aid}" class="wrap-900" style="padding-block:72px;scroll-margin-top:72px">\n{inner}\n</article>')
+    return f'''<section class="wrap-900" style="padding-block:88px 32px">
+<h1 class="display">Co znajdujemy, kiedy sprawdzamy firmę</h1>
+<p class="lead" style="margin-top:18px">Trzy przykłady z naszych diagnoz z października i listopada 2026. Nazwy i szczegóły, po których dałoby się rozpoznać firmę, usunęliśmy. Ustalenia są prawdziwe.</p>
+</section>
+
+{chr(10).join(arts)}
+
+<section class="band-navy cta-band" aria-label="Następny krok"><div class="in">
+<h2>Chcesz wiedzieć, co AI i Google widzą o Twojej firmie?</h2>
+<p class="s">Diagnostyka kosztuje 19 zł. W 3 dni robocze dostajesz to, co powyżej: co znaleźliśmy, co to znaczy dla Twoich klientów i plan.</p>
+<div class="btn-row"><a class="btn btn-primary btn-lg" href="#audyt" data-ga-miejsce="przyklady">Zobacz, czemu AI Cię nie poleca</a></div>
+<p class="n3">Przykłady anonimowe, przygotowane na podstawie diagnoz z października i listopada 2026. Wyniki wyszukiwania zmieniają się w czasie, opis pokazuje stan z dnia sprawdzenia.</p>
+</div></section>
+'''
+
+
+def przyklady_ld():
+    return [breadcrumb_ld('/przyklady', 'Przykłady z diagnoz', home='Strona główna'),
+            {'@context': 'https://schema.org', '@type': 'WebPage', '@id': SITE + '/przyklady#strona', 'url': SITE + '/przyklady',
+             'name': PRZYKLADY_TITLE, 'description': PRZYKLADY_DESC, 'inLanguage': 'pl-PL', 'about': {'@id': ORG_ID},
+             'isPartOf': {'@id': SITE + '/#strona'}}]
+
+
 def build_onas():
     return f'''<section class="wrap-900" style="padding-block:88px 32px">
 <p class="eyebrow">O nas</p>
@@ -883,6 +983,8 @@ def main():
         jsonld=[service_ld('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI dla firm',
                            'Poprawiamy to, co ChatGPT, Gemini, Perplexity i Claude czytają o Twojej firmie: treść i dane na stronie, wizytówkę Google, katalogi i opinie. Kwoty końcowe, bez VAT.', OFFERS[:3]),
                 breadcrumb_ld('/pozycjonowanie-w-ai', 'Pozycjonowanie w AI')]))
+    write('przyklady.html', page(
+        '/przyklady', PRZYKLADY_TITLE, PRZYKLADY_DESC, build_przyklady(), active='/przyklady', jsonld=przyklady_ld()))
     write('wspolpraca.html', page(
         '/wspolpraca', 'Stała opieka i monitoring pozycjonowania w AI | Wskazani',
         'Bez umowy na lata, od 199 zł miesięcznie. Co miesiąc sprawdzamy, czy AI dalej rozumie Twoją firmę, i poprawiamy to, co się zmieniło.',
@@ -910,7 +1012,7 @@ def main():
         '/404', 'Nie znaleziono strony | Wskazani', 'Ta strona nie istnieje. Wróć na stronę główną i zamów diagnostykę pozycjonowania firmy w AI.',
         build_404(), robots='noindex', mobile_cta=False))
 
-    urls = ['/', '/cennik', '/pozycjonowanie-w-ai', '/wspolpraca', '/faq', '/o-nas']
+    urls = ['/', '/cennik', '/pozycjonowanie-w-ai', '/przyklady', '/wspolpraca', '/faq', '/o-nas']
     sm = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, LASTMOD_OLD.get(u, LASTMOD)))

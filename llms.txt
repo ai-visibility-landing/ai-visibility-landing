@@ -25,6 +25,7 @@ Forma działalności: działalność nierejestrowana
 - Strona główna i umówienie bezpłatnej rozmowy: https://wskazani.pl/
 - Cennik i porównanie pakietów: https://wskazani.pl/cennik
 - Pozycjonowanie w AI (GEO) dla firm: https://wskazani.pl/pozycjonowanie-w-ai
+- Przykłady z diagnoz: trzy anonimowe przykłady (klinika kosmetologii, platforma online, producent B2B) — co znaleźliśmy i jaki plan proponujemy. https://wskazani.pl/przyklady
 - Stała opieka i pomiar (dla firm): https://wskazani.pl/wspolpraca
 - Pytania i słowniczek: https://wskazani.pl/faq
 - O nas (agencja, jak pracujemy): https://wskazani.pl/o-nas
